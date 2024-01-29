@@ -1,5 +1,6 @@
 NAME := fdf
-FILE := main.c
+FILE := main.c \
+	colors.c
 SRC_DIR := src
 OBJ_DIR := build
 INC_DIR := inc
@@ -25,7 +26,7 @@ $(MLX_STT):
 	$(MAKE) -C lib/minilibx-linux all
 
 clean:
-	rm -f ./bin/*.o
+	rm -f ./$(OBJ_DIR)/*.o
 
 fclean: clean
 	rm -f fdf

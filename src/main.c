@@ -6,13 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/24 21:08:18 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/29 22:57:26 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
-#include <X11/keysymdef.h>
+
 #define WIDTH (1920)
 #define HEIGHT (1080)
 
@@ -200,6 +200,26 @@ void	draw_line(t_image *image, t_coord start, t_coord end, int color)
 		point.x++;
 	}
 }
+
+void	change_screen_color(t_vars *vars, int color)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIDTH)
+	{
+		y = 0;
+		while (y < HEIGHT)
+		{
+			put_pixel_img(&vars->image, x, y, color);
+			y++;
+		}
+		x++;
+	}
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->image.img_ptr, 0, 0);
+}
+
 int	destroy_exit(t_vars *vars)
 {
 	mlx_destroy_image(vars->mlx_ptr, vars->image.img_ptr);
@@ -216,9 +236,23 @@ int	handle_key(int key, t_vars *vars)
 	{
 		destroy_exit(vars);
 	}
+	else if (key == XK_r)
+	{
+		change_screen_color(vars, create_trgb(0, 0xff, 0, 0));
+	}
 }
 
-int	main(void)
+void	mouse_button(int button,int x,int y, void *p)
+{
+	printf("Mouse in Win, button %d at %dx%d.\n", button, x, y);
+}
+
+int	mouse_motion(int x,int y, void *p)
+{
+  printf("Mouse moving in Win, at %dx%d.\n",x,y);
+}
+
+int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
@@ -264,6 +298,8 @@ int	main(void)
 
 	mlx_key_hook(vars.win_ptr, handle_key, &vars);
 	mlx_hook(vars.win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit, &vars);
+	mlx_mouse_hook(vars.win_ptr, mouse_button, &vars);
+	mlx_hook(vars.win_ptr, MotionNotify, PointerMotionMask, mouse_motion, NULL);
 
 	mlx_loop(vars.mlx_ptr);
 }

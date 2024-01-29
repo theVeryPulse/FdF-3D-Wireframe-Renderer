@@ -6,22 +6,22 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:42:46 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/22 12:57:36 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/29 22:31:35 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /**
  * @brief Create a int value representing trpg
  * 
- * @param t Transparency
+ * @param alpha Transparency
  * @param r Red
  * @param g Green
  * @param b Blue
  * @return int 
  */
-int	create_trgb(unsigned char t, unsigned char r, unsigned char g, unsigned char b)
+int	create_trgb(unsigned char alpha, unsigned char r, unsigned char g, unsigned char b)
 {
-	return (*(int *)(unsigned char [4]){b, g, r, t});
+	return (*(int *)(unsigned char [4]){b, g, r, alpha});
 }
 
 unsigned char	get_t(int trgb)
