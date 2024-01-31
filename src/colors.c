@@ -6,9 +6,11 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:42:46 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/29 22:31:35 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/31 21:23:59 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "fdf.h"
 
 /**
  * @brief Create a int value representing trpg
@@ -19,7 +21,7 @@
  * @param b Blue
  * @return int 
  */
-int	create_trgb(unsigned char alpha, unsigned char r, unsigned char g, unsigned char b)
+t_color	create_argb(unsigned char r, unsigned char g, unsigned char b, unsigned char alpha)
 {
 	return (*(int *)(unsigned char [4]){b, g, r, alpha});
 }

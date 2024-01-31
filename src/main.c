@@ -6,47 +6,21 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/29 22:57:26 by Philip           ###   ########.fr       */
+/*   Updated: 2024/01/31 21:23:59 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include <stdio.h>
 
-#define WIDTH (1920)
-#define HEIGHT (1080)
-
-typedef struct	s_image
-{
-	void	*img_ptr;
-	char	*addr;
-	int		bits_per_pixel;
-	int		line_size;
-	int		endian;
-}	t_image;
-
-typedef struct	s_coord
-{
-	int	x;
-	int	y;
-}	t_coord;
-
-typedef struct	s_vars
-{
-	void	*mlx_ptr;
-	void	*win_ptr;
-	t_image	image;
-}	t_vars;
-
-
 // Put pixel onto the image.
-void	put_pixel_img(t_image *image, int x, int y, int color)
+void	put_pixel_img(t_img_vars *img_vars, int x, int y, int color)
 {
 	unsigned char	*dst;
 	ptrdiff_t		offset;
 
-	offset = y * image->line_size + x * (image->bits_per_pixel / 8);
-	dst = image->addr + offset;
+	offset = y * img_vars->line_size + x * (img_vars->bits_per_pixel / 8);
+	dst = img_vars->addr + offset;
 	*(unsigned int *)dst = color;
 }
 
@@ -59,21 +33,13 @@ void	swap(int *a, int *b)
 	*b = tmp;
 }
 
-int	my_abs(int n)
-{
-	if (n >= 0)
-		return (n);
-	else
-		return (-n);
-}
-
-void	draw_diagonal_line(t_image *image, t_coord start, t_coord end, int color)
+void	draw_diagonal_line(t_img_vars *image, t_coord start, t_coord end, int color)
 {
 	t_coord	point;
 	int		xstep;
 	int		ystep;
 	
-	if (!image || my_abs(end.x - start.x) != my_abs(end.y - start.y))
+	if (!image || ft_abs(end.x - start.x) != ft_abs(end.y - start.y))
 		return ;
 	if (start.x > end.x)
 	{
@@ -89,7 +55,7 @@ void	draw_diagonal_line(t_image *image, t_coord start, t_coord end, int color)
 		point.y += ystep;
 	}
 }
-void	draw_grid_line(t_image *image, t_coord start, t_coord end, int color)
+void	draw_grid_line(t_img_vars *img_vars, t_coord start, t_coord end, int color)
 {
 	t_coord	point;
 
@@ -100,7 +66,7 @@ void	draw_grid_line(t_image *image, t_coord start, t_coord end, int color)
 		point = start;
 		while (point.y <= end.y)
 		{
-			put_pixel_img(image, point.x, point.y++, color);
+			put_pixel_img(img_vars, point.x, point.y++, color);
 		}
 		return ;
 	}
@@ -111,13 +77,13 @@ void	draw_grid_line(t_image *image, t_coord start, t_coord end, int color)
 		point = start;
 		while (point.x <= end.x)
 		{
-			put_pixel_img(image, point.x++, point.y, color);
+			put_pixel_img(img_vars, point.x++, point.y, color);
 		}
 		return ;
 	}
 }
 
-void	draw_line(t_image *image, t_coord start, t_coord end, int color)
+void	draw_line(t_img_vars *img_vars, t_coord start, t_coord end, int color)
 {
 	bool	slope_greater_than_1;
 	bool	slope_is_negative;
@@ -132,16 +98,16 @@ void	draw_line(t_image *image, t_coord start, t_coord end, int color)
 		swap(&start.y, &end.y);
 	}
 
-	delta_x = my_abs(end.x - start.x);
-	delta_y = my_abs(end.y - start.y);
+	delta_x = ft_abs(end.x - start.x);
+	delta_y = ft_abs(end.y - start.y);
 	if (delta_x == delta_y)
 	{
-		draw_diagonal_line(image, start, end, color);
+		draw_diagonal_line(img_vars, start, end, color);
 		return ;
 	}
 	if (delta_x == 0 || delta_y == 0)
 	{
-		draw_grid_line(image, start, end, color);
+		draw_grid_line(img_vars, start, end, color);
 		return ;
 	}
 	/* Slope > 1 */
@@ -149,8 +115,8 @@ void	draw_line(t_image *image, t_coord start, t_coord end, int color)
 	{
 		swap(&start.x, &start.y);
 		swap(&end.x, &end.y);
-		delta_x = my_abs(end.x - start.x);
-		delta_y = my_abs(end.y - start.y);
+		delta_x = ft_abs(end.x - start.x);
+		delta_y = ft_abs(end.y - start.y);
 		slope_greater_than_1 = true;
 	}
 	else
@@ -176,17 +142,17 @@ void	draw_line(t_image *image, t_coord start, t_coord end, int color)
 		if (slope_is_negative)
 		{
 			// printf("(%d,%d)\n", point.x, -point.y);
-			put_pixel_img(image, point.x, -point.y, 0xFFFFFF);
+			put_pixel_img(img_vars, point.x, -point.y, 0xFFFFFF);
 		}
 		else if (slope_greater_than_1)
 		{
 			// printf("(%d,%d)\n", point.y, point.x);
-			put_pixel_img(image, point.y, point.x, 0xFFFFFF);
+			put_pixel_img(img_vars, point.y, point.x, 0xFFFFFF);
 		}
 		else
 		{
 			// printf("(%d,%d)\n", point.x, point.y);
-			put_pixel_img(image, point.x, point.y, 0xFFFFFF);
+			put_pixel_img(img_vars, point.x, point.y, 0xFFFFFF);
 		}
 		if (diff > 0)
 		{
@@ -201,28 +167,38 @@ void	draw_line(t_image *image, t_coord start, t_coord end, int color)
 	}
 }
 
-void	change_screen_color(t_vars *vars, int color)
+void	fill_image_with_color(t_img_vars *img_vars, int color)
 {
-	int	x;
-	int	y;
+	t_pixel	x;
+	t_pixel	y;
 
 	x = 0;
+	y = 0;
+	if (!img_vars)
+		return ;
 	while (x < WIDTH)
 	{
 		y = 0;
 		while (y < HEIGHT)
 		{
-			put_pixel_img(&vars->image, x, y, color);
+			put_pixel_img(img_vars, x, y, color);
 			y++;
 		}
 		x++;
 	}
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->image.img_ptr, 0, 0);
+}
+
+void	change_screen_color(t_vars *vars, int color)
+{
+	if (!vars)
+		return ;
+	fill_image_with_color(&vars->img_vars, color);
+	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }
 
 int	destroy_exit(t_vars *vars)
 {
-	mlx_destroy_image(vars->mlx_ptr, vars->image.img_ptr);
+	mlx_destroy_image(vars->mlx_ptr, vars->img_vars.img_ptr);
 	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 	mlx_destroy_display(vars->mlx_ptr);
 	free(vars->mlx_ptr);
@@ -238,7 +214,11 @@ int	handle_key(int key, t_vars *vars)
 	}
 	else if (key == XK_r)
 	{
-		change_screen_color(vars, create_trgb(0, 0xff, 0, 0));
+		change_screen_color(vars, create_argb(200, 0, 0, 1));
+	}
+	else if (key == XK_b)
+	{
+		change_screen_color(vars, create_argb(0, 0, 0, 0));
 	}
 }
 
@@ -256,6 +236,19 @@ int	main(int argc, char **argv)
 {
 	t_vars	vars;
 
+	char	*content;
+	t_map	map;
+
+	if (argc != 2)
+		return (1);
+	content = read_file(argv[1]);
+	printf("Content as one string:\n%s", content);
+	map_check(content);
+	printf("Map checked\n");
+	map = build_map(content);
+	free(content);
+	printf("Total columns: %d, total rows: %d\n", map.col_num, map.row_num);
+
 	vars.mlx_ptr = mlx_init();
 	vars.win_ptr = mlx_new_window(vars.mlx_ptr, WIDTH, HEIGHT, "Hello world!");
 
@@ -268,8 +261,11 @@ int	main(int argc, char **argv)
 		mlx_pixel_put(mlx_ptr, win_ptr, i, HEIGHT / 2, 0x00ff00);
 	} */
 
-	vars.image.img_ptr = mlx_new_image(vars.mlx_ptr, WIDTH, HEIGHT); // creates a new image in memory. It returns a void * identifier needed to manipulate this image later
-	vars.image.addr = mlx_get_data_addr(vars.image.img_ptr, &vars.image.bits_per_pixel, &vars.image.line_size, &vars.image.endian);
+	vars.img_vars.img_ptr = mlx_new_image(vars.mlx_ptr, WIDTH, HEIGHT); // creates a new image in memory. It returns a void * identifier needed to manipulate this image later
+	vars.img_vars.addr = mlx_get_data_addr(vars.img_vars.img_ptr,
+		&vars.img_vars.bits_per_pixel,
+		&vars.img_vars.line_size,
+		&vars.img_vars.endian);
 
 	
 
@@ -278,9 +274,9 @@ int	main(int argc, char **argv)
 	t_coord	right_bottom = {WIDTH - 100, HEIGHT - 100};
 
 	/* Slope > 1 */
-	draw_line(&vars.image, (t_coord){0, 0}, (t_coord){10, 1000}, 0xFFFFFF);
+	draw_line(&vars.img_vars, (t_coord){0, 0}, (t_coord){10, 1000}, 0xFFFFFF);
 	/* Slope < 0 */
-	draw_line(&vars.image, (t_coord){0, 1000}, (t_coord){1000, 500}, 0xFFFFFF); // Need debugging
+	draw_line(&vars.img_vars, (t_coord){0, 1000}, (t_coord){1000, 500}, 0xFFFFFF);
 	// draw_line(&img, (t_coord){960, 540}, (t_coord){1900, 1000}, 0xFFFFFF);
 	// draw_line(&img, (t_coord){960, 540}, (t_coord){900, 0}, 0xFFFFFF);
 
@@ -294,7 +290,7 @@ int	main(int argc, char **argv)
 	draw_line(&img, (t_coord){center.x - 200, center.y}, (t_coord){center.x + 200, center.y}, 0xFFFFFF);
 	draw_line(&img, (t_coord){center.x, center.y - 200}, (t_coord){center.x, center.y + 200}, 0xFFFFFF); */
 
-	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.image.img_ptr, 0, 0);
+	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
 	mlx_key_hook(vars.win_ptr, handle_key, &vars);
 	mlx_hook(vars.win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit, &vars);
