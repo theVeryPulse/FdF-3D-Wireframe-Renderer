@@ -1,7 +1,9 @@
 NAME := fdf
 FILE := main.c \
 	colors.c \
-	read_file.c
+	draw.c \
+	read_file.c \
+	rotation.c
 SRC_DIR := src
 OBJ_DIR := build
 INC_DIR := inc

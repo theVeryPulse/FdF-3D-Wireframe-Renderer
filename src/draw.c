@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/02 22:55:09 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/03 22:48:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,12 +112,12 @@ void	draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color
 	int			error;
 	t_px_coord	point;
 
+	
 	if (start.x > end.x)
 	{
 		swap(&start.x, &end.x);
 		swap(&start.y, &end.y);
 	}
-
 	delta_x = ft_abs(end.x - start.x);
 	delta_y = ft_abs(end.y - start.y);
 	if (delta_x == delta_y)
@@ -130,50 +130,59 @@ void	draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color
 		draw_grid_line(img_vars, start, end, color);
 		return ;
 	}
-	/* Slope > 1 */
-	if (delta_y > delta_x)
-	{
-		swap(&start.x, &start.y);
-		swap(&end.x, &end.y);
-		delta_x = ft_abs(end.x - start.x);
-		delta_y = ft_abs(end.y - start.y);
-		slope_greater_than_1 = true;
-	}
-	else
-	{
-		slope_greater_than_1 = false;
-	}
-
 	/* Slope < 0 */
-	if ((end.x - start.x < 0) ^ (end.y - start.y < 0))
+	if ((start.x < end.x) && (start.y > end.y))
 	{
-		start.y *= -1;
-		end.y *= -1;
+		start.y = -start.y;
+		end.y = -end.y;
 		slope_is_negative = true;
 	}
 	else
 	{
 		slope_is_negative = false;
 	}
+
+	/* Slope > 1 */
+	if (delta_y > delta_x)
+	{
+		swap(&start.x, &start.y);
+		swap(&end.x, &end.y);
+		slope_greater_than_1 = true;
+	}
+	else
+	{
+		slope_greater_than_1 = false;
+	}
+	if (start.x > end.x)
+	{
+		swap(&start.x, &end.x);
+		swap(&start.y, &end.y);
+	}
+	delta_x = ft_abs(end.x - start.x);
+	delta_y = ft_abs(end.y - start.y);
 	error = 2 * delta_y - delta_x;
 	point = start;
 	while (point.x <= end.x)
 	{
-		if (slope_is_negative)
+		if (slope_greater_than_1 && slope_is_negative)
 		{
-			// printf("(%d,%d)\n", point.x, -point.y);
-			put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, 0xFFFFFF);
+			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, WHITE);
+			printf("(%d,%d)\n", point.y, -point.x);
+		}
+		else if (slope_is_negative)
+		{
+			printf("(%d,%d)\n", point.x, -point.y);
+			put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, WHITE);
 		}
 		else if (slope_greater_than_1)
 		{
-			// printf("(%d,%d)\n", point.y, point.x);
-			// put_pixel_img(img_vars, point.y, point.x, 0xFFFFFF);
-			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, 0xFFFFFF);
+			printf("(%d,%d)\n", point.y, point.x);
+			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, WHITE);
 		}
 		else
 		{
-			// printf("(%d,%d)\n", point.x, point.y);
-			put_pixel_img(img_vars, point, 0xFFFFFF);
+			printf("(%d,%d)\n", point.x, point.y);
+			put_pixel_img(img_vars, point, WHITE);
 		}
 		if (error > 0)
 		{
