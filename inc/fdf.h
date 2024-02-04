@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/03 23:22:38 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/04 22:13:58 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 # include "mlx_int.h"
 # include <fcntl.h>
 # include <math.h>
+# include <stdarg.h>
 # include <stdbool.h>
 # include <stddef.h>
 # include <stdlib.h>
@@ -49,7 +50,7 @@ typedef struct	s_matrix
 	int		row_num;
 	int		col_num;
 	double	entries[MAX_ROW][MAX_COL];
-}	t_matrix;
+}	t_mx;
 
 
 typedef struct	s_img_vars
@@ -93,22 +94,34 @@ t_map		build_map(char *str);
 void		change_screen_color(t_vars *vars, int color);
 int			create_argb(unsigned char r, unsigned char g, unsigned char b, unsigned char alpha);
 int			destroy_exit(t_vars *vars);
-void		draw_diagonal_line(t_img_vars *image, t_px_coord start, t_px_coord end, int color);
-void		draw_grid_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color);
-void		draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color);
 void		ensure_eol(t_list *last);
 void		fill_image_with_color(t_img_vars *img_vars, int color);
 void		fill_points(t_map *map, char *str);
 int			handle_key(int key, t_vars *vars);
 int			hexa_to_int(const char *str);
 void		map_check(char *map_str);
-t_matrix	mx_mult(t_matrix mxa, t_matrix mxb);
 void		mouse_button(int button,int x,int y, void *p);
 int			mouse_motion(int x,int y, void *p);
-t_px_coord	mx_to_pxcoord(t_matrix mx);
+t_px_coord	mx_to_pxcoord(t_mx mx);
 void		put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_color color);
-t_matrix	pxcoord_to_mx(t_px_coord px_coord);
+t_mx		pxcoord_to_mx(t_px_coord px_coord);
 char		*read_file(const char *file);
 t_px_coord	xwin_coord(t_px_coord p_point);
+
+/* Line drawing */
+
+void		draw_diagonal_line(t_img_vars *image, t_px_coord start, t_px_coord end, int color);
+void		draw_grid_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color);
+void		draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color);
+
+/* Matrix */
+
+t_mx		mxa_mult_mxb(t_mx mxa, t_mx mxb);
+t_mx		mx_mult(int mx_count, ...);
+t_mx		psp_proj_mx(double distance, double z);
+t_mx		rot_x_mx(double angle);
+t_mx		rot_y_mx(double angle);
+t_mx		rot_z_mx(double angle);
+
 
 #endif

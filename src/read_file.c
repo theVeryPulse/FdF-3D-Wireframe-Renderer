@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:35:00 by Philip            #+#    #+#             */
-/*   Updated: 2024/01/31 22:56:34 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/03 23:37:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,31 +218,3 @@ t_map	build_map(char *str)
 	return (map);
 }
 
-// int	main(int argc, char const *argv[])
-// {
-// 	char	*content;
-// 	t_map	map;
-
-// 	if (argc != 2)
-// 		return (1);
-// 	content = read_file(argv[1]);
-// 	printf("Content as one string:\n%s", content);
-// 	map_check(content);
-// 	printf("Map checked\n");
-// 	map = build_map(content);
-// 	free(content);
-// 	printf("Total columns: %d, total rows: %d\n", map.col_num, map.row_num);
-
-// 	/* int i = 0;
-// 	while (i < map.col_num * map.row_num)
-// 	{
-// 		printf("row: %d\tcol: %d\theight: %d\tcolor: %x\n",
-// 			map.vertexes[i].row,
-// 			map.vertexes[i].col,
-// 			map.vertexes[i].height,
-// 			map.vertexes[i].color);
-// 		i++;
-// 	} */
-// 	free(map.vertexes);
-// 	return (0);
-// }

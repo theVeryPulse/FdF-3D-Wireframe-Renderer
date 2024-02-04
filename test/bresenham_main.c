@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:35:43 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/03 23:22:38 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/04 17:26:42 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int argc, char const *argv[])
 
 	// Draws line in every direction
 	double angle = 1 * PI / 180;
-	t_matrix rotation = (t_matrix){.row_num = 2, .col_num = 2,
+	t_mx rotation = (t_mx){.row_num = 2, .col_num = 2,
 		.entries = {
 			{cos(angle), -sin(angle)},
 			{sin(angle), cos(angle)}
@@ -38,7 +38,7 @@ int	main(int argc, char const *argv[])
 	for (int count = 0; count < 390; count++)
 	{
 		draw_line(&vars.img_vars, xwin_coord((t_px_coord){0}), xwin_coord(needle), WHITE);
-		needle = mx_to_pxcoord(mx_mult(rotation, pxcoord_to_mx(needle)));
+		needle = mx_to_pxcoord(mxa_mult_mxb(rotation, pxcoord_to_mx(needle)));
 		mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 	}
 

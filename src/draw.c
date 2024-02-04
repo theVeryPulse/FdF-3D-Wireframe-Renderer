@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/03 22:48:46 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/04 22:30:41 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -167,21 +167,21 @@ void	draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color
 		if (slope_greater_than_1 && slope_is_negative)
 		{
 			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, WHITE);
-			printf("(%d,%d)\n", point.y, -point.x);
+			// printf("(%d,%d)\n", point.y, -point.x);
 		}
 		else if (slope_is_negative)
 		{
-			printf("(%d,%d)\n", point.x, -point.y);
+			// printf("(%d,%d)\n", point.x, -point.y);
 			put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, WHITE);
 		}
 		else if (slope_greater_than_1)
 		{
-			printf("(%d,%d)\n", point.y, point.x);
+			// printf("(%d,%d)\n", point.y, point.x);
 			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, WHITE);
 		}
 		else
 		{
-			printf("(%d,%d)\n", point.x, point.y);
+			// printf("(%d,%d)\n", point.x, point.y);
 			put_pixel_img(img_vars, point, WHITE);
 		}
 		if (error > 0)
