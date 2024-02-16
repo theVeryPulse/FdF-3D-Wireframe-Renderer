@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/04 22:13:58 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/16 15:54:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,8 @@
 
 # define WIDTH (1920)
 # define HEIGHT (1080)
-# define MAX_COL (10)
-# define MAX_ROW (10)
+# define MAX_COL (4)
+# define MAX_ROW (4)
 # define BLACK (0x0)
 # define WHITE (0xffffff)
 # define PI (3.1415926)
@@ -116,11 +116,14 @@ void		draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int colo
 
 /* Matrix */
 
-t_mx		mxa_mult_mxb(t_mx mxa, t_mx mxb);
 t_mx		mx_mult(int mx_count, ...);
-t_mx		psp_proj_mx(double distance, double z);
+t_mx		mx_transpose(t_mx mx);
+t_mx		mxa_mult_mxb(t_mx mxa, t_mx mxb);
+t_mx		psp_proj_mx(t_mx coord);
 t_mx		rot_x_mx(double angle);
+t_mx		rot_x_mx_4x4(double angle);
 t_mx		rot_y_mx(double angle);
+t_mx		rot_y_mx_4x4(double angle);
 t_mx		rot_z_mx(double angle);
 
 

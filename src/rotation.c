@@ -6,11 +6,19 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/04 22:56:35 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/16 15:54:18 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#define KNRM "\x1B[0m"
+#define KRED "\x1B[31m"
+#define KGRN "\x1B[32m"
+#define KYEL "\x1B[33m"
+#define KBLU "\x1B[34m"
+#define KMAG "\x1B[35m"
+#define KCYN "\x1B[36m"
+#define KWHT "\x1B[37m"
 
 int	round_int(double n)
 {
@@ -50,8 +58,10 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 
 	if (mxa.col_num != mxb.row_num)
 	{
-		ft_putendl_fd("Incorrect number of coloumns and rows for matrix "
+		ft_putstr_fd(KRED, STDERR_FILENO);
+		ft_putendl_fd("WARNING: Incorrect number of coloumns and rows for matrix "
 			"multiplication", STDERR_FILENO);
+		ft_putstr_fd(KWHT, STDERR_FILENO);
 		return ((t_mx){0});
 	}
 	product = (t_mx){.row_num = mxa.row_num, .col_num = mxb.col_num};
@@ -76,13 +86,20 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 	return (product);
 }
 
+/**
+ * @brief Returns the pixel coordinates in raster space based on the screen
+ * space coordinates.
+ * 
+ * @param p_point 
+ * @return (t_px_coord) The coordinate of the pixel
+ */
 t_px_coord	xwin_coord(t_px_coord p_point)
 {
 	t_px_coord	result;
 
 	result.x = p_point.x + WIDTH / 2;
 	result.y = -p_point.y + HEIGHT / 2;
-	ft_printf("P-system: (%d,%d), X-system: (%d,%d)\n", p_point.x, p_point.y, result.x, result.y);
+	// ft_printf("P-system: (%d,%d), X-system: (%d,%d)\n", p_point.x, p_point.y, result.x, result.y);
 	return (result);
 }
 
@@ -101,11 +118,13 @@ t_px_coord	mx_to_pxcoord(t_mx mx)
 {
 	t_px_coord	px_coord;
 
-	if (mx.col_num != 1 || mx.row_num != 2)
+	/* if (mx.col_num != 1 || mx.row_num != 2)
 	{
-		ft_putendl_fd("Matrix cannot be transformed into pixel coordinates", STDERR_FILENO);
+		ft_putstr_fd(KRED, STDERR_FILENO);
+		ft_putendl_fd("WARNING: Matrix cannot be transformed into pixel coordinates", STDERR_FILENO);
+		ft_putstr_fd(KWHT, STDERR_FILENO);
 		return ((t_px_coord){0});
-	}
+	} */
 	px_coord.x = round(mx.entries[0][0]);
 	px_coord.y = round(mx.entries[1][0]);
 	return (px_coord);
@@ -159,17 +178,60 @@ t_mx	rot_z_mx(double angle)
 	return (rot_z);
 }
 
-t_mx	psp_proj_mx(double distance, double z)
+t_mx	psp_proj_mx(t_mx coord)
 {
 	t_mx	proj_mx;
-	t_mx	co;
+	double	x_co;
+	double	y_co;
+	double	distance;
 
-	co = 1 / (distance - z);
+	distance = 500;
+	x_co = fabs(coord.entries[0][0]) / (distance - coord.entries[2][0]);
+	y_co = fabs(coord.entries[1][0]) / (distance - coord.entries[2][0]);
+	printf("x_co: %f, y_co: %f\n", x_co, y_co);
 	proj_mx = (t_mx){.row_num = 2, .col_num = 3,
 		.entries = {
-			{1, 0, 0},
-			{0, 1, 0}
+			{x_co, 0, 0},
+			{0, y_co, 0}
 		}
 	};
 	return (proj_mx);
+}
+
+t_mx	isometric_proj(void)
+{
+	t_mx	iso_proj;
+
+	iso_proj = mx_mult(2, rot_x_mx_4x4(35.264 * PI/ 180), rot_y_mx_4x4(45 * PI / 180));
+	return (iso_proj);
+}
+
+t_mx	rot_x_mx_4x4(double angle)
+{
+	t_mx	rot_x;
+
+	rot_x = (t_mx){.row_num = 4, .col_num = 4,
+		.entries = {
+			{1, 0, 0, 0},
+			{0, cos(angle), -sin(angle), 0},
+			{0, sin(angle), cos(angle), 0},
+			{0, 0, 0, 1}
+		}
+	};
+	return (rot_x);
+}
+
+t_mx	rot_y_mx_4x4(double angle)
+{
+	t_mx	rot_y;
+
+	rot_y = (t_mx){.row_num = 4, .col_num = 4,
+		.entries = {
+			{cos(angle), 0, sin(angle), 0},
+			{0, 1, 0, 0},
+			{-sin(angle), 0, cos(angle), 0},
+			{0, 0, 0, 1}
+		}
+	};
+	return (rot_y);
 }
