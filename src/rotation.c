@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 01:09:10 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 23:44:43 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -201,7 +201,7 @@ t_mx	psp_proj_mx(t_mx coord)
 	x_co = fabs(coord.entries[0][0]) / (distance - coord.entries[2][0]);
 	y_co = fabs(coord.entries[1][0]) / (distance - coord.entries[2][0]);
 	printf("x_co: %f, y_co: %f\n", x_co, y_co);
-	proj_mx = (t_mx){.row_num = 2, .col_num = 3,
+	proj_mx = (t_mx){.row_num = 2, .col_num = 4,
 		.entries = {
 			{x_co, 0, 0},
 			{0, y_co, 0}
@@ -246,4 +246,19 @@ t_mx	rot_y_mx_4x4(double angle)
 		}
 	};
 	return (rot_y);
+}
+
+t_mx	rot_z_mx_4x4(double angle)
+{
+	t_mx	rot_z;
+
+	rot_z = (t_mx){.row_num = 4, .col_num = 4,
+		.entries = {
+			{cos(angle), -sin(angle), 0, 0},
+			{sin(angle), cos(angle), 0, 0},
+			{0, 0, 1, 0},
+			{0, 0, 0, 1}
+		}
+	};
+	return (rot_z);
 }

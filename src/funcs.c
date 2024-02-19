@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:53:07 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/03 22:53:16 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 23:15:32 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,18 @@ int	handle_key(int key, t_vars *vars)
 	else if (key == XK_b)
 	{
 		change_screen_color(vars, create_argb(0, 0, 0, 0));
+	}
+	else if (key == XK_Left || key == XK_Right || key == XK_Up || key == XK_Down)
+	{
+		translate(vars, key);
+	}
+	else if (key == XK_i || key == XK_o)
+	{
+		scale(vars, key);
+	}
+	else if (key == XK_q || key== XK_e || key == XK_w || key == XK_s || key == XK_a || key == XK_d)
+	{
+		rotate(vars, key);
 	}
 }
 

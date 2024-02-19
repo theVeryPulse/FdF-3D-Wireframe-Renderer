@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 01:30:27 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 23:37:15 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,6 @@ typedef struct	s_px_coord
 	int	y;
 }	t_px_coord;
 
-typedef struct	s_vars
-{
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img_vars	img_vars;
-}	t_vars;
 
 typedef struct	s_vertex
 {
@@ -90,6 +84,14 @@ typedef struct	s_map
 	int			col_num;
 	int			row_num;
 }	t_map;
+
+typedef struct	s_vars
+{
+	void		*mlx_ptr;
+	void		*win_ptr;
+	t_img_vars	img_vars;
+	t_map		map;
+}	t_vars;
 
 t_map		build_map(char *str);
 void		change_screen_color(t_vars *vars, int color);
@@ -126,6 +128,13 @@ t_mx		rot_x_mx_4x4(double angle);
 t_mx		rot_y_mx(double angle);
 t_mx		rot_y_mx_4x4(double angle);
 t_mx		rot_z_mx(double angle);
+t_mx		rot_z_mx_4x4(double angle);
 
+/* Model */
+
+void		render_ortho_model(t_vars *vars);
+void		rotate(t_vars *vars, int key);
+void		scale(t_vars *vars, int key);
+void		translate(t_vars *vars, int key);
 
 #endif

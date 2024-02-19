@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:09 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 00:59:21 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 02:05:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,13 @@ int	main(int argc, char **argv)
 
 		for (int i = 0; i < 3; i++)
 		{
-			draw_line(&vars.img_vars, raster_coord(mx_to_pxcoord(projected[i])), raster_coord(mx_to_pxcoord(projected[i + 1])), WHITE);
-			draw_line(&vars.img_vars, raster_coord(mx_to_pxcoord(projected[i + 4])), raster_coord(mx_to_pxcoord(projected[i + 5])), WHITE);
-			draw_line(&vars.img_vars, raster_coord(mx_to_pxcoord(projected[i])), raster_coord(mx_to_pxcoord(projected[i + 4])), WHITE);
+			draw_line(&vars.img_vars, raster_coord((projected[i])), raster_coord((projected[i + 1])), WHITE);
+			draw_line(&vars.img_vars, raster_coord((projected[i + 4])), raster_coord((projected[i + 5])), WHITE);
+			draw_line(&vars.img_vars, raster_coord((projected[i])), raster_coord((projected[i + 4])), WHITE);
 		}
-		draw_line(&vars.img_vars, raster_coord(mx_to_pxcoord(projected[0])), raster_coord(mx_to_pxcoord(projected[3])), WHITE);
-		draw_line(&vars.img_vars, raster_coord(mx_to_pxcoord(projected[4])), raster_coord(mx_to_pxcoord(projected[7])), WHITE);
-		draw_line(&vars.img_vars, raster_coord(mx_to_pxcoord(projected[3])), raster_coord(mx_to_pxcoord(projected[7])), WHITE);
+		draw_line(&vars.img_vars, raster_coord((projected[0])), raster_coord((projected[3])), WHITE);
+		draw_line(&vars.img_vars, raster_coord((projected[4])), raster_coord((projected[7])), WHITE);
+		draw_line(&vars.img_vars, raster_coord((projected[3])), raster_coord((projected[7])), WHITE);
 
 		mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 		angle1 += 1 * PI / 180;
