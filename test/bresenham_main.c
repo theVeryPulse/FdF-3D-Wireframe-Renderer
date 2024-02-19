@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:35:43 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/04 17:26:42 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 00:59:21 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int	main(int argc, char const *argv[])
 		&vars.img_vars.line_size,
 		&vars.img_vars.endian);
 
-	// draw_line(&vars.img_vars, xwin_coord((t_px_coord){0}), xwin_coord((t_px_coord){10, 300}), WHITE);
+	// draw_line(&vars.img_vars, raster_coord((t_px_coord){0}), raster_coord((t_px_coord){10, 300}), WHITE);
 
 	// Draws line in every direction
 	double angle = 1 * PI / 180;
@@ -37,7 +37,7 @@ int	main(int argc, char const *argv[])
 	t_px_coord	needle = (t_px_coord){.x = 0, .y = 200};
 	for (int count = 0; count < 390; count++)
 	{
-		draw_line(&vars.img_vars, xwin_coord((t_px_coord){0}), xwin_coord(needle), WHITE);
+		draw_line(&vars.img_vars, raster_coord((t_px_coord){0}), raster_coord(needle), WHITE);
 		needle = mx_to_pxcoord(mxa_mult_mxb(rotation, pxcoord_to_mx(needle)));
 		mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 	}

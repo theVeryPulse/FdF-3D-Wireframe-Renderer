@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:09 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/16 15:54:14 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 00:59:21 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,20 +76,20 @@ int	main(int argc, char **argv)
 		t_px_coord	d2 = mx_to_pxcoord((mx_mult(3, projection_2x4, rot_4x4, h_4x1)));
 		fill_image_with_color(&vars.img_vars, BLACK);
 
-		draw_line(&vars.img_vars, xwin_coord(a1), xwin_coord(b1), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(b1), xwin_coord(c1), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(c1), xwin_coord(d1), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(d1), xwin_coord(a1), WHITE);
+		draw_line(&vars.img_vars, raster_coord(a1), raster_coord(b1), WHITE);
+		draw_line(&vars.img_vars, raster_coord(b1), raster_coord(c1), WHITE);
+		draw_line(&vars.img_vars, raster_coord(c1), raster_coord(d1), WHITE);
+		draw_line(&vars.img_vars, raster_coord(d1), raster_coord(a1), WHITE);
 
-		draw_line(&vars.img_vars, xwin_coord(a2), xwin_coord(b2), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(b2), xwin_coord(c2), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(c2), xwin_coord(d2), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(d2), xwin_coord(a2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(a2), raster_coord(b2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(b2), raster_coord(c2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(c2), raster_coord(d2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(d2), raster_coord(a2), WHITE);
 
-		draw_line(&vars.img_vars, xwin_coord(a1), xwin_coord(a2), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(b1), xwin_coord(b2), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(c1), xwin_coord(c2), WHITE);
-		draw_line(&vars.img_vars, xwin_coord(d1), xwin_coord(d2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(a1), raster_coord(a2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(b1), raster_coord(b2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(c1), raster_coord(c2), WHITE);
+		draw_line(&vars.img_vars, raster_coord(d1), raster_coord(d2), WHITE);
 
 		mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 

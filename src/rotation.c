@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/16 15:54:18 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 01:09:10 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,10 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 	if (mxa.col_num != mxb.row_num)
 	{
 		ft_putstr_fd(KRED, STDERR_FILENO);
-		ft_putendl_fd("WARNING: Incorrect number of coloumns and rows for matrix "
-			"multiplication", STDERR_FILENO);
+		ft_putstr_fd("WARNING:", STDERR_FILENO);
 		ft_putstr_fd(KWHT, STDERR_FILENO);
+		ft_putendl_fd("Incorrect number of coloumns and rows for matrix "
+			"multiplication", STDERR_FILENO);
 		return ((t_mx){0});
 	}
 	product = (t_mx){.row_num = mxa.row_num, .col_num = mxb.col_num};
@@ -91,9 +92,9 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
  * space coordinates.
  * 
  * @param p_point 
- * @return (t_px_coord) The coordinate of the pixel
+ * @return (t_px_coord) The coordinate of the pixel in raster space
  */
-t_px_coord	xwin_coord(t_px_coord p_point)
+t_px_coord	old_raster_coord(t_px_coord p_point)
 {
 	t_px_coord	result;
 
@@ -101,6 +102,17 @@ t_px_coord	xwin_coord(t_px_coord p_point)
 	result.y = -p_point.y + HEIGHT / 2;
 	// ft_printf("P-system: (%d,%d), X-system: (%d,%d)\n", p_point.x, p_point.y, result.x, result.y);
 	return (result);
+}
+
+t_px_coord	raster_coord(t_mx screen_coord)
+{
+	t_px_coord	raster_coord;
+
+	raster_coord = mx_to_pxcoord(screen_coord);
+	raster_coord.x = raster_coord.x + WIDTH / 2;
+	raster_coord.y = -raster_coord.y + HEIGHT / 2;
+	// ft_printf("P-system: (%d,%d), X-system: (%d,%d)\n", p_point.x, p_point.y, result.x, result.y);
+	return (raster_coord);
 }
 
 t_mx	pxcoord_to_mx(t_px_coord px_coord)

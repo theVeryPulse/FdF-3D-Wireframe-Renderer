@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/16 15:54:46 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/19 01:30:27 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ typedef struct	s_img_vars
 
 typedef struct	s_px_coord
 {
-	t_pixel	x;
-	t_pixel	y;
+	int	x;
+	int	y;
 }	t_px_coord;
 
 typedef struct	s_vars
@@ -81,6 +81,7 @@ typedef struct	s_vertex
 	t_unit	col;
 	t_unit	height;
 	t_color	color;
+	t_mx	real_coord;
 }	t_vertex;
 
 typedef struct	s_map
@@ -106,7 +107,7 @@ t_px_coord	mx_to_pxcoord(t_mx mx);
 void		put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_color color);
 t_mx		pxcoord_to_mx(t_px_coord px_coord);
 char		*read_file(const char *file);
-t_px_coord	xwin_coord(t_px_coord p_point);
+t_px_coord	raster_coord(t_mx screen_coord);
 
 /* Line drawing */
 

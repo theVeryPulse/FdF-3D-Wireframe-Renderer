@@ -6,14 +6,14 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:35:00 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/03 23:37:51 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/18 21:19:49 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static char	*list_to_str(t_list *list);
-static void	list_free(t_list **list);
+/* static void	list_free(t_list **list); */
 
 void	ensure_eol(t_list *last)
 {
@@ -51,11 +51,12 @@ char	*read_file(const char *file)
 	}
 	ensure_eol(ft_lstlast(list));
 	all = list_to_str(list);
-	list_free(&list);
+	// list_free(&list);
+	ft_lstclear(&list, free);
 	return (all);
 }
 
-static void	list_free(t_list **list)
+/* static void	list_free(t_list **list)
 {
 	t_list	*this;
 	t_list	*next;
@@ -71,7 +72,7 @@ static void	list_free(t_list **list)
 		free(this);
 		this = next;
 	}
-}
+} */
 
 static char	*list_to_str(t_list *list)
 {
@@ -169,6 +170,10 @@ void	fill_points(t_map *map, char *str)
 			if (str[i] == ',')
 			{
 				map->vertexes[vertex_idx].color = hexa_to_int(&str[++i]);
+			}
+			else
+			{
+				map->vertexes[vertex_idx].color = WHITE;
 			}
 			while (ft_isalnum(str[i]))
 				i++;
