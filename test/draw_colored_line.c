@@ -1,46 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_main.c                                         :+:      :+:    :+:   */
+/*   draw_colored_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 17:52:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 22:38:56 by Philip           ###   ########.fr       */
+/*   Created: 2024/02/20 22:11:49 by Philip            #+#    #+#             */
+/*   Updated: 2024/02/20 22:28:14 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	print_map(t_map *map)
-{
-	for (size_t i = 0; i < map->row_num; i++)
-	{
-		for (size_t j = 0; j < map->col_num; j++)
-		{
-			printf("%x ", map->vertexes[map->col_num * i + j].color);
-		}
-		printf("\n");
-	}
-}
-
-t_mx	point_real_coord(double x, double y, double z)
-{
-	t_mx	point;
-
-	point = (t_mx){.row_num = 4, .col_num = 1, .entries = {{x}, {y}, {z}, {1}}};
-	return (point);
-}
-
-t_mx	isometric4x4(void)
-{
-	t_mx	iso_proj;
-
-	// iso_proj = mx_mult(2, rot_x_mx_4x4(45 * PI/ 180), rot_y_mx_4x4(-10 * PI / 180));
-	iso_proj = mxa_mult_mxb(rot_x_mx_4x4(35.264 * PI/ 180),
-							rot_y_mx_4x4(-45 * PI / 180));
-	return (iso_proj);
-}
 
 int main(int argc, char const *argv[])
 {
@@ -55,7 +25,7 @@ int main(int argc, char const *argv[])
 	
 	printf("Map checked\n");
 	vars.map = build_map(content);
-	print_map(&vars.map);
+	// print_map(&vars.map);
 	free(content);
 	printf("Total columns: %d, total rows: %d\n", vars.map.col_num, vars.map.row_num);
 
@@ -68,38 +38,12 @@ int main(int argc, char const *argv[])
 		&vars.img_vars.line_size,
 		&vars.img_vars.endian);
 
-	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
+	t_px_coord	a;
+	t_px_coord	b;
 
-	// Initialize vertexes' real coordinates
-	int	col;
-	int	row;
-	int	i;
-	double	init_scale;
-
-	init_scale = 50.0;
-	row = 0;
-	i = 0;
-	while (row < vars.map.row_num)
-	{
-		col = 0;
-		while (col < vars.map.col_num)
-		{
-			vars.map.vertexes[col + row * vars.map.col_num].real_coord = point_real_coord(
-				init_scale * col,
-				init_scale * vars.map.vertexes[col + row * vars.map.col_num].height,
-				-init_scale * (vars.map.row_num - row - 1));
-			vars.map.vertexes[col + row * vars.map.col_num].real_coord = mx_mult(2, 
-				isometric4x4(),
-				vars.map.vertexes[col + row * vars.map.col_num].real_coord);
-			col++;
-		}
-		row++;
-	}
-
-	// render_ortho_model(&vars);
-	render_colored_ortho_model(&vars);
-
-
+	a = (t_px_coord){.x = 0, .y = 500, .color = create_argb(0xff, 0, 0, 0xff)};
+	b = (t_px_coord){.x = 1000, .y = 500, .color = create_argb(0xff, 0, 0xff, 0)};
+	draw_colored_line(&vars.img_vars, a, b);
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
@@ -107,6 +51,5 @@ int main(int argc, char const *argv[])
 	mlx_hook(vars.win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit, &vars);
 	mlx_mouse_hook(vars.win_ptr, mouse_button, &vars);
 	mlx_hook(vars.win_ptr, MotionNotify, PointerMotionMask, mouse_motion, NULL);
-
 	mlx_loop(vars.mlx_ptr);
 }

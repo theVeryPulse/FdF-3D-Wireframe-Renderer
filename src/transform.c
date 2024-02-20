@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:07:22 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 02:26:25 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 22:41:41 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@ void	translate(t_vars *vars, int key)
 		i++;
 	}
 	fill_image_with_color(&vars->img_vars, BLACK);
-	render_ortho_model(vars);
+	// render_ortho_model(vars);
+	render_colored_ortho_model(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }
 
@@ -72,7 +73,8 @@ void	scale(t_vars *vars, int key)
 		i++;
 	}
 	fill_image_with_color(&vars->img_vars, BLACK);
-	render_ortho_model(vars);
+	// render_ortho_model(vars);
+	render_colored_ortho_model(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }
 
@@ -114,6 +116,7 @@ void	rotate(t_vars *vars, int key)
 		i++;
 	}
 	fill_image_with_color(&vars->img_vars, BLACK);
-	render_ortho_model(vars);
+	// render_ortho_model(vars);
+	render_colored_ortho_model(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }

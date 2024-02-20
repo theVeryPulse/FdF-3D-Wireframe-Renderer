@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/22 12:42:46 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 02:33:53 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 21:51:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,27 +21,27 @@
  * @param b Blue
  * @return int 
  */
-t_color	create_argb(unsigned char r, unsigned char g, unsigned char b, unsigned char alpha)
+t_argb	create_argb(unsigned char alpha, unsigned char r, unsigned char g, unsigned char b)
 {
 	return (*(int *)(unsigned char [4]){b, g, r, alpha});
 }
 
-unsigned char	get_t(int argb)
+unsigned char	get_a(t_argb argb)
 {
 	return (((unsigned char *)&argb)[3]);
 }
 
-unsigned char	get_r(int argb)
+unsigned char	get_r(t_argb argb)
 {
 	return (((unsigned char *)&argb)[2]);
 }
 
-unsigned char	get_g(int argb)
+unsigned char	get_g(t_argb argb)
 {
 	return (((unsigned char *)&argb)[1]);
 }
 
-unsigned char	get_b(int argb)
+unsigned char	get_b(t_argb argb)
 {
 	return (((unsigned char *)&argb)[0]);
 }

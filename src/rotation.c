@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 23:44:43 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 23:37:24 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #define KCYN "\x1B[36m"
 #define KWHT "\x1B[37m"
 
-int	round_int(double n)
+int	round_double(double n)
 {
 	if (n > 0)
 		return ((int)(n + 0.5));
@@ -137,8 +137,8 @@ t_px_coord	mx_to_pxcoord(t_mx mx)
 		ft_putstr_fd(KWHT, STDERR_FILENO);
 		return ((t_px_coord){0});
 	} */
-	px_coord.x = round(mx.entries[0][0]);
-	px_coord.y = round(mx.entries[1][0]);
+	px_coord.x = round_double(mx.entries[0][0]);
+	px_coord.y = round_double(mx.entries[1][0]);
 	return (px_coord);
 }
 

@@ -1,46 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fdf_main.c                                         :+:      :+:    :+:   */
+/*   perspective_main.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/05 17:52:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 22:38:56 by Philip           ###   ########.fr       */
+/*   Created: 2024/02/20 23:21:47 by Philip            #+#    #+#             */
+/*   Updated: 2024/02/20 23:22:09 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-
-void	print_map(t_map *map)
-{
-	for (size_t i = 0; i < map->row_num; i++)
-	{
-		for (size_t j = 0; j < map->col_num; j++)
-		{
-			printf("%x ", map->vertexes[map->col_num * i + j].color);
-		}
-		printf("\n");
-	}
-}
-
-t_mx	point_real_coord(double x, double y, double z)
-{
-	t_mx	point;
-
-	point = (t_mx){.row_num = 4, .col_num = 1, .entries = {{x}, {y}, {z}, {1}}};
-	return (point);
-}
-
-t_mx	isometric4x4(void)
-{
-	t_mx	iso_proj;
-
-	// iso_proj = mx_mult(2, rot_x_mx_4x4(45 * PI/ 180), rot_y_mx_4x4(-10 * PI / 180));
-	iso_proj = mxa_mult_mxb(rot_x_mx_4x4(35.264 * PI/ 180),
-							rot_y_mx_4x4(-45 * PI / 180));
-	return (iso_proj);
-}
 
 int main(int argc, char const *argv[])
 {
