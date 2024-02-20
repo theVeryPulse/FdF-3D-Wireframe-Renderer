@@ -8,6 +8,6 @@ cc fdf_main.c ../src/draw.c ../src/rotation.c ../src/colors.c ../src/funcs.c \
     ../lib/minilibx-linux/libmlx.a ../lib/libft/lib/libft.a \
     -lX11 -lXext -lm -lz \
     -o ../bin/fdf \
-    -g
+    -O3
 
 # ../bin/fdf fdf.fdf

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:07:22 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 23:37:15 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 02:26:25 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,6 @@ void	rotate(t_vars *vars, int key)
 {
 	t_mx	rotate4x4;
 
-	rotate4x4 = (t_mx){.row_num = 4, .col_num = 4,
-		.entries = {{1, 0, 0, 0},
-					{0, 1, 0, 0},
-					{0, 0, 1, 0},
-					{0, 0, 0, 1}}};
 	if (key == XK_e)
 	{
 		rotate4x4 = rot_y_mx_4x4(10.0 * PI / 180.0);

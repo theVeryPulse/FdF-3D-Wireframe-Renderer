@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:53:07 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 23:15:32 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 02:40:04 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	destroy_exit(t_vars *vars)
 	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
 	mlx_destroy_display(vars->mlx_ptr);
 	free(vars->mlx_ptr);
+	free(vars->map.vertexes);
 	exit (0);
 }
 

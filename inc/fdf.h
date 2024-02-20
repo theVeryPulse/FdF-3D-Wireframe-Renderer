@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/19 23:37:15 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 03:23:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,7 @@
 # define PI (3.1415926)
 
 typedef int t_unit;
-typedef int t_pixel;
 typedef int t_color;
-
-typedef struct	s_3d_af_vector
-{
-	double			x;
-	double			y;
-	double			z;
-	const double	w;
-}	t_3d_af_vector;
 
 typedef struct	s_matrix
 {
@@ -51,7 +42,6 @@ typedef struct	s_matrix
 	int		col_num;
 	double	entries[MAX_ROW][MAX_COL];
 }	t_mx;
-
 
 typedef struct	s_img_vars
 {
@@ -64,10 +54,10 @@ typedef struct	s_img_vars
 
 typedef struct	s_px_coord
 {
-	int	x;
-	int	y;
+	int		x;
+	int		y;
+	t_color	color;
 }	t_px_coord;
-
 
 typedef struct	s_vertex
 {

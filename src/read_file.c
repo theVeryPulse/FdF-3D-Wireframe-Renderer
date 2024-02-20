@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:35:00 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/18 21:19:49 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/20 02:05:14 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,28 +51,9 @@ char	*read_file(const char *file)
 	}
 	ensure_eol(ft_lstlast(list));
 	all = list_to_str(list);
-	// list_free(&list);
 	ft_lstclear(&list, free);
 	return (all);
 }
-
-/* static void	list_free(t_list **list)
-{
-	t_list	*this;
-	t_list	*next;
-
-	if (!list || !(*list))
-		return ;
-	this = *list;
-	next = this->next;
-	while (this)
-	{
-		next = this->next;
-		free(this->content);
-		free(this);
-		this = next;
-	}
-} */
 
 static char	*list_to_str(t_list *list)
 {
