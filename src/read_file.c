@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:35:00 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 02:05:14 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 23:01:57 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,7 @@ void	map_check(char *map_str)
 	}
 }
 
-int	hexa_to_int(const char *str)
+int	hexa_atoi(const char *str)
 {
 	size_t		i;
 	int			n;
@@ -149,13 +149,9 @@ void	fill_points(t_map *map, char *str)
 			while (ft_isdigit(str[i]) || ft_strchr("+-", str[i]))
 				i++;
 			if (str[i] == ',')
-			{
-				map->vertexes[vertex_idx].color = hexa_to_int(&str[++i]);
-			}
+				map->vertexes[vertex_idx].color = hexa_atoi(&str[++i]);
 			else
-			{
 				map->vertexes[vertex_idx].color = WHITE;
-			}
 			while (ft_isalnum(str[i]))
 				i++;
 			vertex_idx++;

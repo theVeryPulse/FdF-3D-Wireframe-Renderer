@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 19:02:07 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 21:31:06 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,15 @@
 void	int_swap(int *a, int *b)
 {
 	int	tmp;
+
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+
+void	px_coord_swap(t_px_coord *a, t_px_coord *b)
+{
+	t_px_coord	tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -65,8 +74,7 @@ void	draw_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b,
 		return ;
 	if (a.x > b.x)
 	{
-		int_swap(&a.x, &b.x);
-		int_swap(&a.y, &b.y);
+		px_coord_swap(&a, &b);
 	}
 	point = a;
 	ystep = 1 + (b.y < a.y) * (-2);
@@ -118,8 +126,7 @@ void	draw_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b, int color)
 
 	if (a.x > b.x)
 	{
-		int_swap(&a.x, &b.x);
-		int_swap(&a.y, &b.y);
+		px_coord_swap(&a, &b);
 	}
 	delta_x = ft_abs(b.x - a.x);
 	delta_y = ft_abs(b.y - a.y);
@@ -158,8 +165,7 @@ void	draw_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b, int color)
 	}
 	if (a.x > b.x)
 	{
-		int_swap(&a.x, &b.x);
-		int_swap(&a.y, &b.y);
+		px_coord_swap(&a, &b);
 	}
 	delta_x = ft_abs(b.x - a.x);
 	delta_y = ft_abs(b.y - a.y);
@@ -200,6 +206,19 @@ void	draw_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b, int color)
 	}
 }
 
+t_argb	gradient_color(double transition, t_argb start, t_argb end)
+{
+	t_argb	color;
+
+	if (transition < 0 || transition > 1)
+		return (start);
+	color = argb((0xff),
+				((1 - transition) * get_r(start) + transition * get_r(end)),
+				((1 - transition) * get_g(start) + transition * get_g(end)),
+				((1 - transition) * get_b(start) + transition * get_b(end)));
+	return (color);
+}
+
 void	draw_colored_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b)
 {
 	t_px_coord	point;
@@ -207,14 +226,12 @@ void	draw_colored_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b)
 	int		ystep;
 	double	t;
 	double	dt;
-	t_argb	color;
 
 	if (!image || ft_abs(b.x - a.x) != ft_abs(b.y - a.y))
 		return ;
 	if (a.x > b.x)
 	{
-		int_swap(&a.x, &b.x);
-		int_swap(&a.y, &b.y);
+		px_coord_swap(&a, &b);
 	}
 	t = 0.0;
 	dt = 1.0 / ft_abs(b.x - a.x);
@@ -222,11 +239,8 @@ void	draw_colored_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b)
 	ystep = 1 + (b.y < a.y) * (-2);
 	while (point.x <= b.x)
 	{
-		color = argb((0xff),
-					((1 - t) * get_r(a.color) + t * get_r(b.color)),
-					((1 - t) * get_g(a.color) + t * get_g(b.color)),
-					((1 - t) * get_b(a.color) + t * get_b(b.color)));
-		put_pixel_img(image, point, color);
+		// color = gradient_color(t, a.color, b.color);
+		put_pixel_img(image, point, gradient_color(t, a.color, b.color));
 		point.x++;
 		point.y += ystep;
 		t += dt;
@@ -249,16 +263,12 @@ void	draw_colored_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 		point = a;
 		while (point.y++ <= b.y)
 		{
-			color = argb((0xff),
-						((1 - t) * get_r(a.color) + t * get_r(b.color)),
-						((1 - t) * get_g(a.color) + t * get_g(b.color)),
-						((1 - t) * get_b(a.color) + t * get_b(b.color)));
+			color = gradient_color(t, a.color, b.color);
 			put_pixel_img(img_vars, point, color);
 			t += dt;
 		}
-		return ;
 	}
-	if (b.y == a.y)
+	else if (b.y == a.y)
 	{
 		if (a.x > b.x)
 			int_swap(&a.x, &b.x);
@@ -266,14 +276,10 @@ void	draw_colored_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 		point = a;
 		while (point.x++ <= b.x)
 		{
-			color = argb((0xff),
-						((1 - t) * get_r(a.color) + t * get_r(b.color)),
-						((1 - t) * get_g(a.color) + t * get_g(b.color)),
-						((1 - t) * get_b(a.color) + t * get_b(b.color)));
+			color = gradient_color(t, a.color, b.color);
 			put_pixel_img(img_vars, point, color);
 			t += dt;
 		}
-		return ;
 	}
 }
 
@@ -291,20 +297,17 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 
 	if (a.x > b.x)
 	{
-		int_swap(&a.x, &b.x);
-		int_swap(&a.y, &b.y);
+		px_coord_swap(&a, &b);
 	}
 	delta_x = ft_abs(b.x - a.x);
 	delta_y = ft_abs(b.y - a.y);
 	if (delta_x == delta_y)
 	{
-		draw_colored_diagonal_line(img_vars, a, b);
-		return ;
+		return (draw_colored_diagonal_line(img_vars, a, b));
 	}
 	if (delta_x == 0 || delta_y == 0)
 	{
-		draw_colored_grid_line(img_vars, a, b);
-		return ;
+		return (draw_colored_grid_line(img_vars, a, b));
 	}
 	/* Slope < 0 */
 	if ((a.x < b.x) && (a.y > b.y))
@@ -331,8 +334,7 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 	}
 	if (a.x > b.x)
 	{
-		int_swap(&a.x, &b.x);
-		int_swap(&a.y, &b.y);
+		px_coord_swap(&a, &b);
 	}
 	delta_x = ft_abs(b.x - a.x);
 	delta_y = ft_abs(b.y - a.y);
@@ -342,10 +344,7 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 	dt = 1.0 / ft_abs(b.x - a.x);
 	while (point.x <= b.x)
 	{
-		color = argb((0xff),
-							((1 - t) * get_r(a.color) + t * get_r(b.color)),
-							((1 - t) * get_g(a.color) + t * get_g(b.color)),
-							((1 - t) * get_b(a.color) + t * get_b(b.color)));
+		color = gradient_color(t, a.color, b.color);
 		if (slope_greater_than_1 && slope_is_negative)
 		{
 			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, color);

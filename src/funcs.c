@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:53:07 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 18:54:40 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 22:36:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,33 +30,31 @@ int	destroy_exit(t_vars *vars)
 	exit (0);
 }
 
-int	handle_key(int key, t_vars *vars)
+int	isometric_handle_key(int key, t_vars *vars)
 {
 	printf("%d pressed\n", key);
 	if (key == XK_Escape)
-	{
 		destroy_exit(vars);
-	}
-	else if (key == XK_r)
-	{
-		change_screen_color(vars, argb(200, 0, 0, 1));
-	}
-	else if (key == XK_b)
-	{
-		change_screen_color(vars, argb(0, 0, 0, 0));
-	}
-	else if (key == XK_Left || key == XK_Right || key == XK_Up || key == XK_Down)
-	{
+	else if (key == XK_Left || key == XK_Right || key == XK_Up
+			|| key == XK_Down)
 		translate(vars, key);
-	}
 	else if (key == XK_i || key == XK_o)
-	{
 		scale(vars, key);
-	}
-	else if (key == XK_q || key== XK_e || key == XK_w || key == XK_s || key == XK_a || key == XK_d)
-	{
+	else if (key == XK_q || key== XK_e || key == XK_w || key == XK_s
+			|| key == XK_a || key == XK_d)
 		rotate(vars, key);
-	}
+}
+
+void	cavilier_handle_key(int key, t_vars *vars)
+{
+	printf("%d pressed\n", key);
+	if (key == XK_Escape)
+		destroy_exit(vars);
+	else if (key == XK_Left || key == XK_Right || key == XK_Up
+			|| key == XK_Down)
+		translate_cavilier(vars, key);
+	else if (key == XK_i || key == XK_o)
+		scale_cavilier(vars, key);
 }
 
 void	mouse_button(int button,int x,int y, void *p)
@@ -93,7 +91,6 @@ t_mx	isometric4x4(void)
 {
 	t_mx	iso_proj;
 
-	// iso_proj = mx_mult(2, rot_x_mx_4x4(45 * PI/ 180), rot_y_mx_4x4(-10 * PI / 180));
 	iso_proj = mxa_mult_mxb(rot_x_mx_4x4(35.264 * PI/ 180),
 							rot_y_mx_4x4(-45 * PI / 180));
 	return (iso_proj);

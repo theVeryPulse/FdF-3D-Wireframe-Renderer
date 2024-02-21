@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 18:58:48 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 23:01:31 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,13 +87,14 @@ typedef struct	s_vars
 }	t_vars;
 
 t_map			build_map(char *str);
+void			cavilier_handle_key(int key, t_vars *vars);
 void			change_screen_color(t_vars *vars, int color);
 int				destroy_exit(t_vars *vars);
 void			ensure_eol(t_list *last);
 void			fill_image_with_color(t_img_vars *img_vars, int color);
 void			fill_points(t_map *map, char *str);
-int				handle_key(int key, t_vars *vars);
-int				hexa_to_int(const char *str);
+int				isometric_handle_key(int key, t_vars *vars);
+int				hexa_atoi(const char *str);
 void			map_check(char *map_str);
 void			mouse_button(int button,int x,int y, void *p);
 int				mouse_motion(int x,int y, void *p);
@@ -127,7 +128,6 @@ void			draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int col
 t_mx			mx_mult(int mx_count, ...);
 t_mx			mx_transpose(t_mx mx);
 t_mx			mxa_mult_mxb(t_mx mxa, t_mx mxb);
-t_mx			psp_proj_mx(t_mx coord);
 t_mx			rot_x_mx(double angle);
 t_mx			rot_x_mx_4x4(double angle);
 t_mx			rot_y_mx(double angle);
@@ -142,7 +142,10 @@ void			render_colored_ortho_model(t_vars *vars);
 void			render_ortho_model(t_vars *vars);
 void			rotate(t_vars *vars, int key);
 void			scale(t_vars *vars, int key);
+void			scale_cavilier(t_vars *vars, int key);
 void			translate(t_vars *vars, int key);
+void			translate_cavilier(t_vars *vars, int key);
+
 
 void			print_map(t_map *map);
 t_mx			point_real_coord(double x, double y, double z);

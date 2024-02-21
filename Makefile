@@ -1,5 +1,5 @@
 NAME := fdf
-FILE := main_isometric.c \
+COMMON_FILES := \
 	colors.c \
 	draw.c \
 	funcs.c \
@@ -12,6 +12,14 @@ SRC_DIR := src
 OBJ_DIR := build
 INC_DIR := inc
 
+FILES := main_isometric.c $(COMMON_FILES)
+SRC := $(addprefix $(SRC_DIR)/, $(FILES))
+OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
+
+FILES_BONUS := main_cavilier.c $(COMMON_FILES)
+SRC_BONUS := $(addprefix $(SRC_DIR)/, $(FILES_BONUS))
+OBJ_BONUS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_BONUS))
+
 MLX_INC := lib/minilibx-linux
 MLX_STT := lib/minilibx-linux/libmlx.a
 FT_INC := lib/libft/inc
@@ -19,23 +27,25 @@ FT_STT := lib/libft/lib/libft.a
 
 CFLAGS := -Wall -Wextra -Werror
 
-SRC := $(addprefix $(SRC_DIR)/, $(FILE))
-OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # -O3 highest optimization
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(OBJ_DIR)
 	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -O3 -c $< -o $@ -I$(INC_DIR)
 
-.SILENT:
+# .SILENT:
 
 all: $(NAME)
 
-$(NAME): msg $(OBJ) $(MLX_STT) $(FT_STT)
-	$(CC) $(OBJ) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $(NAME) -I$(INC_DIR)
+$(NAME): $(OBJ) $(MLX_STT) $(FT_STT)
+	@rm -f bonus
+	$(CC) $(OBJ) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $@ -I$(INC_DIR)
 	@echo "👏 Complete! 👏"
 
-msg:
-	@echo "🚧 Building fdf... 🏗️"
+bonus: $(OBJ_BONUS) $(MLX_STT) $(FT_STT)
+	touch bonus
+	$(CC) $(OBJ_BONUS) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $(NAME) -I$(INC_DIR)
+	@echo "👏 Complete! 👏"
 
 $(FT_STT):
 	$(MAKE) -C lib/libft
@@ -47,6 +57,7 @@ clean:
 	rm -f ./$(OBJ_DIR)/*.o
 
 fclean: clean
+	rm -f bonus
 	rm -f fdf
 
 re: fclean all
