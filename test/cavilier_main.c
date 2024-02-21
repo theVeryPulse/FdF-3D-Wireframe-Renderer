@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_colored_line.c                                :+:      :+:    :+:   */
+/*   cavilier_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 22:11:49 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 18:54:40 by Philip           ###   ########.fr       */
+/*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
+/*   Updated: 2024/02/21 17:32:14 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
 	
 	printf("Map checked\n");
 	vars.map = build_map(content);
-	// print_map(&vars.map);
+	print_map(&vars.map);
 	free(content);
 	printf("Total columns: %d, total rows: %d\n", vars.map.col_num, vars.map.row_num);
 
@@ -38,12 +38,32 @@ int main(int argc, char const *argv[])
 		&vars.img_vars.line_size,
 		&vars.img_vars.endian);
 
-	t_px_coord	a;
-	t_px_coord	b;
+	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
-	a = (t_px_coord){.x = 0, .y = 500, .color = argb(0xff, 0, 0, 0xff)};
-	b = (t_px_coord){.x = 1000, .y = 500, .color = argb(0xff, 0, 0xff, 0)};
-	draw_colored_line(&vars.img_vars, a, b);
+	// Initialize vertexes' real coordinates
+	int	col;
+	int	row;
+	int	i;
+	double	init_scale;
+
+	init_scale = 50.0;
+	row = 0;
+	i = 0;
+	while (row < vars.map.row_num)
+	{
+		col = 0;
+		while (col < vars.map.col_num)
+		{
+			vars.map.vertexes[col + row * vars.map.col_num].real_coord = point_real_coord(
+				init_scale * col,
+				init_scale * vars.map.vertexes[col + row * vars.map.col_num].height,
+				-init_scale * (vars.map.row_num - row - 1));
+			col++;
+		}
+		row++;
+	}
+
+	render_colored_cavilier_model(&vars);
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
@@ -51,5 +71,6 @@ int main(int argc, char const *argv[])
 	mlx_hook(vars.win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit, &vars);
 	mlx_mouse_hook(vars.win_ptr, mouse_button, &vars);
 	mlx_hook(vars.win_ptr, MotionNotify, PointerMotionMask, mouse_motion, NULL);
+
 	mlx_loop(vars.mlx_ptr);
 }
