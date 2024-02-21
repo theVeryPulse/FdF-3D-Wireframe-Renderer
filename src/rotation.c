@@ -6,19 +6,11 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 23:37:24 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 17:57:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#define KNRM "\x1B[0m"
-#define KRED "\x1B[31m"
-#define KGRN "\x1B[32m"
-#define KYEL "\x1B[33m"
-#define KBLU "\x1B[34m"
-#define KMAG "\x1B[35m"
-#define KCYN "\x1B[36m"
-#define KWHT "\x1B[37m"
 
 int	round_double(double n)
 {

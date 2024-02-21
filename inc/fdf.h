@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 23:38:01 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 18:58:48 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,9 @@
 # define BLACK (0x000000)
 # define WHITE (0xffffff)
 # define PI (3.1415926)
+# define KNRM "\x1B[0m"
+# define KRED "\x1B[31m"
+# define KWHT "\x1B[37m"
 
 typedef int t_unit;
 typedef int t_argb;
@@ -103,7 +106,10 @@ int				round_double(double n);
 
 /* Color */
 
-int				create_argb(unsigned char alpha, unsigned char r, unsigned char g, unsigned char b);
+int				argb(unsigned char alpha,
+					unsigned char r,
+					unsigned char g,
+					unsigned char b);
 unsigned char	get_a(t_argb argb);
 unsigned char	get_b(t_argb argb);
 unsigned char	get_g(t_argb argb);
@@ -131,10 +137,17 @@ t_mx			rot_z_mx_4x4(double angle);
 
 /* Model */
 
+void			render_colored_cavilier_model(t_vars *vars);
 void			render_colored_ortho_model(t_vars *vars);
 void			render_ortho_model(t_vars *vars);
 void			rotate(t_vars *vars, int key);
 void			scale(t_vars *vars, int key);
 void			translate(t_vars *vars, int key);
+
+void			print_map(t_map *map);
+t_mx			point_real_coord(double x, double y, double z);
+t_mx			isometric4x4(void);
+
+
 
 #endif

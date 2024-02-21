@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_isometric.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/03 22:53:00 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 17:34:12 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
-int	main(int argc, char **argv)
+int	main(int argc, char const *argv[])
 {
 	t_vars	vars;
 	char	*content;
-	t_map	map;
 
 	if (argc != 2)
 		return (1);
 	content = read_file(argv[1]); 
 	printf("Content as one string:\n%s", content);
 	map_check(content);
+	
 	printf("Map checked\n");
-	map = build_map(content);
+	vars.map = build_map(content);
+	print_map(&vars.map);
 	free(content);
-	printf("Total columns: %d, total rows: %d\n", map.col_num, map.row_num);
+	printf("Total columns: %d, total rows: %d\n", vars.map.col_num, vars.map.row_num);
 
 	vars.mlx_ptr = mlx_init();
 	vars.win_ptr = mlx_new_window(vars.mlx_ptr, WIDTH, HEIGHT, "Hello world!");
@@ -40,7 +40,34 @@ int	main(int argc, char **argv)
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
+	// Initialize vertexes' real coordinates
+	int	col;
+	int	row;
+	int	i;
+	double	init_scale;
 
+	init_scale = 50.0;
+	row = 0;
+	i = 0;
+	while (row < vars.map.row_num)
+	{
+		col = 0;
+		while (col < vars.map.col_num)
+		{
+			vars.map.vertexes[col + row * vars.map.col_num].real_coord = point_real_coord(
+				init_scale * col,
+				init_scale * vars.map.vertexes[col + row * vars.map.col_num].height,
+				-init_scale * (vars.map.row_num - row - 1));
+			vars.map.vertexes[col + row * vars.map.col_num].real_coord = mx_mult(2, 
+				isometric4x4(),
+				vars.map.vertexes[col + row * vars.map.col_num].real_coord);
+			col++;
+		}
+		row++;
+	}
+
+	render_colored_ortho_model(&vars);
+	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
 	mlx_key_hook(vars.win_ptr, handle_key, &vars);
 	mlx_hook(vars.win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit, &vars);

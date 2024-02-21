@@ -1,12 +1,17 @@
 NAME := fdf
-FILE := main.c \
+FILE := main_isometric.c \
 	colors.c \
 	draw.c \
+	funcs.c \
+	matrix.c \
 	read_file.c \
-	rotation.c
+	render.c \
+	rotation.c \
+	transform.c
 SRC_DIR := src
 OBJ_DIR := build
 INC_DIR := inc
+
 MLX_INC := lib/minilibx-linux
 MLX_STT := lib/minilibx-linux/libmlx.a
 FT_INC := lib/libft/inc
@@ -19,8 +24,7 @@ OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
 # -O3 highest optimization
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-# $(CC) -I /usr/include -I$(MLX_INC) -O3 -c $< -o $@ -I$(INC_DIR)
-	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -g -c $< -o $@ -I$(INC_DIR)
+	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -O3 -c $< -o $@ -I$(INC_DIR)
 
 .SILENT:
 

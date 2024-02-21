@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 22:26:21 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 19:02:07 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,8 @@ void	put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_argb color)
 
 	if (coord.x >= WIDTH || coord.x < 0 || coord.y >= HEIGHT || coord.y < 0)
 		return ;
-	offset = coord.y * img_vars->line_size + coord.x * (img_vars->bits_per_pixel / 8);
+	offset = coord.y * img_vars->line_size
+			+ coord.x * (img_vars->bits_per_pixel / 8);
 	dst = img_vars->addr + offset;
 	*(unsigned int *)dst = color;
 }
@@ -53,7 +54,8 @@ void	fill_image_with_color(t_img_vars *img_vars, int color)
 	}
 }
 
-void	draw_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b, int color)
+void	draw_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b,
+							int color)
 {
 	t_px_coord	point;
 	int		xstep;
@@ -76,7 +78,8 @@ void	draw_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b, int color
 	}
 }
 
-void	draw_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b, int color)
+void	draw_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b,
+						int color)
 {
 	t_px_coord	point;
 
@@ -219,13 +222,10 @@ void	draw_colored_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b)
 	ystep = 1 + (b.y < a.y) * (-2);
 	while (point.x <= b.x)
 	{
-		color = create_argb((0xff),
-							((1 - t) * get_r(a.color) + t * get_r(b.color)),
-							((1 - t) * get_g(a.color) + t * get_g(b.color)),
-							((1 - t) * get_b(a.color) + t * get_b(b.color)));
-		/* color.r = (1 - t) * color0.r + t * color1.r;
-		color.g = (1 - t) * color0.g + t * color1.g;
-		color.b = (1 - t) * color0.b + t * color1.b; */
+		color = argb((0xff),
+					((1 - t) * get_r(a.color) + t * get_r(b.color)),
+					((1 - t) * get_g(a.color) + t * get_g(b.color)),
+					((1 - t) * get_b(a.color) + t * get_b(b.color)));
 		put_pixel_img(image, point, color);
 		point.x++;
 		point.y += ystep;
@@ -249,10 +249,10 @@ void	draw_colored_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 		point = a;
 		while (point.y++ <= b.y)
 		{
-			color = create_argb((0xff),
-							((1 - t) * get_r(a.color) + t * get_r(b.color)),
-							((1 - t) * get_g(a.color) + t * get_g(b.color)),
-							((1 - t) * get_b(a.color) + t * get_b(b.color)));
+			color = argb((0xff),
+						((1 - t) * get_r(a.color) + t * get_r(b.color)),
+						((1 - t) * get_g(a.color) + t * get_g(b.color)),
+						((1 - t) * get_b(a.color) + t * get_b(b.color)));
 			put_pixel_img(img_vars, point, color);
 			t += dt;
 		}
@@ -266,10 +266,10 @@ void	draw_colored_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 		point = a;
 		while (point.x++ <= b.x)
 		{
-			color = create_argb((0xff),
-							((1 - t) * get_r(a.color) + t * get_r(b.color)),
-							((1 - t) * get_g(a.color) + t * get_g(b.color)),
-							((1 - t) * get_b(a.color) + t * get_b(b.color)));
+			color = argb((0xff),
+						((1 - t) * get_r(a.color) + t * get_r(b.color)),
+						((1 - t) * get_g(a.color) + t * get_g(b.color)),
+						((1 - t) * get_b(a.color) + t * get_b(b.color)));
 			put_pixel_img(img_vars, point, color);
 			t += dt;
 		}
@@ -342,7 +342,7 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 	dt = 1.0 / ft_abs(b.x - a.x);
 	while (point.x <= b.x)
 	{
-		color = create_argb((0xff),
+		color = argb((0xff),
 							((1 - t) * get_r(a.color) + t * get_r(b.color)),
 							((1 - t) * get_g(a.color) + t * get_g(b.color)),
 							((1 - t) * get_b(a.color) + t * get_b(b.color)));

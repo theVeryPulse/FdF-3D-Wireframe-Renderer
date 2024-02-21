@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   perspective_main.c                                 :+:      :+:    :+:   */
+/*   cavilier_main.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/20 23:21:47 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 23:22:09 by Philip           ###   ########.fr       */
+/*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
+/*   Updated: 2024/02/21 17:32:14 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,12 @@ int main(int argc, char const *argv[])
 				init_scale * col,
 				init_scale * vars.map.vertexes[col + row * vars.map.col_num].height,
 				-init_scale * (vars.map.row_num - row - 1));
-			vars.map.vertexes[col + row * vars.map.col_num].real_coord = mx_mult(2, 
-				isometric4x4(),
-				vars.map.vertexes[col + row * vars.map.col_num].real_coord);
 			col++;
 		}
 		row++;
 	}
 
-	// render_ortho_model(&vars);
-	render_colored_ortho_model(&vars);
-
-
+	render_colored_cavilier_model(&vars);
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 

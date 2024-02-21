@@ -6,17 +6,19 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:07:22 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 22:41:41 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/21 19:11:28 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-void	translate(t_vars *vars, int key)
+t_mx	build_translation_matrix(int key)
 {
 	t_mx	transl4x4;
-	
-	transl4x4 = (t_mx){.row_num = 4, .col_num = 4,
+
+	transl4x4 = (t_mx){
+		.row_num = 4,
+		.col_num = 4,
 		.entries = {{1, 0, 0, 0},
 					{0, 1, 0, 0},
 					{0, 0, 1, 0},
@@ -24,12 +26,19 @@ void	translate(t_vars *vars, int key)
 	if (key == XK_Up)
 		transl4x4.entries[1][3] = 10;
 	else if (key == XK_Down)
-		transl4x4.entries[1][3] = - 10;
+		transl4x4.entries[1][3] = -10;
 	else if (key == XK_Left)
 		transl4x4.entries[0][3] = -10;
 	else if (key == XK_Right)
 		transl4x4.entries[0][3] = 10;
+	return (transl4x4);
+}
 
+void	translate(t_vars *vars, int key)
+{
+	t_mx	transl4x4;
+	
+	transl4x4 = build_translation_matrix(key);
 
 	int	i;
 
@@ -40,8 +49,8 @@ void	translate(t_vars *vars, int key)
 		i++;
 	}
 	fill_image_with_color(&vars->img_vars, BLACK);
-	// render_ortho_model(vars);
 	render_colored_ortho_model(vars);
+	// render_colored_cavilier_model(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }
 
@@ -73,8 +82,8 @@ void	scale(t_vars *vars, int key)
 		i++;
 	}
 	fill_image_with_color(&vars->img_vars, BLACK);
-	// render_ortho_model(vars);
 	render_colored_ortho_model(vars);
+	// render_colored_cavilier_model(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }
 
@@ -116,7 +125,6 @@ void	rotate(t_vars *vars, int key)
 		i++;
 	}
 	fill_image_with_color(&vars->img_vars, BLACK);
-	// render_ortho_model(vars);
 	render_colored_ortho_model(vars);
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
 }
