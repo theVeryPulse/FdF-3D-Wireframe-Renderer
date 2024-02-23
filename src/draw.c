@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 21:31:06 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:20:57 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,149 +63,6 @@ void	fill_image_with_color(t_img_vars *img_vars, int color)
 	}
 }
 
-void	draw_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b,
-							int color)
-{
-	t_px_coord	point;
-	int		xstep;
-	int		ystep;
-	
-	if (!image || ft_abs(b.x - a.x) != ft_abs(b.y - a.y))
-		return ;
-	if (a.x > b.x)
-	{
-		px_coord_swap(&a, &b);
-	}
-	point = a;
-	ystep = 1 + (b.y < a.y) * (-2);
-	while (point.x <= b.x)
-	{
-		put_pixel_img(image, point, color);
-		point.x++;
-		point.y += ystep;
-	}
-}
-
-void	draw_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b,
-						int color)
-{
-	t_px_coord	point;
-
-	if (b.x == a.x)
-	{
-		if (a.y > b.y)
-			int_swap(&a.y, &b.y);
-		point = a;
-		while (point.y++ <= b.y)
-		{
-			put_pixel_img(img_vars, point, color);
-		}
-		return ;
-	}
-	if (b.y == a.y)
-	{
-		if (a.x > b.x)
-			int_swap(&a.x, &b.x);
-		point = a;
-		while (point.x++ <= b.x)
-		{
-			put_pixel_img(img_vars, point, color);
-		}
-		return ;
-	}
-}
-
-void	draw_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b, int color)
-{
-	bool		slope_greater_than_1;
-	bool		slope_is_negative;
-	int			delta_y;
-	int			delta_x;
-	int			error;
-	t_px_coord	point;
-
-	if (a.x > b.x)
-	{
-		px_coord_swap(&a, &b);
-	}
-	delta_x = ft_abs(b.x - a.x);
-	delta_y = ft_abs(b.y - a.y);
-	if (delta_x == delta_y)
-	{
-		draw_diagonal_line(img_vars, a, b, color);
-		return ;
-	}
-	if (delta_x == 0 || delta_y == 0)
-	{
-		draw_grid_line(img_vars, a, b, color);
-		return ;
-	}
-	/* Slope < 0 */
-	if ((a.x < b.x) && (a.y > b.y))
-	{
-		a.y = -a.y;
-		b.y = -b.y;
-		slope_is_negative = true;
-	}
-	else
-	{
-		slope_is_negative = false;
-	}
-
-	/* Slope > 1 */
-	if (delta_y > delta_x)
-	{
-		int_swap(&a.x, &a.y);
-		int_swap(&b.x, &b.y);
-		slope_greater_than_1 = true;
-	}
-	else
-	{
-		slope_greater_than_1 = false;
-	}
-	if (a.x > b.x)
-	{
-		px_coord_swap(&a, &b);
-	}
-	delta_x = ft_abs(b.x - a.x);
-	delta_y = ft_abs(b.y - a.y);
-	error = 2 * delta_y - delta_x;
-	point = a;
-	while (point.x <= b.x)
-	{
-		if (slope_greater_than_1 && slope_is_negative)
-		{
-			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, WHITE);
-			// printf("(%d,%d)\n", point.y, -point.x);
-		}
-		else if (slope_is_negative)
-		{
-			// printf("(%d,%d)\n", point.x, -point.y);
-			put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, WHITE);
-		}
-		else if (slope_greater_than_1)
-		{
-			// printf("(%d,%d)\n", point.y, point.x);
-			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, WHITE);
-		}
-		else
-		{
-			// printf("(%d,%d)\n", point.x, point.y);
-			put_pixel_img(img_vars, point, WHITE);
-		}
-		if (error > 0)
-		{
-			point.y++;
-			error += 2 * (delta_y - delta_x);
-		}
-		else
-		{
-			error += 2 * delta_y;
-		}
-		point.x++;
-	}
-}
-
 t_argb	gradient_color(double transition, t_argb start, t_argb end)
 {
 	t_argb	color;
@@ -230,19 +87,58 @@ void	draw_colored_diagonal_line(t_img_vars *image, t_px_coord a, t_px_coord b)
 	if (!image || ft_abs(b.x - a.x) != ft_abs(b.y - a.y))
 		return ;
 	if (a.x > b.x)
-	{
 		px_coord_swap(&a, &b);
-	}
 	t = 0.0;
 	dt = 1.0 / ft_abs(b.x - a.x);
 	point = a;
 	ystep = 1 + (b.y < a.y) * (-2);
 	while (point.x <= b.x)
 	{
-		// color = gradient_color(t, a.color, b.color);
 		put_pixel_img(image, point, gradient_color(t, a.color, b.color));
 		point.x++;
 		point.y += ystep;
+		t += dt;
+	}
+}
+
+void	draw_colored_hori_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
+{
+	t_px_coord	point;
+	double		t;
+	double		dt;
+	t_argb		color;
+
+	if (a.x != b.x)
+		return ;
+	if (a.x > b.x)
+			int_swap(&a.x, &b.x);
+	dt = 1.0 / ft_abs(b.x - a.x);
+	point = a;
+	while (point.x++ <= b.x)
+	{
+		color = gradient_color(t, a.color, b.color);
+		put_pixel_img(img_vars, point, color);
+		t += dt;
+	}
+}
+
+void	draw_colored_verti_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
+{
+	t_px_coord	point;
+	double		t;
+	double		dt;
+	t_argb		color;
+
+	if (b.y != a.y)
+		return ;
+	if (a.y > b.y)
+		int_swap(&a.y, &b.y);
+	dt = 1.0 / ft_abs(b.y - a.y);
+	point = a;
+	while (point.y++ <= b.y)
+	{
+		color = gradient_color(t, a.color, b.color);
+		put_pixel_img(img_vars, point, color);
 		t += dt;
 	}
 }
@@ -256,126 +152,106 @@ void	draw_colored_grid_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 
 	t = 0.0;
 	if (b.x == a.x)
-	{
-		if (a.y > b.y)
-			int_swap(&a.y, &b.y);
-		dt = 1.0 / ft_abs(b.y - a.y);
-		point = a;
-		while (point.y++ <= b.y)
-		{
-			color = gradient_color(t, a.color, b.color);
-			put_pixel_img(img_vars, point, color);
-			t += dt;
-		}
-	}
+		draw_colored_verti_line(img_vars, a, b);
 	else if (b.y == a.y)
-	{
-		if (a.x > b.x)
-			int_swap(&a.x, &b.x);
-		dt = 1.0 / ft_abs(b.x - a.x);
-		point = a;
-		while (point.x++ <= b.x)
-		{
-			color = gradient_color(t, a.color, b.color);
-			put_pixel_img(img_vars, point, color);
-			t += dt;
-		}
-	}
+		draw_colored_hori_line(img_vars, a, b);
 }
 
-void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
+void	draw_pixel_bresenham(t_img_vars *img_vars, t_slope_property slope, t_px_coord point)
 {
-	bool		slope_greater_than_1;
-	bool		slope_is_negative;
-	int			delta_y;
-	int			delta_x;
-	int			error;
-	t_px_coord	point;
-	double		t;
-	double		dt;
-	t_argb		color;
-
-	if (a.x > b.x)
-	{
-		px_coord_swap(&a, &b);
-	}
-	delta_x = ft_abs(b.x - a.x);
-	delta_y = ft_abs(b.y - a.y);
-	if (delta_x == delta_y)
-	{
-		return (draw_colored_diagonal_line(img_vars, a, b));
-	}
-	if (delta_x == 0 || delta_y == 0)
-	{
-		return (draw_colored_grid_line(img_vars, a, b));
-	}
-	/* Slope < 0 */
-	if ((a.x < b.x) && (a.y > b.y))
-	{
-		a.y = -a.y;
-		b.y = -b.y;
-		slope_is_negative = true;
-	}
+	if (!img_vars)
+		return ;
+	if (slope.is_greater_than_1 && slope.is_negative)
+		put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, point.color);
+	else if (slope.is_negative)
+		put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, point.color);
+	else if (slope.is_greater_than_1)
+		put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, point.color);
 	else
-	{
-		slope_is_negative = false;
-	}
+		put_pixel_img(img_vars, point, point.color);
+}
 
-	/* Slope > 1 */
-	if (delta_y > delta_x)
-	{
-		int_swap(&a.x, &a.y);
-		int_swap(&b.x, &b.y);
-		slope_greater_than_1 = true;
-	}
-	else
-	{
-		slope_greater_than_1 = false;
-	}
-	if (a.x > b.x)
-	{
-		px_coord_swap(&a, &b);
-	}
-	delta_x = ft_abs(b.x - a.x);
-	delta_y = ft_abs(b.y - a.y);
-	error = 2 * delta_y - delta_x;
+void	calc_error_and_delta(int *error, t_delta *delta, t_px_coord *a, t_px_coord *b)
+{
+	delta->x = ft_abs(b->x - a->x);
+	delta->y = ft_abs(b->y - a->y);
+	*error = 2 * delta->y - delta->x;
+}
+
+void	init_transition(t_transition *t, t_px_coord *a, t_px_coord *b)
+{
+	t->curr = 0.0;
+	t->step = 1.0 / ft_abs(b->x - a->x);
+}
+
+void	draw_colored_pixels_bresenham(t_img_vars *img_vars,
+					t_px_coord a,
+					t_px_coord b,
+					t_slope_property slope)
+{
+	t_px_coord		point;
+	t_transition	t;
+	int				error;
+	t_delta			delta;
+
+	calc_error_and_delta(&error, &delta, &a, &b);
+	init_transition(&t, &a, &b);
 	point = a;
-	t = 0.0;
-	dt = 1.0 / ft_abs(b.x - a.x);
 	while (point.x <= b.x)
 	{
-		color = gradient_color(t, a.color, b.color);
-		if (slope_greater_than_1 && slope_is_negative)
-		{
-			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, color);
-			// printf("(%d,%d)\n", point.y, -point.x);
-		}
-		else if (slope_is_negative)
-		{
-			// printf("(%d,%d)\n", point.x, -point.y);
-			
-			put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, color);
-		}
-		else if (slope_greater_than_1)
-		{
-			// printf("(%d,%d)\n", point.y, point.x);
-			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, color);
-		}
-		else
-		{
-			// printf("(%d,%d)\n", point.x, point.y);
-			put_pixel_img(img_vars, point, color);
-		}
+		point.color = gradient_color(t.curr, a.color, b.color);
+		draw_pixel_bresenham(img_vars, slope, point);
 		if (error > 0)
 		{
 			point.y++;
-			error += 2 * (delta_y - delta_x);
+			error += 2 * (delta.y - delta.x);
 		}
 		else
-		{
-			error += 2 * delta_y;
-		}
+			error += 2 * delta.y;
 		point.x++;
-		t += dt;
+		t.curr += t.step;
 	}
+}
+
+void	normalize_coords_bresenham(t_px_coord *a, t_px_coord *b, t_slope_property *slope)
+{
+	t_delta	delta;
+
+	if (!a || !b || !slope)
+		return ;
+	if (a->x > b->x)
+		px_coord_swap(a, b);
+	delta.x = ft_abs(b->x - a->x);
+	delta.y = ft_abs(b->y - a->y);
+	slope->is_negative = false;
+	if ((a->x < b->x) && (a->y > b->y))
+	{
+		a->y *= -1;
+		b->y *= -1;
+		slope->is_negative = true;
+	}
+	slope->is_greater_than_1 = false;
+	if (delta.y > delta.x)
+	{
+		int_swap(&(a->x), &(a->y));
+		int_swap(&(b->x), &(b->y));
+		slope->is_greater_than_1 = true;
+	}
+	if (a->x > b->x)
+		px_coord_swap(a, b);
+}
+/**
+ * @brief 
+ * 
+ * @param img_vars 
+ * @param a 
+ * @param b 
+ * @note https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+ */
+void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
+{
+	t_slope_property	slope;
+
+	normalize_coords_bresenham(&a, &b, &slope);
+	draw_colored_pixels_bresenham(img_vars, a, b, slope);
 }

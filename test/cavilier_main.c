@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 22:27:24 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 16:23:04 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int main(int argc, char const *argv[])
 		row++;
 	}
 
-	render_colored_cavilier_model(&vars);
+	render_colored_caval_model(&vars);
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 

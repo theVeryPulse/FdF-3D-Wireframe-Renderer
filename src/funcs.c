@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 22:53:07 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 22:36:51 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 16:23:04 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,16 +45,16 @@ int	isometric_handle_key(int key, t_vars *vars)
 		rotate(vars, key);
 }
 
-void	cavilier_handle_key(int key, t_vars *vars)
+void	caval_handle_key(int key, t_vars *vars)
 {
 	printf("%d pressed\n", key);
 	if (key == XK_Escape)
 		destroy_exit(vars);
 	else if (key == XK_Left || key == XK_Right || key == XK_Up
 			|| key == XK_Down)
-		translate_cavilier(vars, key);
+		translate_caval(vars, key);
 	else if (key == XK_i || key == XK_o)
-		scale_cavilier(vars, key);
+		scale_caval(vars, key);
 }
 
 void	mouse_button(int button,int x,int y, void *p)
@@ -94,4 +94,11 @@ t_mx	isometric4x4(void)
 	iso_proj = mxa_mult_mxb(rot_x_mx_4x4(35.264 * PI/ 180),
 							rot_y_mx_4x4(-45 * PI / 180));
 	return (iso_proj);
+}
+
+void	put_image_to_window_vars(t_vars *vars)
+{
+	mlx_put_image_to_window(vars->mlx_ptr,
+							vars->win_ptr,
+							vars->img_vars.img_ptr, 0, 0);
 }

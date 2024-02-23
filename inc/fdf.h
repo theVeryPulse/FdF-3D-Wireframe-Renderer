@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 23:01:31 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 20:58:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,30 @@
 
 typedef int t_unit;
 typedef int t_argb;
+
+typedef struct	s_num
+{
+	int	row;
+	int	col;
+}	t_num;
+
+typedef struct	s_transition
+{
+	double	curr;
+	double	step;
+}	t_transition;
+
+typedef struct	s_slope_property
+{
+	bool	is_greater_than_1;
+	bool	is_negative;
+}	t_slope_property;
+
+typedef struct	s_delta
+{
+	int	x;
+	int	y;
+}	t_delta;
 
 typedef struct	s_matrix
 {
@@ -86,8 +110,14 @@ typedef struct	s_vars
 	t_map		map;
 }	t_vars;
 
-t_map			build_map(char *str);
-void			cavilier_handle_key(int key, t_vars *vars);
+/* Read file */
+
+void			ensure_eol(t_list *last);
+char			*read_file(const char *file);
+int				hexa_atoi(const char *str);
+
+
+void			caval_handle_key(int key, t_vars *vars);
 void			change_screen_color(t_vars *vars, int color);
 int				destroy_exit(t_vars *vars);
 void			ensure_eol(t_list *last);
@@ -95,22 +125,28 @@ void			fill_image_with_color(t_img_vars *img_vars, int color);
 void			fill_points(t_map *map, char *str);
 int				isometric_handle_key(int key, t_vars *vars);
 int				hexa_atoi(const char *str);
-void			map_check(char *map_str);
 void			mouse_button(int button,int x,int y, void *p);
 int				mouse_motion(int x,int y, void *p);
 t_px_coord		mx_to_pxcoord(t_mx mx);
+void			put_image_to_window_vars(t_vars *vars);
 void			put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_argb color);
 t_mx			pxcoord_to_mx(t_px_coord px_coord);
-char			*read_file(const char *file);
 t_px_coord		raster_coord(t_mx screen_coord);
 int				round_double(double n);
+
+/* Map */
+
+t_map			build_map(char *str);
+void			fill_points(t_map *map, char *str);
+void			map_check(char *map_str);
+void			populate_vertexes_in_map(t_vars *vars);
 
 /* Color */
 
 int				argb(unsigned char alpha,
-					unsigned char r,
-					unsigned char g,
-					unsigned char b);
+						unsigned char r,
+						unsigned char g,
+						unsigned char b);
 unsigned char	get_a(t_argb argb);
 unsigned char	get_b(t_argb argb);
 unsigned char	get_g(t_argb argb);
@@ -119,9 +155,7 @@ unsigned char	get_r(t_argb argb);
 /* Line drawing */
 
 void			draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b);
-void			draw_diagonal_line(t_img_vars *image, t_px_coord start, t_px_coord end, int color);
-void			draw_grid_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color);
-void			draw_line(t_img_vars *img_vars, t_px_coord start, t_px_coord end, int color);
+
 
 /* Matrix */
 
@@ -137,15 +171,17 @@ t_mx			rot_z_mx_4x4(double angle);
 
 /* Model */
 
-void			render_colored_cavilier_model(t_vars *vars);
+t_mx			caval_screen_coord(t_mx world_coord);
+t_mx			ortho_screen_coord(t_mx world_coord);
+void			render_colored_caval_model(t_vars *vars);
 void			render_colored_ortho_model(t_vars *vars);
 void			render_ortho_model(t_vars *vars);
 void			rotate(t_vars *vars, int key);
 void			scale(t_vars *vars, int key);
-void			scale_cavilier(t_vars *vars, int key);
+void			scale_caval(t_vars *vars, int key);
+void			transform_all_vertexes(t_vertex *vertexes, int total, t_mx transform);
 void			translate(t_vars *vars, int key);
-void			translate_cavilier(t_vars *vars, int key);
-
+void			translate_caval(t_vars *vars, int key);
 
 void			print_map(t_map *map);
 t_mx			point_real_coord(double x, double y, double z);

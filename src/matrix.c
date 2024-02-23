@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:05:51 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 22:08:15 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 18:02:13 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 	while (p_row_i < product.row_num)
 	{
 		p_col_i = 0;
-		while (p_col_i <product.col_num)
+		while (p_col_i < product.col_num)
 		{
 			entry = 0;
 			i = 0;

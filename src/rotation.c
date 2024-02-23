@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 22:17:21 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/22 19:16:05 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ t_px_coord	old_raster_coord(t_px_coord p_point)
 
 	result.x = p_point.x + WIDTH / 2;
 	result.y = -p_point.y + HEIGHT / 2;
-	// ft_printf("P-system: (%d,%d), X-system: (%d,%d)\n", p_point.x, p_point.y, result.x, result.y);
 	return (result);
 }
 
@@ -44,7 +43,6 @@ t_px_coord	raster_coord(t_mx screen_coord)
 	raster_coord = mx_to_pxcoord(screen_coord);
 	raster_coord.x = raster_coord.x + WIDTH / 2;
 	raster_coord.y = -raster_coord.y + HEIGHT / 2;
-	// ft_printf("P-system: (%d,%d), X-system: (%d,%d)\n", p_point.x, p_point.y, result.x, result.y);
 	return (raster_coord);
 }
 
@@ -63,13 +61,6 @@ t_px_coord	mx_to_pxcoord(t_mx mx)
 {
 	t_px_coord	px_coord;
 
-	/* if (mx.col_num != 1 || mx.row_num != 2)
-	{
-		ft_putstr_fd(KRED, STDERR_FILENO);
-		ft_putendl_fd("WARNING: Matrix cannot be transformed into pixel coordinates", STDERR_FILENO);
-		ft_putstr_fd(KWHT, STDERR_FILENO);
-		return ((t_px_coord){0});
-	} */
 	px_coord.x = round_double(mx.entries[0][0]);
 	px_coord.y = round_double(mx.entries[1][0]);
 	return (px_coord);

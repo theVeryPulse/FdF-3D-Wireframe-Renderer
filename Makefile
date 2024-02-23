@@ -3,6 +3,7 @@ COMMON_FILES := \
 	colors.c \
 	draw.c \
 	funcs.c \
+	map.c \
 	matrix.c \
 	read_file.c \
 	render.c \
@@ -16,7 +17,7 @@ FILES := main_isometric.c $(COMMON_FILES)
 SRC := $(addprefix $(SRC_DIR)/, $(FILES))
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-FILES_BONUS := main_cavilier.c $(COMMON_FILES)
+FILES_BONUS := main_caval.c $(COMMON_FILES)
 SRC_BONUS := $(addprefix $(SRC_DIR)/, $(FILES_BONUS))
 OBJ_BONUS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_BONUS))
 

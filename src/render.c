@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:22:18 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 22:13:42 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 16:24:35 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,110 +22,93 @@ t_mx	ortho_screen_coord(t_mx world_coord)
 	return(mxa_mult_mxb(ortho_proj_2x4, world_coord));
 }
 
-// 0.5 * cos(45 degrees) = 0.35355339059
-t_mx	cavilier_screen_coord(t_mx world_coord)
+t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx, int col_idx)
 {
-	static const t_mx	cavilier_proj_2x4 = (t_mx){
-		.row_num = 2,
-		.col_num = 4,
-		.entries = {{1, 0, -0.2626609944 * 2, 0},
-					{0, 1, -0.4254517622 * 2, 0}}};
-	return(mxa_mult_mxb(cavilier_proj_2x4, world_coord));
-}
+	t_px_coord	pixel;
+	t_vertex	vertex;
 
-void	render_ortho_model(t_vars *vars)
-{
-	int	i;
-	int	j;
-
-	i = 0;
-	while (i < vars->map.row_num)
-	{
-		j = 0;
-		while (j < vars->map.col_num)
-		{
-			if (j != vars->map.col_num - 1)
-			{
-				draw_line(&vars->img_vars,
-					raster_coord(ortho_screen_coord(vars->map.vertexes[j + i * vars->map.col_num].real_coord)),
-					raster_coord(ortho_screen_coord(vars->map.vertexes[j + 1 + i * vars->map.col_num].real_coord)),
-					WHITE);
-			}
-			if (i != vars->map.row_num - 1)
-			{
-				draw_line(&vars->img_vars,
-					raster_coord(ortho_screen_coord(vars->map.vertexes[j + i * vars->map.col_num].real_coord)),
-					raster_coord(ortho_screen_coord(vars->map.vertexes[j + (i + 1) * vars->map.col_num].real_coord)),
-					WHITE);
-			}
-			j++;
-		}
-		i++;
-	}
+	vertex = vars->map.vertexes[col_idx + row_idx * vars->map.col_num];
+	pixel = raster_coord(ortho_screen_coord(vertex.real_coord));
+	pixel.color = vertex.color;
+	return (pixel);
 }
 
 void	render_colored_ortho_model(t_vars *vars)
 {
-	int			i;
-	int			j;
-	t_px_coord	a;
-	t_px_coord	b;
+	int			row_idx;
+	int			col_idx;
 
-	i = 0;
-	while (i < vars->map.row_num)
+	row_idx = 0;
+	while (row_idx < vars->map.row_num)
 	{
-		j = 0;
-		while (j < vars->map.col_num)
+		col_idx = 0;
+		while (col_idx < vars->map.col_num)
 		{
-			a = raster_coord(ortho_screen_coord(vars->map.vertexes[j + i * vars->map.col_num].real_coord));
-			a.color = vars->map.vertexes[j + i * vars->map.col_num].color;
-			if (j != vars->map.col_num - 1)
+			if (col_idx != vars->map.col_num - 1)
 			{
-				b = raster_coord(ortho_screen_coord(vars->map.vertexes[j + 1 + i * vars->map.col_num].real_coord));
-				b.color = vars->map.vertexes[j + 1 + i * vars->map.col_num].color;
-				draw_colored_line(&vars->img_vars, a, b);
+				draw_colored_line(&vars->img_vars, 
+					ortho_raster_coord_with_color(vars, row_idx, col_idx), 
+					ortho_raster_coord_with_color(vars, row_idx, col_idx + 1));
 			}
-			if (i != vars->map.row_num - 1)
+			if (row_idx != vars->map.row_num - 1)
 			{
-				b = raster_coord(ortho_screen_coord(vars->map.vertexes[j + (i + 1) * vars->map.col_num].real_coord));
-				b.color = vars->map.vertexes[j + (i + 1) * vars->map.col_num].color;
-				draw_colored_line(&vars->img_vars, a, b);
+				draw_colored_line(&vars->img_vars,
+					ortho_raster_coord_with_color(vars, row_idx, col_idx),
+					ortho_raster_coord_with_color(vars, row_idx + 1, col_idx));
 			}
-			j++;
+			col_idx++;
 		}
-		i++;
+		row_idx++;
 	}
 }
 
-void	render_colored_cavilier_model(t_vars *vars)
+// 0.5 * cos(45 degrees) = 0.35355339059
+t_mx	caval_screen_coord(t_mx world_coord)
 {
-	int			i;
-	int			j;
-	t_px_coord	a;
-	t_px_coord	b;
+	static const t_mx	caval_proj_2x4 = (t_mx){
+		.row_num = 2,
+		.col_num = 4,
+		.entries = {{1, 0, -0.2626609944 * 2, 0},
+					{0, 1, -0.4254517622 * 2, 0}}};
+	return(mxa_mult_mxb(caval_proj_2x4, world_coord));
+}
 
-	i = 0;
-	while (i < vars->map.row_num)
+t_px_coord	caval_raster_coord_with_color(t_vars *vars, int row_idx, int col_idx)
+{
+	t_px_coord	pixel;
+	t_vertex	vertex;
+
+	vertex = vars->map.vertexes[col_idx + row_idx * vars->map.col_num];
+	pixel = raster_coord(caval_screen_coord(vertex.real_coord));
+	pixel.color = vertex.color;
+	return (pixel);
+}
+
+void	render_colored_caval_model(t_vars *vars)
+{
+	int			row_idx;
+	int			col_idx;
+
+	row_idx = 0;
+	while (row_idx < vars->map.row_num)
 	{
-		j = 0;
-		while (j < vars->map.col_num)
+		col_idx = 0;
+		while (col_idx < vars->map.col_num)
 		{
-			a = raster_coord(cavilier_screen_coord(vars->map.vertexes[j + i * vars->map.col_num].real_coord));
-			a.color = vars->map.vertexes[j + i * vars->map.col_num].color;
-			if (j != vars->map.col_num - 1)
+			if (col_idx != vars->map.col_num - 1)
 			{
-				b = raster_coord(cavilier_screen_coord(vars->map.vertexes[j + 1 + i * vars->map.col_num].real_coord));
-				b.color = vars->map.vertexes[j + 1 + i * vars->map.col_num].color;
-				draw_colored_line(&vars->img_vars, a, b);
+				draw_colored_line(&vars->img_vars,
+					caval_raster_coord_with_color(vars, row_idx, col_idx),
+					caval_raster_coord_with_color(vars, row_idx, col_idx + 1));
 			}
-			if (i != vars->map.row_num - 1)
+			if (row_idx != vars->map.row_num - 1)
 			{
-				b = raster_coord(cavilier_screen_coord(vars->map.vertexes[j + (i + 1) * vars->map.col_num].real_coord));
-				b.color = vars->map.vertexes[j + (i + 1) * vars->map.col_num].color;
-				draw_colored_line(&vars->img_vars, a, b);
+				draw_colored_line(&vars->img_vars,
+					caval_raster_coord_with_color(vars, row_idx, col_idx),
+					caval_raster_coord_with_color(vars, row_idx + 1, col_idx));
 			}
-			j++;
+			col_idx++;
 		}
-		i++;
+		row_idx++;
 	}
 }

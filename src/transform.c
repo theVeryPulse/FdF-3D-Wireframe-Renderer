@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:07:22 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/21 22:52:15 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/23 16:23:04 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,42 +34,43 @@ t_mx	build_translation_matrix_for_key(int key)
 	return (transl4x4);
 }
 
+void	transform_all_vertexes(t_vertex *vertexes, int total, t_mx transform)
+{
+	int	i;
+
+	i = 0;
+	while (i < total)
+	{
+		vertexes[i].real_coord = mxa_mult_mxb(transform,
+												vertexes[i].real_coord);
+		i++;
+	}
+}
+
 void	translate(t_vars *vars, int key)
 {
 	t_mx	transl4x4;
 	
 	transl4x4 = build_translation_matrix_for_key(key);
-
-	int	i;
-
-	i = 0;
-	while (i < vars->map.col_num * vars->map.row_num)
-	{
-		vars->map.vertexes[i].real_coord = mx_mult(2, transl4x4, vars->map.vertexes[i].real_coord);
-		i++;
-	}
+	transform_all_vertexes(vars->map.vertexes,
+							vars->map.row_num * vars->map.col_num,
+							transl4x4);
 	fill_image_with_color(&vars->img_vars, BLACK);
 	render_colored_ortho_model(vars);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
+	put_image_to_window_vars(vars);
 }
 
-void	translate_cavilier(t_vars *vars, int key)
+void	translate_caval(t_vars *vars, int key)
 {
 	t_mx	transl4x4;
 	
 	transl4x4 = build_translation_matrix_for_key(key);
-
-	int	i;
-
-	i = 0;
-	while (i < vars->map.col_num * vars->map.row_num)
-	{
-		vars->map.vertexes[i].real_coord = mx_mult(2, transl4x4, vars->map.vertexes[i].real_coord);
-		i++;
-	}
+	transform_all_vertexes(vars->map.vertexes,
+							vars->map.row_num * vars->map.col_num,
+							transl4x4);
 	fill_image_with_color(&vars->img_vars, BLACK);
-	render_colored_cavilier_model(vars);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
+	render_colored_caval_model(vars);
+	put_image_to_window_vars(vars);
 }
 
 t_mx	scale_matrix4x4(double scaling)
@@ -100,37 +101,25 @@ void	scale(t_vars *vars, int key)
 	t_mx	scale4x4;
 
 	scale4x4 = build_scale_matrix_for_key(key);
-
-	int	i;
-
-	i = 0;
-	while (i < vars->map.col_num * vars->map.row_num)
-	{
-		vars->map.vertexes[i].real_coord = mx_mult(2, scale4x4, vars->map.vertexes[i].real_coord);
-		i++;
-	}
+	transform_all_vertexes(vars->map.vertexes,
+							vars->map.row_num * vars->map.col_num,
+							scale4x4);
 	fill_image_with_color(&vars->img_vars, BLACK);
 	render_colored_ortho_model(vars);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
+	put_image_to_window_vars(vars);
 }
 
-void	scale_cavilier(t_vars *vars, int key)
+void	scale_caval(t_vars *vars, int key)
 {
 	t_mx	scale4x4;
 
 	scale4x4 = build_scale_matrix_for_key(key);
-
-	int	i;
-
-	i = 0;
-	while (i < vars->map.col_num * vars->map.row_num)
-	{
-		vars->map.vertexes[i].real_coord = mx_mult(2, scale4x4, vars->map.vertexes[i].real_coord);
-		i++;
-	}
+	transform_all_vertexes(vars->map.vertexes,
+							vars->map.row_num * vars->map.col_num,
+							scale4x4);
 	fill_image_with_color(&vars->img_vars, BLACK);
-	render_colored_cavilier_model(vars);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
+	render_colored_caval_model(vars);
+	put_image_to_window_vars(vars);
 }
 
 t_mx	build_rotation_matrix_for_key(int key)
@@ -157,16 +146,10 @@ void	rotate(t_vars *vars, int key)
 	t_mx	rotate4x4;
 
 	rotate4x4 = build_rotation_matrix_for_key(key);
-
-	int	i;
-
-	i = 0;
-	while (i < vars->map.col_num * vars->map.row_num)
-	{
-		vars->map.vertexes[i].real_coord = mx_mult(2, rotate4x4, vars->map.vertexes[i].real_coord);
-		i++;
-	}
+	transform_all_vertexes(vars->map.vertexes,
+							vars->map.row_num * vars->map.col_num,
+							rotate4x4);
 	fill_image_with_color(&vars->img_vars, BLACK);
 	render_colored_ortho_model(vars);
-	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_vars.img_ptr, 0, 0);
+	put_image_to_window_vars(vars);
 }
