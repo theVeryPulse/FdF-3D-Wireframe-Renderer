@@ -66,10 +66,15 @@ $(MLX_STT):
 
 clean:
 	rm -f ./$(OBJ_DIR)/*.o
+	$(MAKE) -C lib/libft clean
+	$(MAKE) -C lib/minilibx-linux clean
+
 
 fclean: clean
 	rm -f bonus
 	rm -f fdf
+	rm -f lib/libft/lib/libft.a
+	rm -f lib/libft/lib/*.a
 
 re: fclean all
 
