@@ -80,9 +80,9 @@ The world coordinate system has its origin at the centre of the screen, with x-a
 
 The camera coordinate system is the same as the world coordinate system.
 
-There is no scaling between world/camera coordinate and screen coordinate, meaning a number is world system correspond to the same amount of pixels.
+There is no scaling between world/camera coordinate and screen coordinate, meaning a number in world system corresponds to the same amount of pixels on screen.
 
-Because of this, the step of Normalized Device Coordinates conversion is omitted, and all coordinates are directly converted to raster space (actual pixels).
+Because of this uniformity between screen and raster spaces, the conversion of Normalized Device Coordinates is omitted, and all coordinates are directly converted to raster space (actual pixels).
 
 ## Useful Links
 
