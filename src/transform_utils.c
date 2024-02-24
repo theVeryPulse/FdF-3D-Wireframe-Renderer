@@ -6,12 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 01:11:23 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:18:56 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:53:42 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Creates a 4x4 scaling matrix based on the given scaling factor.
+ *
+ * @param scaling The scaling factor to be applied uniformly along all axes.
+ * @return The resulting 4x4 scaling matrix.
+ */
 t_mx	get_scale4x4(double scaling)
 {
 	t_mx	scale4x4;
@@ -27,6 +33,12 @@ t_mx	get_scale4x4(double scaling)
 	return (scale4x4);
 }
 
+/**
+ * @brief Creates a 4x4 rotation matrix which rotates the model to isometric
+ *        angle.
+ *
+ * @return The rotation matrix for isometric projection angle.
+ */
 t_mx	isometric4x4(void)
 {
 	t_mx	iso_proj;

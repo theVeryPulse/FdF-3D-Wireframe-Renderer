@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:22:37 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:45:25 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 16:13:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,16 @@ static void	draw_pixel_bresenham(t_img_vars *img_vars, t_slope_property slope,
 				t_px_coord point);
 
 /**
- * @brief 
- * 
- * @param img_vars 
- * @param a 
- * @param b 
- * @note https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+ * @brief Draws a colored line between two points on the mlx image
+ *
+ * @param img_vars Pointer to the image variables structure.
+ * @param a The starting point of the line.
+ * @param b The ending point of the line.
+ * @note Draws a line between the points 'a' and 'b' on the screen using and
+ *       colors each pixel along the line based on gradient color interpolation
+ *       between the colors of 'a' and 'b'.
+ * @see Bresenham's algorithm: 
+ *      https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
  */
 void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 {
@@ -35,6 +39,17 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 	draw_colored_pixels_bresenham(img_vars, a, b, slope);
 }
 
+/**
+ * @brief Normalizes coordinates and determines slope properties for Bresenham's
+ * line drawing algorithm.
+ * 
+ * @param a Pointer to the starting point of the line.
+ * @param b Pointer to the ending point of the line.
+ * @param slope Pointer to the slope properties structure.
+ * @note The draw_colored_line function only works for lines in quadrant I with
+ *       slope smaller than 1. Lines in all other quadrants are first converted
+ *       to quadrant I, and mirrored along y=x if slope is greater than 1.
+ */
 static void	normalize_coords_bresenham(t_px_coord *a, t_px_coord *b,
 		t_slope_property *slope)
 {
@@ -64,6 +79,14 @@ static void	normalize_coords_bresenham(t_px_coord *a, t_px_coord *b,
 		px_coord_swap(a, b);
 }
 
+/**
+ * @brief Draws colored pixels along a line using Bresenham's algorithm.
+ *
+ * @param img_vars Pointer to the image variables structure.
+ * @param a The starting point of the line.
+ * @param b The ending point of the line.
+ * @param slope Structure containing slope properties.
+ */
 static void	draw_colored_pixels_bresenham(t_img_vars *img_vars,
 					t_px_coord a,
 					t_px_coord b,
@@ -93,6 +116,15 @@ static void	draw_colored_pixels_bresenham(t_img_vars *img_vars,
 	}
 }
 
+/**
+ * @brief Draws a colored pixel on the mlx image.
+ *
+ * @param img_vars Pointer to the image variables structure.
+ * @param slope Structure containing slope properties.
+ * @param point The coordinates for drawing the colored pixel.
+ * @note Draws a colored pixel on the mlx image, the original point coordinates
+ *       are to be interpreted through the slope property.
+ */
 static void	draw_pixel_bresenham(t_img_vars *img_vars, t_slope_property slope,
 		t_px_coord point)
 {

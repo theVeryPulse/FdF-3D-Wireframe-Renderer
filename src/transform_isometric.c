@@ -6,12 +6,19 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:43:04 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 00:44:01 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:51:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Translates all vertexes of the orthographic model based on the pressed
+ *        key.
+ *
+ * @param vars The pointer to the variables structure.
+ * @param key The key for translation direction.
+ */
 void	translate(t_vars *vars, int key)
 {
 	t_mx	transl4x4;
@@ -25,6 +32,13 @@ void	translate(t_vars *vars, int key)
 	put_image_to_window_vars(vars);
 }
 
+/**
+ * @brief Scales all vertexes of the orthographic model based on the pressed 
+ *        key.
+ *
+ * @param vars The pointer to the variables structure.
+ * @param key The key for the scaling direction.
+ */
 void	scale(t_vars *vars, int key)
 {
 	t_mx	scale4x4;
@@ -38,6 +52,12 @@ void	scale(t_vars *vars, int key)
 	put_image_to_window_vars(vars);
 }
 
+/**
+ * @brief Rotates all vertexes of the orthographic model based on the given key.
+ *
+ * @param vars The pointer to the variables structure.
+ * @param key The key for the rotation direction.
+ */
 void	rotate(t_vars *vars, int key)
 {
 	t_mx	rotate4x4;

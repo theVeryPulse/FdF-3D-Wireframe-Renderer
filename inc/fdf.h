@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 02:18:48 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:59:04 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,9 @@ typedef struct s_vertex
 	t_mx	real_coord;
 }	t_vertex;
 
+/**
+ * vertexes should be a dynamically allocated array of required size.
+ */
 typedef struct s_map
 {
 	t_vertex	*vertexes;
@@ -202,10 +205,10 @@ void			render_colored_ortho_model(t_vars *vars);
 
 /* Events */
 
-void			caval_handle_key(int key, t_vars *vars);
+int				caval_handle_key(int key, t_vars *vars);
 int				destroy_exit(t_vars *vars);
 int				isometric_handle_key(int key, t_vars *vars);
-void			mouse_button(int button, int x, int y, void *p);
+int				mouse_button(int button, int x, int y, void *p);
 int				mouse_motion(int x, int y, void *p);
 
 /* Helpers */

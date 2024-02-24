@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:22:18 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 02:18:21 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:40:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,11 @@ static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
 static t_px_coord	caval_raster_coord_with_color(t_vars *vars, int row_idx,
 						int col_idx);
 
+/**
+ * @brief Renders the colored orthographic model of the map on mlx image.
+ *
+ * @param vars A pointer to the variables structure.
+ */
 void	render_colored_ortho_model(t_vars *vars)
 {
 	int			row_idx;
@@ -46,6 +51,11 @@ void	render_colored_ortho_model(t_vars *vars)
 	}
 }
 
+/**
+ * @brief Renders the colored cavalier model of the map on mlx image.
+ *
+ * @param vars A pointer to the variables structure.
+ */
 void	render_colored_caval_model(t_vars *vars)
 {
 	int			row_idx;
@@ -75,6 +85,15 @@ void	render_colored_caval_model(t_vars *vars)
 	}
 }
 
+/**
+ * @brief Converts a vertex in the orthographic projection to a raster
+ *        coordinate with color.
+ *
+ * @param vars A pointer to the variables structure.
+ * @param row_idx The row index of the vertex in the map.
+ * @param col_idx The column index of the vertex in the map.
+ * @return The pixel coordinate with color.
+ */
 static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
 			int col_idx)
 {
@@ -87,6 +106,15 @@ static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
 	return (pixel);
 }
 
+/**
+ * @brief Converts a vertex in the cavalier projection to a raster coordinate
+ *        with color.
+ *
+ * @param vars A pointer to the variables structure.
+ * @param row_idx The row index of the vertex in the map.
+ * @param col_idx The column index of the vertex in the map.
+ * @return The pixel coordinate with color.
+ */
 static t_px_coord	caval_raster_coord_with_color(t_vars *vars, int row_idx,
 			int col_idx)
 {

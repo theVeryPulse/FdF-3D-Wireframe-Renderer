@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:23:31 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:37:02 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:08:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 static void	get_vertex_color(t_vertex *vertex, char *str_color, size_t *i);
 
+/**
+ * @brief Checks the validity of the map string.
+ *
+ * @param map_str The map string to be checked.
+ * @note Checks if the string only has numbers, commas, letters, and spaces.
+ */
 void	map_check(char *map_str)
 {
 	size_t	i;
@@ -33,6 +39,13 @@ void	map_check(char *map_str)
 	}
 }
 
+/**
+ * @brief Parses the map data from the string and populates the vertexes of the 
+ *        map.
+ *
+ * @param map Pointer to the map structure to be populated.
+ * @param str The string containing the map data.
+ */
 void	parse_map_data(t_map *map, char *str)
 {
 	size_t	i;
@@ -60,6 +73,12 @@ void	parse_map_data(t_map *map, char *str)
 	}
 }
 
+/**
+ * @brief Builds the map structure from the given map string.
+ *
+ * @param str The map string containing the map data.
+ * @return The built map structure.
+ */
 t_map	build_map(char *str)
 {
 	t_map	map;
@@ -78,6 +97,14 @@ t_map	build_map(char *str)
 	return (map);
 }
 
+/**
+ * @brief Populates the vertexes in the map structure with real coordinates.
+ *
+ * @param vars Pointer to the variables structure containing the map.
+ * @note System have x,y on screen plane and z pointing outwards. The map is
+ *       initialized that rows are parallel to x axis, and columns parallel to z
+ *       axis, and height in y axis direction.
+ */
 void	populate_vertexes_in_map(t_vars *vars)
 {
 	int			col;
@@ -105,6 +132,15 @@ void	populate_vertexes_in_map(t_vars *vars)
 	}
 }
 
+/**
+ * @brief Retrieves the color of a vertex from the string and updates the
+ *        vertex structure.
+ *
+ * @param vertex Pointer to the vertex structure.
+ * @param str_color The  string containing the color.
+ * @param i Pointer to the current index in the string.
+ * @note Color string should be in format "0xRRGGBB"
+ */
 static void	get_vertex_color(t_vertex *vertex, char *str_color, size_t *i)
 {
 	if (*str_color == ',')

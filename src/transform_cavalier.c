@@ -6,12 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:45:13 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 00:45:30 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:47:21 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Translates all vertexes of the caval model based on the given key.
+ *
+ * @param vars The pointer to the variables structure.
+ * @param key Key for the translation direction.
+ */
 void	translate_caval(t_vars *vars, int key)
 {
 	t_mx	transl4x4;
@@ -25,6 +31,12 @@ void	translate_caval(t_vars *vars, int key)
 	put_image_to_window_vars(vars);
 }
 
+/**
+ * @brief Scales all vertexes of the caval model based on the given key.
+ *
+ * @param vars The pointer to the variables structure.
+ * @param key Key for the scaling direction.
+ */
 void	scale_caval(t_vars *vars, int key)
 {
 	t_mx	scale4x4;

@@ -6,12 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:35:10 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 00:36:27 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:28:44 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Counts the number of rows in the map data string.
+ *
+ * @param str The map data string.
+ * @return The number of rows in the data.
+ */
 int	count_rows(char *str)
 {
 	size_t	i;
@@ -28,6 +34,12 @@ int	count_rows(char *str)
 	return (row_num);
 }
 
+/**
+ * @brief Counts the number of columns in the map data string.
+ *
+ * @param str The map data string.
+ * @return The number of columns in the data.
+ */
 int	count_cols(char *str)
 {
 	size_t	i;
@@ -47,6 +59,12 @@ int	count_cols(char *str)
 	return (col_num);
 }
 
+/**
+ * @brief Skips over the current number in the map data string.
+ *
+ * @param str The map data string.
+ * @param i Pointer to the current index in the string.
+ */
 void	skip_the_number(char *str, size_t *i)
 {
 	if (!str || !i)
@@ -55,12 +73,23 @@ void	skip_the_number(char *str, size_t *i)
 		(*i)++;
 }
 
+/**
+ * @brief Skips over the current hexadecimal number in the string.
+ *
+ * @param str The map data string.
+ * @param i Pointer to the current index in the string.
+ */
 void	skip_the_hexa(char *str, size_t *i)
 {
 	while (ft_isalnum(str[*i]))
 		(*i)++;
 }
 
+/**
+ * @brief Set counter to the first column of the next row.
+ *
+ * @param num Pointer to the structure containing row and column numbers.
+ */
 void	next_row_first_col(t_num *num)
 {
 	num->row++;

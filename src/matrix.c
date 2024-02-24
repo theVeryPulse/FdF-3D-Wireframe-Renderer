@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:05:51 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 02:05:58 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 18:02:03 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,12 @@
 static void	mx_mult_error_msg(void);
 static void	calc_mx_product(t_mx *product, t_mx *mxa, t_mx *mxb);
 
+/**
+ * @brief Transposes the given matrix.
+ *
+ * @param mx The matrix to be transposed.
+ * @return The transposed matrix.
+ */
 t_mx	mx_transpose(t_mx mx)
 {
 	t_mx	mx_t;
@@ -37,6 +43,13 @@ t_mx	mx_transpose(t_mx mx)
 	return (mx_t);
 }
 
+/**
+ * @brief Multiplies multiple matrices together.
+ *
+ * @param mx_count The number of matrices to multiply.
+ * @param ... The matrices to multiply.
+ * @return The product of the matrices.
+ */
 t_mx	mx_mult(int mx_count, ...)
 {
 	va_list	ap;
@@ -57,6 +70,13 @@ t_mx	mx_mult(int mx_count, ...)
 	return (product);
 }
 
+/**
+ * @brief Multiplies two matrices.
+ *
+ * @param mxa The first matrix.
+ * @param mxb The second matrix.
+ * @return The product of the matrices.
+ */
 t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 {
 	t_mx	product;
@@ -75,6 +95,10 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 	return (product);
 }
 
+/**
+ * @brief Prints an error message for wrong number of rows and columns for
+ *        multiplication.
+ */
 static void	mx_mult_error_msg(void)
 {
 	ft_putstr_fd(KRED, STDERR_FILENO);
@@ -84,6 +108,13 @@ static void	mx_mult_error_msg(void)
 		"multiplication", STDERR_FILENO);
 }
 
+/**
+ * @brief Calculates the product of two matrices.
+ *
+ * @param product Pointer to the production matrix.
+ * @param mxa Pointer to the first matrix.
+ * @param mxb Pointer to the second matrix.
+ */
 static void	calc_mx_product(t_mx *product, t_mx *mxa, t_mx *mxb)
 {
 	int		i;

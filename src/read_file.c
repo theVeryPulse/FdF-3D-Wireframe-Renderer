@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:35:00 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:54:22 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:35:37 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,14 @@
 static char	*list_to_str(t_list *list);
 static void	ensure_eol(t_list *last);
 
+/**
+ * @brief Reads the content of a file and returns it as a string.
+ *
+ * @param file The path to the file to read.
+ * @return A dynamically allocated string containing the file's content, or NULL
+ *         on failure.
+ * @note Appends new line character if the string does end with one.
+ */
 char	*read_file(const char *file)
 {
 	int		fd;
@@ -43,6 +51,12 @@ char	*read_file(const char *file)
 	return (all);
 }
 
+/**
+ * @brief Converts a hexadecimal string to an integer.
+ *
+ * @param str The hexadecimal string to convert.
+ * @return The integer value of the hexadecimal string.
+ */
 int	hexa_atoi(const char *str)
 {
 	size_t				i;
@@ -70,6 +84,12 @@ int	hexa_atoi(const char *str)
 	return (n);
 }
 
+/**
+ * @brief Converts a linked list of strings into a single string.
+ *
+ * @param list The linked list of strings to concatenate.
+ * @return The concatenated string.
+ */
 static char	*list_to_str(t_list *list)
 {
 	t_list	*node;
@@ -97,6 +117,12 @@ static char	*list_to_str(t_list *list)
 	return (s);
 }
 
+/**
+ * @brief Ensures that the line in a linked list of strings ends with a
+ *        newline character.
+ *
+ * @param last A pointer to the last node in the linked list.
+ */
 static void	ensure_eol(t_list *last)
 {
 	char	*temp;

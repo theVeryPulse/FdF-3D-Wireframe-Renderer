@@ -6,13 +6,20 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:22:28 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 16:50:11 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-// Put pixel onto the image.
+/**
+ * @brief Puts a pixel with the specified color at the given coordinates on the 
+ *        mlx image.
+ *
+ * @param img_vars Pointer to the image variables structure.
+ * @param coord The coordinates of the pixel.
+ * @param color The color of the pixel.
+ */
 void	put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_argb color)
 {
 	unsigned char	*dst;
@@ -26,6 +33,12 @@ void	put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_argb color)
 	*(unsigned int *)dst = color;
 }
 
+/**
+ * @brief Fills the entire mlx image with the specified color.
+ *
+ * @param img_vars Pointer to the image variables structure.
+ * @param color The color to fill the image with.
+ */
 void	fill_image_with_color(t_img_vars *img_vars, int color)
 {
 	t_px_coord	point;
@@ -45,6 +58,12 @@ void	fill_image_with_color(t_img_vars *img_vars, int color)
 	}
 }
 
+/**
+ * @brief Changes the color of entire X window to the specified color.
+ *
+ * @param vars Pointer to the variables structure.
+ * @param color The color to change the screen to.
+ */
 void	change_screen_color(t_vars *vars, int color)
 {
 	if (!vars)
@@ -53,6 +72,11 @@ void	change_screen_color(t_vars *vars, int color)
 	put_image_to_window_vars(vars);
 }
 
+/**
+ * @brief Puts the image to the window.
+ *
+ * @param vars Pointer to the variables structure.
+ */
 void	put_image_to_window_vars(t_vars *vars)
 {
 	mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr,

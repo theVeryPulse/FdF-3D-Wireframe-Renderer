@@ -72,7 +72,7 @@ Note: Cavalier projection does not support rotation
 
 ## Conventions
 
-Points, vectors are represented in row-major vectors. To support translation by matrix, the extra homogenous coordinate is added. Matrices are stored in 4x4 arrays.
+Points, vectors are represented in column-major vectors. To support translation by matrix, the extra homogenous coordinate is added. Matrices are stored in 4x4 arrays.
 
 [v'] = [Transformation matrix][v]
 

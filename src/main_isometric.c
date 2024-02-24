@@ -6,22 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:24:34 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 16:57:07 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	set_up_hooks_isometric(t_vars *vars)
-{
-	mlx_key_hook(vars->win_ptr, isometric_handle_key, vars);
-	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit,
-		vars);
-	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);
-	mlx_hook(vars->win_ptr, MotionNotify, PointerMotionMask, mouse_motion,
-		NULL);
-}
+static void	set_up_hooks_isometric(t_vars *vars);
 
+/**
+ * Only creates one X image, to update the window, the image is repainted and
+ * then put to the X window.
+ */
 int	main(int argc, char const *argv[])
 {
 	t_vars	vars;
@@ -48,4 +44,14 @@ int	main(int argc, char const *argv[])
 	put_image_to_window_vars(&vars);
 	set_up_hooks_isometric(&vars);
 	mlx_loop(vars.mlx_ptr);
+}
+
+static void	set_up_hooks_isometric(t_vars *vars)
+{
+	mlx_key_hook(vars->win_ptr, isometric_handle_key, vars);
+	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit,
+		vars);
+	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);
+	mlx_hook(vars->win_ptr, MotionNotify, PointerMotionMask, mouse_motion,
+		NULL);
 }

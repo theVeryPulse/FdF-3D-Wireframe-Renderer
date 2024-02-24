@@ -6,22 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:25:57 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 16:56:53 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-static void	set_up_hooks_caval(t_vars *vars)
-{
-	mlx_key_hook(vars->win_ptr, caval_handle_key, vars);
-	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask,
-		destroy_exit, vars);
-	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);
-	mlx_hook(vars->win_ptr, MotionNotify, PointerMotionMask, mouse_motion,
-		NULL);
-}
+static void	set_up_hooks_caval(t_vars *vars);
 
+/**
+ * Only creates one X image, to update the window, the image is repainted and
+ * then put to the X window.
+ */
 int	main(int argc, char const *argv[])
 {
 	t_vars	vars;
@@ -46,4 +42,14 @@ int	main(int argc, char const *argv[])
 		0, 0);
 	set_up_hooks_caval(&vars);
 	mlx_loop(vars.mlx_ptr);
+}
+
+static void	set_up_hooks_caval(t_vars *vars)
+{
+	mlx_key_hook(vars->win_ptr, caval_handle_key, vars);
+	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask,
+		destroy_exit, vars);
+	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);
+	mlx_hook(vars->win_ptr, MotionNotify, PointerMotionMask, mouse_motion,
+		NULL);
 }

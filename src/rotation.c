@@ -6,12 +6,18 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:35 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:59:33 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 17:45:24 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+/**
+ * @brief Generates a 4x4 matrix for rotation around the x-axis.
+ *
+ * @param angle The angle of rotation in radians.
+ * @return The rotation matrix.
+ */
 t_mx	rot_x_mx_4x4(double angle)
 {
 	t_mx	rot_x;
@@ -27,6 +33,12 @@ t_mx	rot_x_mx_4x4(double angle)
 	return (rot_x);
 }
 
+/**
+ * @brief Generates a 4x4 matrix for rotation around the y-axis.
+ *
+ * @param angle The angle of rotation in radians.
+ * @return The rotation matrix.
+ */
 t_mx	rot_y_mx_4x4(double angle)
 {
 	t_mx	rot_y;
@@ -42,6 +54,12 @@ t_mx	rot_y_mx_4x4(double angle)
 	return (rot_y);
 }
 
+/**
+ * @brief Generates a 4x4 matrix for rotation around the z-axis.
+ *
+ * @param angle The angle of rotation in radians.
+ * @return The rotation matrix.
+ */
 t_mx	rot_z_mx_4x4(double angle)
 {
 	t_mx	rot_z;
