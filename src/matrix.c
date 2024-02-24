@@ -6,11 +6,14 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:05:51 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/23 18:02:13 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:05:58 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+static void	mx_mult_error_msg(void);
+static void	calc_mx_product(t_mx *product, t_mx *mxa, t_mx *mxb);
 
 t_mx	mx_transpose(t_mx mx)
 {
@@ -64,31 +67,46 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
 
 	if (mxa.col_num != mxb.row_num)
 	{
-		ft_putstr_fd(KRED, STDERR_FILENO);
-		ft_putstr_fd("WARNING:", STDERR_FILENO);
-		ft_putstr_fd(KWHT, STDERR_FILENO);
-		ft_putendl_fd("Incorrect number of coloumns and rows for matrix "
-			"multiplication", STDERR_FILENO);
+		mx_mult_error_msg();
 		return ((t_mx){0});
 	}
 	product = (t_mx){.row_num = mxa.row_num, .col_num = mxb.col_num};
+	calc_mx_product(&product, &mxa, &mxb);
+	return (product);
+}
+
+static void	mx_mult_error_msg(void)
+{
+	ft_putstr_fd(KRED, STDERR_FILENO);
+	ft_putstr_fd("WARNING:", STDERR_FILENO);
+	ft_putstr_fd(KWHT, STDERR_FILENO);
+	ft_putendl_fd("Incorrect number of coloumns and rows for matrix "
+		"multiplication", STDERR_FILENO);
+}
+
+static void	calc_mx_product(t_mx *product, t_mx *mxa, t_mx *mxb)
+{
+	int		i;
+	int		p_row_i;
+	int		p_col_i;
+	double	entry;
+
 	p_row_i = 0;
-	while (p_row_i < product.row_num)
+	while (p_row_i < product->row_num)
 	{
 		p_col_i = 0;
-		while (p_col_i < product.col_num)
+		while (p_col_i < product->col_num)
 		{
 			entry = 0;
 			i = 0;
-			while (i < mxa.col_num)
+			while (i < mxa->col_num)
 			{
-				entry += mxa.entries[p_row_i][i] * mxb.entries[i][p_col_i];
+				entry += mxa->entries[p_row_i][i] * mxb->entries[i][p_col_i];
 				i++;
 			}
-			product.entries[p_row_i][p_col_i] = entry;
+			product->entries[p_row_i][p_col_i] = entry;
 			p_col_i++;
 		}
 		p_row_i++;
 	}
-	return (product);
 }

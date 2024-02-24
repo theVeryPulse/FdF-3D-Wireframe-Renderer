@@ -1,14 +1,24 @@
 NAME := fdf
 COMMON_FILES := \
-	colors.c \
-	draw.c \
+	argb.c \
+	bresenham.c \
+	bresenham_utils.c \
+	coord_conversion.c \
+	events.c \
 	funcs.c \
+	gradient.c \
+	helpers.c \
+	image.c \
 	map.c \
+	map_utils.c \
 	matrix.c \
 	read_file.c \
 	render.c \
 	rotation.c \
-	transform.c
+	transform.c \
+	transform_cavalier.c \
+	transform_isometric.c \
+	transform_utils.c
 SRC_DIR := src
 OBJ_DIR := build
 INC_DIR := inc
@@ -17,7 +27,7 @@ FILES := main_isometric.c $(COMMON_FILES)
 SRC := $(addprefix $(SRC_DIR)/, $(FILES))
 OBJ := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC))
 
-FILES_BONUS := main_caval.c $(COMMON_FILES)
+FILES_BONUS := main_cavalier.c $(COMMON_FILES)
 SRC_BONUS := $(addprefix $(SRC_DIR)/, $(FILES_BONUS))
 OBJ_BONUS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(SRC_BONUS))
 
