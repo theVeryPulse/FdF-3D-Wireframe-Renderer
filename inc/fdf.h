@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 02:04:50 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:18:48 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,7 +166,6 @@ t_mx			build_translation_matrix_for_key(int key);
 t_mx			get_scale4x4(double scaling);
 void			transform_all_vertexes(t_vertex *vertexes, int total,
 					t_mx transform);
-
 
 /* Rotation */
 

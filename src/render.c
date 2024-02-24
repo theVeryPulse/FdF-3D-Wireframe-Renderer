@@ -6,16 +6,16 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:22:18 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:56:25 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 02:18:21 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
 static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
-			int col_idx);
+						int col_idx);
 static t_px_coord	caval_raster_coord_with_color(t_vars *vars, int row_idx,
-			int col_idx);
+						int col_idx);
 
 void	render_colored_ortho_model(t_vars *vars)
 {
