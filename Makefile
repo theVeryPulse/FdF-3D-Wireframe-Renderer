@@ -9,6 +9,7 @@ COMMON_FILES := \
 	gradient.c \
 	helpers.c \
 	image.c \
+	key_hooks.c \
 	map.c \
 	map_utils.c \
 	matrix.c \

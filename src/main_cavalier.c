@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:56:53 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:48:27 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	main(int argc, char const *argv[])
 
 static void	set_up_hooks_caval(t_vars *vars)
 {
-	mlx_key_hook(vars->win_ptr, caval_handle_key, vars);
+	press_key_hook(vars->win_ptr, caval_handle_key, vars);
 	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask,
 		destroy_exit, vars);
 	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:57:07 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:49:12 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int	main(int argc, char const *argv[])
 
 static void	set_up_hooks_isometric(t_vars *vars)
 {
-	mlx_key_hook(vars->win_ptr, isometric_handle_key, vars);
+	press_key_hook(vars->win_ptr, isometric_handle_key, vars);
 	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit,
 		vars);
 	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);

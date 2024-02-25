@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:59:04 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:48:01 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -202,6 +202,10 @@ t_px_coord		raster_coord(t_mx screen_coord);
 
 void			render_colored_caval_model(t_vars *vars);
 void			render_colored_ortho_model(t_vars *vars);
+
+/* Key Hook */
+
+int				press_key_hook(t_win_list *win, int (*funct)(), void *param);
 
 /* Events */
 

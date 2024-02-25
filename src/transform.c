@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:07:22 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:56:53 by Philip           ###   ########.fr       */
+/*   Updated: 2024/02/24 22:51:42 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ t_mx	build_scale_matrix_for_key(int key)
 	t_mx	scale4x4;
 
 	if (key == XK_i)
-		scale4x4 = get_scale4x4(1.1);
+		scale4x4 = get_scale4x4(1.05);
 	else if (key == XK_o)
-		scale4x4 = get_scale4x4(0.9);
+		scale4x4 = get_scale4x4(0.95);
 	return (scale4x4);
 }
 
@@ -69,17 +69,17 @@ t_mx	build_rotation_matrix_for_key(int key)
 	t_mx	rotate4x4;
 
 	if (key == XK_e)
-		rotate4x4 = rot_y_mx_4x4(10.0 * PI / 180.0);
+		rotate4x4 = rot_y_mx_4x4(1.0 * PI / 180.0);
 	else if (key == XK_q)
-		rotate4x4 = rot_y_mx_4x4(-10.0 * PI / 180.0);
+		rotate4x4 = rot_y_mx_4x4(-1.0 * PI / 180.0);
 	else if (key == XK_s)
-		rotate4x4 = rot_x_mx_4x4(10.0 * PI / 180.0);
+		rotate4x4 = rot_x_mx_4x4(1.0 * PI / 180.0);
 	else if (key == XK_w)
-		rotate4x4 = rot_x_mx_4x4(-10.0 * PI / 180.0);
+		rotate4x4 = rot_x_mx_4x4(-1.0 * PI / 180.0);
 	else if (key == XK_a)
-		rotate4x4 = rot_z_mx_4x4(10.0 * PI / 180.0);
+		rotate4x4 = rot_z_mx_4x4(1.0 * PI / 180.0);
 	else if (key == XK_d)
-		rotate4x4 = rot_z_mx_4x4(-10.0 * PI / 180.0);
+		rotate4x4 = rot_z_mx_4x4(-1.0 * PI / 180.0);
 	return (rotate4x4);
 }
 
