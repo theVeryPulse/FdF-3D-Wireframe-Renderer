@@ -1,3 +1,5 @@
+A 3D Wireframe Renderer
+
 # FDF (A 3D Wireframe Renderer)
 
 FDF is a simple isometric 3D wireframe renderer written in C. It takes a map file as input, representing a grid of points in 3D space, and renders it as a wireframe projection on the screen.
