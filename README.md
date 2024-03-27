@@ -1,3 +1,5 @@
+A 3D Wireframe Renderer
+
 # FDF (A 3D Wireframe Renderer)
 
 FDF is a simple isometric 3D wireframe renderer written in C. It takes a map file as input, representing a grid of points in 3D space, and renders it as a wireframe projection on the screen.
@@ -34,9 +36,11 @@ FDF is a simple isometric 3D wireframe renderer written in C. It takes a map fil
 
 ## Usage
 Run the executable ```fdf``` with the map as command line argument
-   ```bash
-   ./fdf test_maps/42.fdf
-   ```
+
+```bash
+./fdf test_maps/42.fdf
+```
+
 ![42.fdf](pic/42.png)
 
 ## Map File Format
@@ -61,12 +65,12 @@ where the row and column represent the coordinates on horizontal plane, and the 
 
 | Key(s)    | Action                |
 |-----------|-----------------------|
-| Arrow Keys| Move the model        |
-| I / O Keys| Zoom in / out         |
-| W / S Keys| Rotate up / down      |
-| A / D Keys| Rotate counter-clockwise / clockwise |
-| Q / E Keys| Rotate left / right   |
-| Esc Key   | Exit the program      |
+| `←` `↑` `↓` `→`| Move the model        |
+| `i` `o`   | Zoom in / out         |
+| `w` `s`   | Rotate up / down      |
+| `a` `d`   | Rotate counter-clockwise / clockwise |
+| `q` `e`   | Rotate left / right   |
+| `Esc`     | Exit the program      |
 
 Note: Cavalier projection does not support rotation
 
