@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 22:48:01 by Philip           ###   ########.fr       */
+/*   Updated: 2024/03/27 18:33:33 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,8 @@ void			calc_error_and_delta(int *error, t_delta *delta, t_px_coord *a,
 					t_px_coord *b);
 void			draw_colored_line(t_img_vars *img_vars, t_px_coord a,
 					t_px_coord b);
-void			init_transition(t_transition *t, t_px_coord *a, t_px_coord *b);
+void			init_gradient_color_transition(t_transition *t, t_px_coord *a,
+					t_px_coord *b);
 
 /* Matrix */
 

@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:25:40 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:16:56 by Philip           ###   ########.fr       */
+/*   Updated: 2024/03/27 18:32:54 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,8 @@ void	calc_error_and_delta(int *error, t_delta *delta, t_px_coord *a,
  * @param a Pointer to the starting point of the line.
  * @param b Pointer to the ending point of the line.
  */
-void	init_transition(t_transition *t, t_px_coord *a, t_px_coord *b)
+void	init_gradient_color_transition(t_transition *t, t_px_coord *a,
+	t_px_coord *b)
 {
 	t->curr = 0.0;
 	t->step = 1.0 / ft_abs(b->x - a->x);

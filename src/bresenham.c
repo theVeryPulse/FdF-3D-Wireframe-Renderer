@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:22:37 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:13:51 by Philip           ###   ########.fr       */
+/*   Updated: 2024/03/27 18:32:14 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,28 +53,26 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 static void	normalize_coords_bresenham(t_px_coord *a, t_px_coord *b,
 		t_slope_property *slope)
 {
-	t_delta	delta;
-
 	if (!a || !b || !slope)
 		return ;
 	if (a->x > b->x)
 		px_coord_swap(a, b);
-	delta.x = ft_abs(b->x - a->x);
-	delta.y = ft_abs(b->y - a->y);
-	slope->is_negative = false;
 	if ((a->x < b->x) && (a->y > b->y))
 	{
+		slope->is_negative = true;
 		a->y *= -1;
 		b->y *= -1;
-		slope->is_negative = true;
 	}
-	slope->is_greater_than_1 = false;
-	if (delta.y > delta.x)
+	else
+		slope->is_negative = false;
+	if (ft_abs(b->y - a->y) > ft_abs(b->x - a->x))
 	{
+		slope->is_greater_than_1 = true;
 		int_swap(&(a->x), &(a->y));
 		int_swap(&(b->x), &(b->y));
-		slope->is_greater_than_1 = true;
 	}
+	else
+		slope->is_greater_than_1 = false;
 	if (a->x > b->x)
 		px_coord_swap(a, b);
 }
@@ -98,7 +96,7 @@ static void	draw_colored_pixels_bresenham(t_img_vars *img_vars,
 	t_delta			delta;
 
 	calc_error_and_delta(&error, &delta, &a, &b);
-	init_transition(&t, &a, &b);
+	init_gradient_color_transition(&t, &a, &b);
 	point = a;
 	while (point.x <= b.x)
 	{
