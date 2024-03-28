@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:22:37 by Philip            #+#    #+#             */
-/*   Updated: 2024/03/27 18:32:14 by Philip           ###   ########.fr       */
+/*   Updated: 2024/03/28 15:56:30 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ static void	draw_pixel_bresenham(t_img_vars *img_vars, t_slope_property slope,
  * @note Draws a line between the points 'a' and 'b' on the screen using and
  *       colors each pixel along the line based on gradient color interpolation
  *       between the colors of 'a' and 'b'.
+ *       Coordinates are in screen system (between 0 and window size)
  * @see Bresenham's algorithm: 
  *      https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
  */
@@ -35,6 +36,8 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 {
 	t_slope_property	slope;
 
+	if ((a.x > WIDTH && b.x > WIDTH) || (a.y > HEIGHT && b.y > HEIGHT))
+		return ;
 	normalize_coords_bresenham(&a, &b, &slope);
 	draw_colored_pixels_bresenham(img_vars, a, b, slope);
 }
@@ -53,8 +56,6 @@ void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 static void	normalize_coords_bresenham(t_px_coord *a, t_px_coord *b,
 		t_slope_property *slope)
 {
-	if (!a || !b || !slope)
-		return ;
 	if (a->x > b->x)
 		px_coord_swap(a, b);
 	if ((a->x < b->x) && (a->y > b->y))
@@ -126,8 +127,6 @@ static void	draw_colored_pixels_bresenham(t_img_vars *img_vars,
 static void	draw_pixel_bresenham(t_img_vars *img_vars, t_slope_property slope,
 		t_px_coord point)
 {
-	if (!img_vars)
-		return ;
 	if (slope.is_greater_than_1 && slope.is_negative)
 		put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x},
 			point.color);
