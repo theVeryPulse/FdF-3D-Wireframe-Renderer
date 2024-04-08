@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:09 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 21:04:33 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:22:54 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(int argc, char **argv)
 	printf("Content as one string:\n%s", content);
 	map_check(content);
 	printf("Map checked\n");
-	map = build_map(content);
+	map = map_build(content);
 	free(content);
 	printf("Total columns: %d, total rows: %d\n", map.col_num, map.row_num); */
 
@@ -52,7 +52,7 @@ int	main(int argc, char **argv)
 		b_p = mx_to_pxcoord(mx_mult(2, rot, pxcoord_to_mx(b_p)));
 		c_p = mx_to_pxcoord(mx_mult(2, rot, pxcoord_to_mx(c_p)));
 		d_p = mx_to_pxcoord(mx_mult(2, rot, pxcoord_to_mx(d_p)));
-		fill_image_with_color(&vars.img_vars, BLACK);
+		image_fill_color(&vars.img_vars, BLACK);
 		draw_line(&vars.img_vars, raster_coord(a_p), raster_coord(b_p), WHITE);
 		draw_line(&vars.img_vars, raster_coord(b_p), raster_coord(c_p), WHITE);
 		draw_line(&vars.img_vars, raster_coord(c_p), raster_coord(d_p), WHITE);
@@ -91,7 +91,7 @@ int	main(int argc, char **argv)
 		t_mx	rotated[8];
 		t_mx	projected[8];
 
-		fill_image_with_color(&vars.img_vars, BLACK);
+		image_fill_color(&vars.img_vars, BLACK);
 
 		for (int i = 0; i < 8; i++)
 		{
@@ -139,7 +139,7 @@ int	main(int argc, char **argv)
 		t_px_coord	b2 = mx_to_pxcoord((mx_mult(3, projection_2x3, rot_3x3, f_3x1)));
 		t_px_coord	c2 = mx_to_pxcoord((mx_mult(3, projection_2x3, rot_3x3, g_3x1)));
 		t_px_coord	d2 = mx_to_pxcoord((mx_mult(3, projection_2x3, rot_3x3, h_3x1)));
-		fill_image_with_color(&vars.img_vars, BLACK);
+		image_fill_color(&vars.img_vars, BLACK);
 
 		draw_line(&vars.img_vars, raster_coord(a1), raster_coord(b1), WHITE);
 		draw_line(&vars.img_vars, raster_coord(b1), raster_coord(c1), WHITE);

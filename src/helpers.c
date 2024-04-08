@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:19:13 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:46:52 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 20:59:56 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	px_coord_swap(t_px_coord *a, t_px_coord *b)
 	*b = tmp;
 }
 
+#if 0
 /**
  * @brief Rounds a double to the nearest integer.
  *
@@ -56,3 +57,4 @@ int	round_double(double n)
 	else
 		return ((int)(n - 0.5));
 }
+#endif

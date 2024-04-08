@@ -6,10 +6,11 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:35:10 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:28:44 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 20:23:10 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#if 0
 #include "fdf.h"
 
 /**
@@ -95,3 +96,4 @@ void	next_row_first_col(t_num *num)
 	num->row++;
 	num->col = 1;
 }
+#endif

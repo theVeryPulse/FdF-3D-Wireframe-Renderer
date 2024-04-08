@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:43:04 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:51:46 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:22:54 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	translate(t_vars *vars, int key)
 	transform_all_vertexes(vars->map.vertexes,
 		vars->map.row_num * vars->map.col_num,
 		transl4x4);
-	fill_image_with_color(&vars->img_vars, BLACK);
+	image_fill_color(&vars->img_vars, BLACK);
 	render_colored_ortho_model(vars);
 	put_image_to_window_vars(vars);
 }
@@ -47,7 +47,7 @@ void	scale(t_vars *vars, int key)
 	transform_all_vertexes(vars->map.vertexes,
 		vars->map.row_num * vars->map.col_num,
 		scale4x4);
-	fill_image_with_color(&vars->img_vars, BLACK);
+	image_fill_color(&vars->img_vars, BLACK);
 	render_colored_ortho_model(vars);
 	put_image_to_window_vars(vars);
 }
@@ -66,7 +66,7 @@ void	rotate(t_vars *vars, int key)
 	transform_all_vertexes(vars->map.vertexes,
 		vars->map.row_num * vars->map.col_num,
 		rotate4x4);
-	fill_image_with_color(&vars->img_vars, BLACK);
+	image_fill_color(&vars->img_vars, BLACK);
 	render_colored_ortho_model(vars);
 	put_image_to_window_vars(vars);
 }

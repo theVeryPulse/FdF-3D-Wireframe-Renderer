@@ -6,11 +6,12 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:22:18 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:40:36 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:32:49 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "bresenham.h"
 
 static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
 						int col_idx);
@@ -35,13 +36,13 @@ void	render_colored_ortho_model(t_vars *vars)
 		{
 			if (col_idx != vars->map.col_num - 1)
 			{
-				draw_colored_line(&vars->img_vars,
+				bresenham_draw_colored_line(&vars->img_vars,
 					ortho_raster_coord_with_color(vars, row_idx, col_idx),
 					ortho_raster_coord_with_color(vars, row_idx, col_idx + 1));
 			}
 			if (row_idx != vars->map.row_num - 1)
 			{
-				draw_colored_line(&vars->img_vars,
+				bresenham_draw_colored_line(&vars->img_vars,
 					ortho_raster_coord_with_color(vars, row_idx, col_idx),
 					ortho_raster_coord_with_color(vars, row_idx + 1, col_idx));
 			}
@@ -69,13 +70,13 @@ void	render_colored_caval_model(t_vars *vars)
 		{
 			if (col_idx != vars->map.col_num - 1)
 			{
-				draw_colored_line(&vars->img_vars,
+				bresenham_draw_colored_line(&vars->img_vars,
 					caval_raster_coord_with_color(vars, row_idx, col_idx),
 					caval_raster_coord_with_color(vars, row_idx, col_idx + 1));
 			}
 			if (row_idx != vars->map.row_num - 1)
 			{
-				draw_colored_line(&vars->img_vars,
+				bresenham_draw_colored_line(&vars->img_vars,
 					caval_raster_coord_with_color(vars, row_idx, col_idx),
 					caval_raster_coord_with_color(vars, row_idx + 1, col_idx));
 			}
@@ -101,7 +102,7 @@ static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
 	t_vertex	vertex;
 
 	vertex = vars->map.vertexes[col_idx + row_idx * vars->map.col_num];
-	pixel = raster_coord(ortho_screen_coord(vertex.real_coord));
+	pixel = raster_coord(screen_coord_ortho(vertex.real_coord));
 	pixel.color = vertex.color;
 	return (pixel);
 }
@@ -122,7 +123,7 @@ static t_px_coord	caval_raster_coord_with_color(t_vars *vars, int row_idx,
 	t_vertex	vertex;
 
 	vertex = vars->map.vertexes[col_idx + row_idx * vars->map.col_num];
-	pixel = raster_coord(caval_screen_coord(vertex.real_coord));
+	pixel = raster_coord(screen_coord_caval(vertex.real_coord));
 	pixel.color = vertex.color;
 	return (pixel);
 }

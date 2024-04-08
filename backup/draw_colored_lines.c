@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:20:45 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 01:40:52 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:23:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@
 // 	ystep = 1 + (b.y < a.y) * (-2);
 // 	while (point.x <= b.x)
 // 	{
-// 		put_pixel_img(image, point, gradient_color(t, a.color, b.color));
+// 		image_put_pixel(image, point, gradient_color(t, a.color, b.color));
 // 		point.x++;
 // 		point.y += ystep;
 // 		t += dt;
@@ -54,7 +54,7 @@
 // 	while (point.x++ <= b.x)
 // 	{
 // 		color = gradient_color(t, a.color, b.color);
-// 		put_pixel_img(img_vars, point, color);
+// 		image_put_pixel(img_vars, point, color);
 // 		t += dt;
 // 	}
 // }
@@ -76,7 +76,7 @@
 // 	while (point.y++ <= b.y)
 // 	{
 // 		color = gradient_color(t, a.color, b.color);
-// 		put_pixel_img(img_vars, point, color);
+// 		image_put_pixel(img_vars, point, color);
 // 		t += dt;
 // 	}
 // }

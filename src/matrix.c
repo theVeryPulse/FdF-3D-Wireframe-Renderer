@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:05:51 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 18:02:03 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 18:21:40 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,11 +101,9 @@ t_mx	mxa_mult_mxb(t_mx mxa, t_mx mxb)
  */
 static void	mx_mult_error_msg(void)
 {
-	ft_putstr_fd(KRED, STDERR_FILENO);
-	ft_putstr_fd("WARNING:", STDERR_FILENO);
-	ft_putstr_fd(KWHT, STDERR_FILENO);
-	ft_putendl_fd("Incorrect number of coloumns and rows for matrix "
-		"multiplication", STDERR_FILENO);
+	ft_dprintf(STDERR_FILENO,
+		KRED"WARNING: "KNRM
+		"Incorrect number of columns and rows for matrix multiplication\n");
 }
 
 /**

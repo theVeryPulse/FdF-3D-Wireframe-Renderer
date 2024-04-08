@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/19 21:07:22 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 22:51:42 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 19:08:07 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,21 @@ t_mx	build_translation_matrix_for_key(int key)
 t_mx	build_scale_matrix_for_key(int key)
 {
 	t_mx	scale4x4;
+	double	scaling;
 
+	scaling = 1;
 	if (key == XK_i)
-		scale4x4 = get_scale4x4(1.05);
+		scaling = 1.05;
 	else if (key == XK_o)
-		scale4x4 = get_scale4x4(0.95);
+		scaling = 0.95;
+	scale4x4 = (t_mx){
+		.row_num = 4,
+		.col_num = 4,
+		.entries = {
+	{scaling, 0, 0, 0},
+	{0, scaling, 0, 0},
+	{0, 0, scaling, 0},
+	{0, 0, 0, 1}}};
 	return (scale4x4);
 }
 

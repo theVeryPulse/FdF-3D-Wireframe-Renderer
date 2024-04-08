@@ -6,17 +6,20 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/30 19:35:00 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:35:37 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:32:00 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "libft.h"
+#include <stdlib.h>
+#include <fcntl.h>
+#include <stdio.h>
 
 static char	*list_to_str(t_list *list);
 static void	ensure_eol(t_list *last);
 
 /**
- * @brief Reads the content of a file and returns it as a string.
+ * @brief Reads the content of a file and returns it as one string.
  *
  * @param file The path to the file to read.
  * @return A dynamically allocated string containing the file's content, or NULL
@@ -51,13 +54,14 @@ char	*read_file(const char *file)
 	return (all);
 }
 
+#if 0
 /**
  * @brief Converts a hexadecimal string to an integer.
  *
  * @param str The hexadecimal string to convert.
  * @return The integer value of the hexadecimal string.
  */
-int	hexa_atoi(const char *str)
+int	hex_atoi(const char *str)
 {
 	size_t				i;
 	int					n;
@@ -83,6 +87,7 @@ int	hexa_atoi(const char *str)
 	free(copy);
 	return (n);
 }
+#endif
 
 /**
  * @brief Converts a linked list of strings into a single string.

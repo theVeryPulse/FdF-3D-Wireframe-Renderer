@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:52:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 22:38:56 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 20:20:09 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int main(int argc, char const *argv[])
 	map_check(content);
 	
 	printf("Map checked\n");
-	vars.map = build_map(content);
+	vars.map = map_build(content);
 	print_map(&vars.map);
 	free(content);
 	printf("Total columns: %d, total rows: %d\n", vars.map.col_num, vars.map.row_num);

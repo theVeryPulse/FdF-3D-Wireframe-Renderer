@@ -2,15 +2,23 @@ NAME := fdf
 COMMON_FILES := \
 	argb.c \
 	bresenham.c \
+	bresenham_draw_colored_line.c \
+	bresenham_draw_colored_pixels.c \
+	bresenham_normalize_coords.c \
 	bresenham_utils.c \
 	coord_conversion.c \
 	events.c \
 	funcs.c \
 	gradient.c \
 	helpers.c \
+	hex_atoi.c \
 	image.c \
 	key_hooks.c \
 	map.c \
+	map_build.c \
+	map_check.c \
+	map_parse_data.c \
+	map_populate_vertexes.c \
 	map_utils.c \
 	matrix.c \
 	read_file.c \
@@ -20,6 +28,7 @@ COMMON_FILES := \
 	transform_cavalier.c \
 	transform_isometric.c \
 	transform_utils.c
+
 SRC_DIR := src
 OBJ_DIR := build
 

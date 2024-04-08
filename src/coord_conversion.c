@@ -6,11 +6,16 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:39:07 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:23:19 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:03:55 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#include "matrix.h"
+#include "scree_size.h"
+#include "px_coord.h"
+
+static t_px_coord	mx_to_pxcoord(t_mx mx);
+static int	round_double(double n);
 
 /**
  * @brief Performs orthographic projection from world coordinates to screen
@@ -20,7 +25,7 @@
  * @return The resulting screen coordinate after orthographic projection.
  * @note Both input and ouput points are stored in 4x1 matrices.
  */
-t_mx	ortho_screen_coord(t_mx world_coord)
+t_mx	screen_coord_ortho(t_mx world_coord)
 {
 	t_mx	ortho_proj_2x4;
 
@@ -41,7 +46,7 @@ t_mx	ortho_screen_coord(t_mx world_coord)
  * @return The resulting screen coordinate matrix after cavalier projection.
  * @note Both input and ouput points are stored in 4x1 matrices.
  */
-t_mx	caval_screen_coord(t_mx world_coord)
+t_mx	screen_coord_caval(t_mx world_coord)
 {
 	t_mx	caval_proj_2x4;
 
@@ -69,4 +74,34 @@ t_px_coord	raster_coord(t_mx screen_coord)
 	raster_coord.x = raster_coord.x + WIDTH / 2;
 	raster_coord.y = -raster_coord.y + HEIGHT / 2;
 	return (raster_coord);
+}
+
+/**
+ * @brief Converts a matrix to a pixel coordinate.
+ *
+ * @param mx The matrix representing the pixel coordinate.
+ * @return The resulting pixel coordinate.
+ */
+static t_px_coord	mx_to_pxcoord(t_mx mx)
+{
+	t_px_coord	px_coord;
+
+	px_coord.x = round_double(mx.entries[0][0]);
+	px_coord.y = round_double(mx.entries[1][0]);
+	return (px_coord);
+}
+
+/**
+ * @brief Rounds a double to the nearest integer.
+ *
+ * @param n The double value to be rounded.
+ * @return The rounded integer value.
+ * @note Relies on the C type casting.
+ */
+static int	round_double(double n)
+{
+	if (n > 0)
+		return ((int)(n + 0.5));
+	else
+		return ((int)(n - 0.5));
 }

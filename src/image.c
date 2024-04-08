@@ -6,11 +6,15 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 16:50:11 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:23:46 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+// #include "img_vars.h"
+#include "scree_size.h"
+// #include "px_coord.h"
+#include <stddef.h>
 
 /**
  * @brief Puts a pixel with the specified color at the given coordinates on the 
@@ -20,7 +24,7 @@
  * @param coord The coordinates of the pixel.
  * @param color The color of the pixel.
  */
-void	put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_argb color)
+void	image_put_pixel(t_img_vars *img_vars, t_px_coord coord, t_argb color)
 {
 	unsigned char	*dst;
 	ptrdiff_t		offset;
@@ -39,7 +43,7 @@ void	put_pixel_img(t_img_vars *img_vars, t_px_coord coord, t_argb color)
  * @param img_vars Pointer to the image variables structure.
  * @param color The color to fill the image with.
  */
-void	fill_image_with_color(t_img_vars *img_vars, int color)
+void	image_fill_color(t_img_vars *img_vars, int color)
 {
 	t_px_coord	point;
 
@@ -51,7 +55,7 @@ void	fill_image_with_color(t_img_vars *img_vars, int color)
 		point.y = 0;
 		while (point.y < HEIGHT)
 		{
-			put_pixel_img(img_vars, point, color);
+			image_put_pixel(img_vars, point, color);
 			point.y++;
 		}
 		point.x++;
@@ -68,7 +72,7 @@ void	change_screen_color(t_vars *vars, int color)
 {
 	if (!vars)
 		return ;
-	fill_image_with_color(&vars->img_vars, color);
+	image_fill_color(&vars->img_vars, color);
 	put_image_to_window_vars(vars);
 }
 

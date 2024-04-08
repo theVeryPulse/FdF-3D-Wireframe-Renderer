@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   draw_colored_line.c                                :+:      :+:    :+:   */
+/*   bresenham_draw_colored_line.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -24,7 +24,7 @@ int main(int argc, char const *argv[])
 	map_check(content);
 	
 	printf("Map checked\n");
-	vars.map = build_map(content);
+	vars.map = map_build(content);
 	// print_map(&vars.map);
 	free(content);
 	printf("Total columns: %d, total rows: %d\n", vars.map.col_num, vars.map.row_num);
@@ -43,7 +43,7 @@ int main(int argc, char const *argv[])
 
 	a = (t_px_coord){.x = 0, .y = 500, .color = argb(0xff, 0, 0, 0xff)};
 	b = (t_px_coord){.x = 1000, .y = 500, .color = argb(0xff, 0, 0xff, 0)};
-	draw_colored_line(&vars.img_vars, a, b);
+	bresenham_draw_colored_line(&vars.img_vars, a, b);
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 

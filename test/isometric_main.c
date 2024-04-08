@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:09 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/20 21:04:33 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 21:22:54 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char **argv)
 		t_px_coord	b2 = mx_to_pxcoord((mx_mult(3, projection_2x4, rot_4x4, f_4x1)));
 		t_px_coord	c2 = mx_to_pxcoord((mx_mult(3, projection_2x4, rot_4x4, g_4x1)));
 		t_px_coord	d2 = mx_to_pxcoord((mx_mult(3, projection_2x4, rot_4x4, h_4x1)));
-		fill_image_with_color(&vars.img_vars, BLACK);
+		image_fill_color(&vars.img_vars, BLACK);
 
 		draw_line(&vars.img_vars, raster_coord(a1), raster_coord(b1), WHITE);
 		draw_line(&vars.img_vars, raster_coord(b1), raster_coord(c1), WHITE);

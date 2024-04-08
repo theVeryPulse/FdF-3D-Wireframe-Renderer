@@ -1,6 +1,6 @@
 // #include "fdf.h"
 
-// void	draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
+// void	bresenham_draw_colored_line(t_img_vars *img_vars, t_px_coord a, t_px_coord b)
 // {
 // 	bool		slope_greater_than_1;
 // 	bool		slope_is_negative;
@@ -64,24 +64,24 @@
 // 		color = gradient_color(t, a.color, b.color);
 // 		if (slope_greater_than_1 && slope_is_negative)
 // 		{
-// 			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, color);
+// 			image_put_pixel(img_vars, (t_px_coord){.x = point.y, .y = -point.x}, color);
 // 			// printf("(%d,%d)\n", point.y, -point.x);
 // 		}
 // 		else if (slope_is_negative)
 // 		{
 // 			// printf("(%d,%d)\n", point.x, -point.y);
 			
-// 			put_pixel_img(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, color);
+// 			image_put_pixel(img_vars, (t_px_coord){.x = point.x, .y = -point.y}, color);
 // 		}
 // 		else if (slope_greater_than_1)
 // 		{
 // 			// printf("(%d,%d)\n", point.y, point.x);
-// 			put_pixel_img(img_vars, (t_px_coord){.x = point.y, .y = point.x}, color);
+// 			image_put_pixel(img_vars, (t_px_coord){.x = point.y, .y = point.x}, color);
 // 		}
 // 		else
 // 		{
 // 			// printf("(%d,%d)\n", point.x, point.y);
-// 			put_pixel_img(img_vars, point, color);
+// 			image_put_pixel(img_vars, point, color);
 // 		}
 // 		if (error > 0)
 // 		{
@@ -114,7 +114,7 @@
 // 	ystep = 1 + (b.y < a.y) * (-2);
 // 	while (point.x <= b.x)
 // 	{
-// 		put_pixel_img(image, point, color);
+// 		image_put_pixel(image, point, color);
 // 		point.x++;
 // 		point.y += ystep;
 // 	}
@@ -132,7 +132,7 @@
 // 		point = a;
 // 		while (point.y++ <= b.y)
 // 		{
-// 			put_pixel_img(img_vars, point, color);
+// 			image_put_pixel(img_vars, point, color);
 // 		}
 // 		return ;
 // 	}
@@ -143,7 +143,7 @@
 // 		point = a;
 // 		while (point.x++ <= b.x)
 // 		{
-// 			put_pixel_img(img_vars, point, color);
+// 			image_put_pixel(img_vars, point, color);
 // 		}
 // 		return ;
 // 	}

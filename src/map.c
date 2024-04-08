@@ -6,14 +6,14 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/23 18:23:31 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:08:51 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 20:35:30 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
+#if 0
 static void	get_vertex_color(t_vertex *vertex, char *str_color, size_t *i);
-
 /**
  * @brief Checks the validity of the map string.
  *
@@ -39,6 +39,7 @@ void	map_check(char *map_str)
 	}
 }
 
+
 /**
  * @brief Parses the map data from the string and populates the vertexes of the 
  *        map.
@@ -46,7 +47,7 @@ void	map_check(char *map_str)
  * @param map Pointer to the map structure to be populated.
  * @param str The string containing the map data.
  */
-void	parse_map_data(t_map *map, char *str)
+void	map_parse_data(t_map *map, char *str)
 {
 	size_t	i;
 	size_t	vertex_idx;
@@ -79,23 +80,23 @@ void	parse_map_data(t_map *map, char *str)
  * @param str The map string containing the map data.
  * @return The built map structure.
  */
-t_map	build_map(char *str)
+void	map_build(t_map *map, char *str)
 {
-	t_map	map;
 	size_t	i;
 
-	map.row_num = count_rows(str);
-	map.col_num = count_cols(str);
-	map.vertexes = (t_vertex *)ft_calloc(map.col_num * map.row_num,
+	map->row_num = count_rows(str);
+	map->col_num = count_cols(str);
+	map->vertexes = (t_vertex *)ft_calloc(map->col_num * map->row_num,
 			sizeof(t_vertex));
-	if (!map.vertexes)
+	if (!map->vertexes)
 	{
 		free(str);
 		exit(1);
 	}
-	parse_map_data(&map, str);
+	map_parse_data(&map, str);
 	return (map);
 }
+
 
 /**
  * @brief Populates the vertexes in the map structure with real coordinates.
@@ -105,7 +106,7 @@ t_map	build_map(char *str)
  *       initialized that rows are parallel to x axis, and columns parallel to z
  *       axis, and height in y axis direction.
  */
-void	populate_vertexes_in_map(t_vars *vars)
+void	map_populate_vertexes(t_vars *vars)
 {
 	int			col;
 	int			row;
@@ -131,7 +132,6 @@ void	populate_vertexes_in_map(t_vars *vars)
 		row++;
 	}
 }
-
 /**
  * @brief Retrieves the color of a vertex from the string and updates the
  *        vertex structure.
@@ -145,9 +145,10 @@ static void	get_vertex_color(t_vertex *vertex, char *str_color, size_t *i)
 {
 	if (*str_color == ',')
 	{
-		vertex->color = hexa_atoi(str_color + 1);
+		vertex->color = hex_atoi(str_color + 1);
 		(*i)++;
 	}
 	else
 		vertex->color = WHITE;
 }
+#endif
