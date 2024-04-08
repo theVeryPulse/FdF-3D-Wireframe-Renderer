@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:33:08 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 23:44:42 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:43:16 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,11 +86,6 @@ int	caval_handle_key(int key, t_vars *vars)
 	ft_printf("%d pressed\n", key);
 	if (key == XK_Escape)
 		destroy_exit(vars);
-	/* else if (key == XK_Left || key == XK_Right || key == XK_Up
-		|| key == XK_Down)
-		translate_caval(vars, key);
-	else if (key == XK_i || key == XK_o)
-		scale_caval(vars, key); */
 	else if (key == XK_Left || key == XK_Right
 		|| key == XK_Up || key == XK_Down
 		|| key == XK_i || key == XK_o)

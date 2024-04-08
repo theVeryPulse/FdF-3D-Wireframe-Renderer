@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:27:34 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:44:34 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,11 +51,6 @@ typedef struct s_vars
 	t_img_vars	img_vars;
 	t_map		map;
 }	t_vars;
-
-/* Read file */
-
-char			*read_file(const char *file);
-int				hex_atoi(const char *str);
 
 /* Image manipulation */
 

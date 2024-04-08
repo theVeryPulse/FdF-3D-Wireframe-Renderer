@@ -6,11 +6,12 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:40:11 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:54:42 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "read_file.h"
 #include "screen_size.h"
 
 static void	set_up_hooks_isometric(t_vars *vars);
@@ -30,7 +31,6 @@ int	main(int argc, char const *argv[])
 	map_check(content);
 	map_build(&vars.map, content);
 	free(content);
-	// map_populate_vertexes(&vars.map);
 	vars.mlx_ptr = mlx_init();
 	vars.win_ptr = mlx_new_window(vars.mlx_ptr, WIDTH, HEIGHT, "fdf");
 	vars.img_vars.img_ptr = mlx_new_image(vars.mlx_ptr, WIDTH, HEIGHT);

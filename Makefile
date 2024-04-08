@@ -31,25 +31,31 @@ MAP_FILES := \
 MAP_FILES := $(addprefix $(MAP_DIR)/, $(MAP_FILES))
 
 
-COORD_CONVERSION := coord_conversion
+HEX_ATOI_DIR := hex_atoi
+HEX_ATOI_FILES := \
+	hex_atoi.c
+HEX_ATOI_FILES := $(addprefix $(HEX_ATOI_DIR)/, $(HEX_ATOI_FILES))
+
+
+COORD_CONVERSION_DIR := coord_conversion
 COORD_CONVERSION_FILES := \
 	raster_coord.c \
 	screen_coord_caval.c \
 	screen_coord_ortho.c
-COORD_CONVERSION_FILES := $(addprefix $(COORD_CONVERSION)/, $(COORD_CONVERSION_FILES))
+COORD_CONVERSION_FILES := $(addprefix $(COORD_CONVERSION_DIR)/, $(COORD_CONVERSION_FILES))
 
 
 SUBFOLDERS := \
 	$(TRANSFORMATION_MATRIX_DIR) \
 	$(BRESENHAM_DIR) \
 	$(MAP_DIR) \
-	$(COORD_CONVERSION)
+	$(COORD_CONVERSION_DIR) \
+	$(HEX_ATOI_DIR)
 
 
 COMMON_FILES := \
 	argb.c \
 	events.c \
-	hex_atoi.c \
 	image.c \
 	key_hooks.c \
 	matrix.c \
@@ -62,7 +68,8 @@ COMMON_FILES := \
 	$(TRANSFORMATION_MATRIX_FILES) \
 	$(BRESENHAM_FILES) \
 	$(MAP_FILES) \
-	$(COORD_CONVERSION_FILES)
+	$(COORD_CONVERSION_FILES) \
+	$(HEX_ATOI_FILES)
 
 SRC_DIR := src
 OBJ_DIR := build
