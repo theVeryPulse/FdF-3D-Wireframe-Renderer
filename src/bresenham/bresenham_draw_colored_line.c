@@ -6,13 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:47:54 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 20:54:50 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:15:09 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bresenham_internal.h"
-#include "px_coord.h"
-#include "scree_size.h"
+#include "../px_coord.h"
+#include "../scree_size.h"
 
 /**
  * @brief Draws a colored line between two points on the mlx image

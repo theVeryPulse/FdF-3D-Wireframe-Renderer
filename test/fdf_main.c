@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/05 17:52:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 20:20:09 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 23:42:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ t_mx	isometric4x4(void)
 {
 	t_mx	iso_proj;
 
-	// iso_proj = mx_mult(2, rot_x_mx_4x4(45 * PI/ 180), rot_y_mx_4x4(-10 * PI / 180));
-	iso_proj = mxa_mult_mxb(rot_x_mx_4x4(35.264 * PI/ 180),
-							rot_y_mx_4x4(-45 * PI / 180));
+	// iso_proj = mx_mult(2, x_rotation4x4(45 * PI/ 180), y_rotation4x4(-10 * PI / 180));
+	iso_proj = mxa_mult_mxb(x_rotation4x4(35.264 * PI/ 180),
+							y_rotation4x4(-45 * PI / 180));
 	return (iso_proj);
 }
 

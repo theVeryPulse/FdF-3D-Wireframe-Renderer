@@ -6,15 +6,15 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:26:57 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:26:29 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:15:26 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bresenham.h"
-#include "px_coord.h"
-#include "img_vars.h"
-#include "image.h"
-#include "argb.h"
+#include "../px_coord.h"
+#include "../img_vars.h"
+#include "../image.h"
+#include "../argb.h"
 #include "libft.h"
 
 static void

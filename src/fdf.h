@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:27:50 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 23:51:25 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@
 // # define MAX_ROW (4)
 // # define BLACK (0x000000)
 // # define WHITE (0xffffff)
-# define PI (3.1415926)
 # define KNRM "\x1B[0m"
 # define KRED "\x1B[31m"
 # define KWHT "\x1B[37m"
@@ -68,18 +67,18 @@ void			image_put_pixel(t_img_vars *img_vars, t_px_coord coord,
 
 /* Transformation (generic) */
 
-t_mx			build_rotation_matrix_for_key(int key);
-t_mx			build_scale_matrix_for_key(int key);
-t_mx			build_translation_matrix_for_key(int key);
+t_mx			rotation4x4_for_key(int key);
+t_mx			scale4x4_for_key(int key);
+t_mx			translation4x4_for_key(int key);
 t_mx			get_scale4x4(double scaling);
 void			transform_all_vertexes(t_vertex *vertexes, int total,
 					t_mx transform);
 
 /* Rotation */
 
-t_mx			rot_x_mx_4x4(double angle);
-t_mx			rot_y_mx_4x4(double angle);
-t_mx			rot_z_mx_4x4(double angle);
+t_mx			x_rotation4x4(double angle);
+t_mx			y_rotation4x4(double angle);
+t_mx			z_rotation4x4(double angle);
 
 /* Transformation for isometric projection */
 

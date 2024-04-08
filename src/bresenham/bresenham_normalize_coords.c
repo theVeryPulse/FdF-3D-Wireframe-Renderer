@@ -6,12 +6,12 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 19:43:20 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:27:05 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:17:51 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "bresenham.h"
-#include "px_coord.h"
+#include "../px_coord.h"
 #include "libft.h"
 #include <stdbool.h>
 

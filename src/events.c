@@ -6,11 +6,50 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 00:33:08 by Philip            #+#    #+#             */
-/*   Updated: 2024/02/24 17:59:11 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 23:44:42 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+
+/* [ ] Comment */
+void	transform(t_vars *vars, int key)
+{
+	t_mx	transform4x4;
+
+	if (key == XK_Left || key == XK_Right
+		|| key == XK_Up || key == XK_Down)
+		transform4x4 = translation4x4_for_key(key);
+	else if (key == XK_i || key == XK_o)
+		transform4x4 = scale4x4_for_key(key);
+	else if (key == XK_q || key == XK_e
+		|| key == XK_w || key == XK_s
+		|| key == XK_a || key == XK_d)
+		transform4x4 = rotation4x4_for_key(key);
+	transform_all_vertexes(vars->map.vertexes,
+		vars->map.row_num * vars->map.col_num,
+		transform4x4);
+	image_fill_color(&vars->img_vars, BLACK);
+	render_colored_ortho_model(vars);
+	put_image_to_window_vars(vars);
+}
+
+void	transform_caval(t_vars *vars, int key)
+{
+	t_mx	transform4x4;
+
+	if (key == XK_Left || key == XK_Right
+		|| key == XK_Up || key == XK_Down)
+		transform4x4 = translation4x4_for_key(key);
+	else if (key == XK_i || key == XK_o)
+		transform4x4 = scale4x4_for_key(key);
+	transform_all_vertexes(vars->map.vertexes,
+		vars->map.row_num * vars->map.col_num,
+		transform4x4);
+	image_fill_color(&vars->img_vars, BLACK);
+	render_colored_caval_model(vars);
+	put_image_to_window_vars(vars);
+}
 
 /**
  * @brief Handles key events for the isometric view mode.
@@ -25,14 +64,13 @@ int	isometric_handle_key(int key, t_vars *vars)
 	printf("%d pressed\n", key);
 	if (key == XK_Escape)
 		destroy_exit(vars);
-	else if (key == XK_Left || key == XK_Right || key == XK_Up
-		|| key == XK_Down)
-		translate(vars, key);
-	else if (key == XK_i || key == XK_o)
-		scale(vars, key);
-	else if (key == XK_q || key == XK_e || key == XK_w || key == XK_s
+	else if (key == XK_Left || key == XK_Right
+		|| key == XK_Up || key == XK_Down
+		|| key == XK_i || key == XK_o
+		|| key == XK_q || key == XK_e
+		|| key == XK_w || key == XK_s
 		|| key == XK_a || key == XK_d)
-		rotate(vars, key);
+		transform(vars, key);
 }
 
 /**
@@ -48,11 +86,15 @@ int	caval_handle_key(int key, t_vars *vars)
 	ft_printf("%d pressed\n", key);
 	if (key == XK_Escape)
 		destroy_exit(vars);
-	else if (key == XK_Left || key == XK_Right || key == XK_Up
+	/* else if (key == XK_Left || key == XK_Right || key == XK_Up
 		|| key == XK_Down)
 		translate_caval(vars, key);
 	else if (key == XK_i || key == XK_o)
-		scale_caval(vars, key);
+		scale_caval(vars, key); */
+	else if (key == XK_Left || key == XK_Right
+		|| key == XK_Up || key == XK_Down
+		|| key == XK_i || key == XK_o)
+		transform_caval(vars, key);
 }
 
 /**

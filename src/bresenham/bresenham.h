@@ -6,15 +6,15 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:34:55 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:33:52 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:14:58 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef BRESENHAM_H
 # define BRESENHAM_H
 
-# include "img_vars.h"
-# include "px_coord.h"
+# include "../img_vars.h"
+# include "../px_coord.h"
 # include <stdbool.h>
 
 typedef struct s_delta

@@ -1,25 +1,40 @@
 NAME := fdf
-COMMON_FILES := \
-	argb.c \
-	bresenham.c \
+
+TRANSFORMATION_MATRIX_DIR := transformation_matrix
+TRANSFORMATION_MATRIX_FILES := \
+	isometric4x4.c \
+	rotation.h \
+	rotation4x4_for_key.c \
+	scale4x4_for_key.c \
+	transformation_matrix.h \
+	translation4x4_for_key.c \
+	x_rotation4x4.c \
+	y_rotation4x4.c \
+	z_rotation4x4.c
+TRANSFORMATION_MATRIX_FILES := $(addprefix $(TRANSFORMATION_MATRIX_DIR)/, $(TRANSFORMATION_MATRIX_FILES))
+
+BRESENHAM_DIR := bresenham
+BRESENHAM_FILES := \
 	bresenham_draw_colored_line.c \
 	bresenham_draw_colored_pixels.c \
-	bresenham_normalize_coords.c \
-	bresenham_utils.c \
+	bresenham_normalize_coords.c
+BRESENHAM_FILES := $(addprefix $(BRESENHAM_DIR)/, $(BRESENHAM_FILES))
+
+SUBFOLDERS := \
+	$(TRANSFORMATION_MATRIX_DIR) \
+	$(BRESENHAM_DIR)
+
+COMMON_FILES := \
+	argb.c \
 	coord_conversion.c \
 	events.c \
-	funcs.c \
-	gradient.c \
-	helpers.c \
 	hex_atoi.c \
 	image.c \
 	key_hooks.c \
-	map.c \
 	map_build.c \
 	map_check.c \
 	map_parse_data.c \
 	map_populate_vertexes.c \
-	map_utils.c \
 	matrix.c \
 	read_file.c \
 	render.c \
@@ -27,10 +42,13 @@ COMMON_FILES := \
 	transform.c \
 	transform_cavalier.c \
 	transform_isometric.c \
-	transform_utils.c
+	transform_utils.c \
+	$(TRANSFORMATION_MATRIX_FILES) \
+	$(BRESENHAM_FILES)
 
 SRC_DIR := src
 OBJ_DIR := build
+SUBFOLDERS := $(addprefix $(OBJ_DIR)/, $(SUBFOLDERS))
 
 FILES := main_isometric.c $(COMMON_FILES)
 SRC := $(addprefix $(SRC_DIR)/, $(FILES))
@@ -50,7 +68,7 @@ CFLAGS := -Wall -Wextra -Werror
 
 # -O3 highest optimization
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR)
+	@mkdir -p $(OBJ_DIR) $(SUBFOLDERS)
 	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -O3 -c $< -o $@
 
 # .SILENT:
@@ -74,7 +92,7 @@ $(MLX_STT):
 	$(MAKE) -C lib/minilibx-linux all
 
 clean:
-	rm -f ./$(OBJ_DIR)/*.o
+	rm -rf ./$(OBJ_DIR)
 	$(MAKE) -C lib/libft clean
 	$(MAKE) -C lib/minilibx-linux clean
 
@@ -88,3 +106,24 @@ fclean: clean
 re: fclean all
 
 .PHONY: all, clean, fclean, re
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

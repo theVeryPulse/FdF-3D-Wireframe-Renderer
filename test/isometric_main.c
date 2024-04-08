@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/03 19:33:09 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:22:54 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/08 23:42:36 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	main(int argc, char **argv)
 	t_mx	rot_4x4;
 	
 	angle1 = 0;
-	rot_4x4 = rot_x_mx_4x4(angle1);
+	rot_4x4 = x_rotation4x4(angle1);
 	t_mx	projection_2x4 = (t_mx){
 		.row_num = 2,
 		.col_num = 4,
@@ -95,10 +95,10 @@ int	main(int argc, char **argv)
 
 		// These two lines for rotating isometric
 		angle1 += 1 * PI / 180;
-		rot_4x4 = mx_mult(4, translation_mx(), rot_y_mx_4x4(angle1) ,rot_x_mx_4x4(35.264 * PI/ 180), rot_y_mx_4x4(45 * PI / 180));
+		rot_4x4 = mx_mult(4, translation_mx(), y_rotation4x4(angle1) ,x_rotation4x4(35.264 * PI/ 180), y_rotation4x4(45 * PI / 180));
 
 		// This line for stationary isometric
-		// rot_4x4 = mx_mult(4, translation_mx(), ,rot_x_mx_4x4(35.264 * PI/ 180), rot_y_mx_4x4(45 * PI / 180));
+		// rot_4x4 = mx_mult(4, translation_mx(), ,x_rotation4x4(35.264 * PI/ 180), y_rotation4x4(45 * PI / 180));
 	}
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
