@@ -22,7 +22,6 @@ COMMON_FILES := \
 	transform_utils.c
 SRC_DIR := src
 OBJ_DIR := build
-INC_DIR := inc
 
 FILES := main_isometric.c $(COMMON_FILES)
 SRC := $(addprefix $(SRC_DIR)/, $(FILES))
@@ -43,7 +42,7 @@ CFLAGS := -Wall -Wextra -Werror
 # -O3 highest optimization
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	@mkdir -p $(OBJ_DIR)
-	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -O3 -c $< -o $@ -I$(INC_DIR)
+	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -O3 -c $< -o $@
 
 # .SILENT:
 
@@ -51,12 +50,12 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(MLX_STT) $(FT_STT)
 	@rm -f bonus
-	$(CC) $(OBJ) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $@ -I$(INC_DIR)
+	$(CC) $(OBJ) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $@
 	@echo "👏 Complete! 👏"
 
 bonus: $(OBJ_BONUS) $(MLX_STT) $(FT_STT)
 	touch bonus
-	$(CC) $(OBJ_BONUS) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $(NAME) -I$(INC_DIR)
+	$(CC) $(OBJ_BONUS) $(MLX_STT) $(FT_STT) -I$(MLX_INC) -I$(FT_INC) -l Xext -l X11 -lm -lz -o $(NAME)
 	@echo "👏 Complete! 👏"
 
 $(FT_STT):
