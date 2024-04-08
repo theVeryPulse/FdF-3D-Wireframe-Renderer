@@ -6,13 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 20:10:19 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:31:04 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:22:26 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "map.h"
-#include "argb.h"
-#include "hex_atoi.h"
+#include "../argb.h"
+#include "../hex_atoi.h"
 #include "libft.h"
 #include <stddef.h>
 

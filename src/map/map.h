@@ -6,15 +6,15 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 20:11:03 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 20:41:05 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:22:53 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MAP_H
 # define MAP_H
 
-# include "matrix.h"
-# include "argb.h"
+# include "../matrix.h"
+# include "../argb.h"
 
 typedef struct s_num
 {

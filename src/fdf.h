@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 23:51:25 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:24:35 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "px_coord.h"
 # include "argb.h"
 # include "img_vars.h"
-# include "map.h"
+# include "map/map.h"
 
 # include "libft.h"
 # include "mlx.h"

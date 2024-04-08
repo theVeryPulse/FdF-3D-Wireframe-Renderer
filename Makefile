@@ -20,9 +20,18 @@ BRESENHAM_FILES := \
 	bresenham_normalize_coords.c
 BRESENHAM_FILES := $(addprefix $(BRESENHAM_DIR)/, $(BRESENHAM_FILES))
 
+MAP_DIR := map
+MAP_FILES := \
+	map_build.c \
+	map_check.c \
+	map_parse_data.c \
+	map_populate_vertexes.c
+MAP_FILES := $(addprefix $(MAP_DIR)/, $(MAP_FILES))
+
 SUBFOLDERS := \
 	$(TRANSFORMATION_MATRIX_DIR) \
-	$(BRESENHAM_DIR)
+	$(BRESENHAM_DIR) \
+	$(MAP_DIR)
 
 COMMON_FILES := \
 	argb.c \
@@ -31,10 +40,6 @@ COMMON_FILES := \
 	hex_atoi.c \
 	image.c \
 	key_hooks.c \
-	map_build.c \
-	map_check.c \
-	map_parse_data.c \
-	map_populate_vertexes.c \
 	matrix.c \
 	read_file.c \
 	render.c \
@@ -44,7 +49,8 @@ COMMON_FILES := \
 	transform_isometric.c \
 	transform_utils.c \
 	$(TRANSFORMATION_MATRIX_FILES) \
-	$(BRESENHAM_FILES)
+	$(BRESENHAM_FILES) \
+	$(MAP_FILES)
 
 SRC_DIR := src
 OBJ_DIR := build
