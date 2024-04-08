@@ -6,12 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/20 22:22:18 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:11:09 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:41:18 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "bresenham/bresenham.h"
+#include "coord_conversion/coord_conversion.h"
 
 static t_px_coord	ortho_raster_coord_with_color(t_vars *vars, int row_idx,
 						int col_idx);

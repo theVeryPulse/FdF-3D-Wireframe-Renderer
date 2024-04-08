@@ -6,13 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/02 17:30:56 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:23:46 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:40:11 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 // #include "img_vars.h"
-#include "scree_size.h"
+#include "screen_size.h"
 // #include "px_coord.h"
 #include <stddef.h>
 

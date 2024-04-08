@@ -6,13 +6,13 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 20:41:21 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:40:11 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "map.h"
-#include "scree_size.h"
+#include "screen_size.h"
 
 static void	set_up_hooks_caval(t_vars *vars);
 

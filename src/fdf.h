@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:20:53 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:24:35 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:27:34 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,15 +24,15 @@
 # include "libft.h"
 # include "mlx.h"
 # include "mlx_int.h"
-# include <fcntl.h>
-# include <math.h>
-# include <stdarg.h>
-# include <stdbool.h>
-# include <stddef.h>
-# include <stdlib.h>
-# include <sys/stat.h>
-# include <X11/keysym.h>
-# include <X11/X.h>
+// # include <fcntl.h>
+// # include <math.h>
+// # include <stdarg.h>
+// # include <stdbool.h>
+// # include <stddef.h>
+// # include <stdlib.h>
+// # include <sys/stat.h>
+// # include <X11/keysym.h>
+// # include <X11/X.h>
 
 // # define WIDTH (1920)
 // # define HEIGHT (1080)

@@ -6,11 +6,12 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:05:51 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 18:21:40 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 00:40:43 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include <stdarg.h>
 
 static void	mx_mult_error_msg(void);
 static void	calc_mx_product(t_mx *product, t_mx *mxa, t_mx *mxb);

@@ -1,23 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   coord_conversion.h                                 :+:      :+:    :+:   */
+/*   screen_size.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 21:08:05 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 21:09:05 by Philip           ###   ########.fr       */
+/*   Created: 2024/04/08 17:30:50 by Philip            #+#    #+#             */
+/*   Updated: 2024/04/09 00:34:48 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef COORD_CONVERSION_H
-# define COORD_CONVERSION_H
+#ifndef SCREEN_SIZE_H
+# define SCREEN_SIZE_H
 
-# include "matrix.h"
-# include "px_coord.h"
-
-t_mx		screen_coord_ortho(t_mx world_coord);
-t_mx		screen_coord_caval(t_mx world_coord);
-t_px_coord	raster_coord(t_mx screen_coord);
+# define WIDTH (1920)
+# define HEIGHT (1080)
 
 #endif

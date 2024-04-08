@@ -13,12 +13,14 @@ TRANSFORMATION_MATRIX_FILES := \
 	z_rotation4x4.c
 TRANSFORMATION_MATRIX_FILES := $(addprefix $(TRANSFORMATION_MATRIX_DIR)/, $(TRANSFORMATION_MATRIX_FILES))
 
+
 BRESENHAM_DIR := bresenham
 BRESENHAM_FILES := \
 	bresenham_draw_colored_line.c \
 	bresenham_draw_colored_pixels.c \
 	bresenham_normalize_coords.c
 BRESENHAM_FILES := $(addprefix $(BRESENHAM_DIR)/, $(BRESENHAM_FILES))
+
 
 MAP_DIR := map
 MAP_FILES := \
@@ -28,14 +30,24 @@ MAP_FILES := \
 	map_populate_vertexes.c
 MAP_FILES := $(addprefix $(MAP_DIR)/, $(MAP_FILES))
 
+
+COORD_CONVERSION := coord_conversion
+COORD_CONVERSION_FILES := \
+	raster_coord.c \
+	screen_coord_caval.c \
+	screen_coord_ortho.c
+COORD_CONVERSION_FILES := $(addprefix $(COORD_CONVERSION)/, $(COORD_CONVERSION_FILES))
+
+
 SUBFOLDERS := \
 	$(TRANSFORMATION_MATRIX_DIR) \
 	$(BRESENHAM_DIR) \
-	$(MAP_DIR)
+	$(MAP_DIR) \
+	$(COORD_CONVERSION)
+
 
 COMMON_FILES := \
 	argb.c \
-	coord_conversion.c \
 	events.c \
 	hex_atoi.c \
 	image.c \
@@ -43,14 +55,14 @@ COMMON_FILES := \
 	matrix.c \
 	read_file.c \
 	render.c \
-	rotation.c \
 	transform.c \
 	transform_cavalier.c \
 	transform_isometric.c \
 	transform_utils.c \
 	$(TRANSFORMATION_MATRIX_FILES) \
 	$(BRESENHAM_FILES) \
-	$(MAP_FILES)
+	$(MAP_FILES) \
+	$(COORD_CONVERSION_FILES)
 
 SRC_DIR := src
 OBJ_DIR := build
