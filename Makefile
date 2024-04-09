@@ -45,31 +45,39 @@ COORD_CONVERSION_FILES := \
 COORD_CONVERSION_FILES := $(addprefix $(COORD_CONVERSION_DIR)/, $(COORD_CONVERSION_FILES))
 
 
+EVENTS_HANDLERS_DIR := event_handlers
+EVENTS_HANDLERS_FILES := \
+	destroy_exit.c \
+	handle_key_cavalier.c \
+	handle_key_isometric.c \
+	mouse_motion.c \
+	moust_button.c \
+	transform.c
+EVENTS_HANDLERS_FILES := $(addprefix $(EVENTS_HANDLERS_DIR)/, $(EVENTS_HANDLERS_FILES))
+
 SUBFOLDERS := \
 	$(TRANSFORMATION_MATRIX_DIR) \
 	$(BRESENHAM_DIR) \
 	$(MAP_DIR) \
 	$(COORD_CONVERSION_DIR) \
-	$(HEX_ATOI_DIR)
+	$(HEX_ATOI_DIR) \
+	$(EVENTS_HANDLERS_DIR)
 
 
 COMMON_FILES := \
 	argb.c \
-	events.c \
 	image.c \
 	key_hooks.c \
 	matrix.c \
 	read_file.c \
 	render.c \
 	transform.c \
-	transform_cavalier.c \
-	transform_isometric.c \
-	transform_utils.c \
 	$(TRANSFORMATION_MATRIX_FILES) \
 	$(BRESENHAM_FILES) \
 	$(MAP_FILES) \
 	$(COORD_CONVERSION_FILES) \
-	$(HEX_ATOI_FILES)
+	$(HEX_ATOI_FILES) \
+	$(EVENTS_HANDLERS_FILES)
 
 SRC_DIR := src
 OBJ_DIR := build

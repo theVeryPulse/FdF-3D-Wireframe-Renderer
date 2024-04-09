@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/21 16:39:47 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:52:23 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:22:35 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "map.h"
 #include "screen_size.h"
 #include "read_file.h"
+#include "event_handlers/event_handlers.h"
 
 static void	set_up_hooks_caval(t_vars *vars);
 
@@ -48,7 +49,7 @@ int	main(int argc, char const *argv[])
 
 static void	set_up_hooks_caval(t_vars *vars)
 {
-	press_key_hook(vars->win_ptr, caval_handle_key, vars);
+	press_key_hook(vars->win_ptr, handle_key_caval, vars);
 	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask,
 		destroy_exit, vars);
 	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);

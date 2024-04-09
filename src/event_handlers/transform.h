@@ -1,28 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transform_utils.c                                  :+:      :+:    :+:   */
+/*   transform.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/24 01:11:23 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 23:53:26 by Philip           ###   ########.fr       */
+/*   Created: 2024/04/09 01:08:10 by Philip            #+#    #+#             */
+/*   Updated: 2024/04/09 01:09:16 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "fdf.h"
+#ifndef TRANSFORM_H
+# define TRANSFORM_H
 
-// /**
-//  * @brief Creates a 4x4 rotation matrix which rotates the model to isometric
-//  *        angle.
-//  *
-//  * @return The rotation matrix for isometric projection angle.
-//  */
-// t_mx	isometric4x4(void)
-// {
-// 	t_mx	iso_proj;
+# include "../fdf.h"
 
-// 	iso_proj = mxa_mult_mxb(x_rotation4x4(35.264 * PI / 180),
-// 			y_rotation4x4(-45 * PI / 180));
-// 	return (iso_proj);
-// }
+void	transform(t_vars *vars, int key);
+
+#endif

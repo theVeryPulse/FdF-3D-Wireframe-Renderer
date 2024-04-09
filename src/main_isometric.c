@@ -6,13 +6,15 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/18 17:06:48 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:54:42 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:24:12 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 #include "read_file.h"
 #include "screen_size.h"
+#include "event_handlers/event_handlers.h"
+#include "transformation_matrix/transformation_matrix.h"
 
 static void	set_up_hooks_isometric(t_vars *vars);
 
@@ -49,7 +51,7 @@ int	main(int argc, char const *argv[])
 
 static void	set_up_hooks_isometric(t_vars *vars)
 {
-	press_key_hook(vars->win_ptr, isometric_handle_key, vars);
+	press_key_hook(vars->win_ptr, handle_key_isometric, vars);
 	mlx_hook(vars->win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit,
 		vars);
 	mlx_mouse_hook(vars->win_ptr, mouse_button, vars);

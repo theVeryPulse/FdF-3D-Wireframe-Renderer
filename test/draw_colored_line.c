@@ -47,7 +47,7 @@ int main(int argc, char const *argv[])
 
 	mlx_put_image_to_window(vars.mlx_ptr, vars.win_ptr, vars.img_vars.img_ptr, 0, 0);
 
-	mlx_key_hook(vars.win_ptr, isometric_handle_key, &vars);
+	mlx_key_hook(vars.win_ptr, handle_key_isometric, &vars);
 	mlx_hook(vars.win_ptr, DestroyNotify, ButtonReleaseMask, destroy_exit, &vars);
 	mlx_mouse_hook(vars.win_ptr, mouse_button, &vars);
 	mlx_hook(vars.win_ptr, MotionNotify, PointerMotionMask, mouse_motion, NULL);

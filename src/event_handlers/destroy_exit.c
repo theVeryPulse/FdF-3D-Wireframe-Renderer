@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transformation_matrix.h                            :+:      :+:    :+:   */
+/*   destroy_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 23:56:52 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 01:25:10 by Philip           ###   ########.fr       */
+/*   Created: 2024/04/09 01:13:32 by Philip            #+#    #+#             */
+/*   Updated: 2024/04/09 01:13:41 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRANSFORMATION_MATRIX_H
-# define TRANSFORMATION_MATRIX_H
+#include "../fdf.h"
 
-# include "../matrix.h"
-
-t_mx	translation4x4_for_key(int key);
-t_mx	scale4x4_for_key(int key);
-t_mx	rotation4x4_for_key(int key);
-t_mx	isometric4x4(void);
-
-#endif
+/**
+ * @brief Destroys resources and exits the program.
+ *
+ * @param vars Pointer to the variables structure.
+ */
+int	destroy_exit(t_vars *vars)
+{
+	mlx_destroy_image(vars->mlx_ptr, vars->img_vars.img_ptr);
+	mlx_destroy_window(vars->mlx_ptr, vars->win_ptr);
+	mlx_destroy_display(vars->mlx_ptr);
+	free(vars->mlx_ptr);
+	free(vars->map.vertexes);
+	exit (0);
+}

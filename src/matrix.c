@@ -6,11 +6,12 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 22:05:51 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:40:43 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:25:39 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
+#include "libft.h"
 #include <stdarg.h>
 
 static void	mx_mult_error_msg(void);

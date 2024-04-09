@@ -1,23 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   transformation_matrix.h                            :+:      :+:    :+:   */
+/*   event_handlers.h                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/08 23:56:52 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 01:25:10 by Philip           ###   ########.fr       */
+/*   Created: 2024/04/09 01:20:59 by Philip            #+#    #+#             */
+/*   Updated: 2024/04/09 01:30:09 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef TRANSFORMATION_MATRIX_H
-# define TRANSFORMATION_MATRIX_H
+#ifndef EVENT_HANDLERS_H
+# define EVENT_HANDLERS_H
 
-# include "../matrix.h"
+# include "../fdf.h"
 
-t_mx	translation4x4_for_key(int key);
-t_mx	scale4x4_for_key(int key);
-t_mx	rotation4x4_for_key(int key);
-t_mx	isometric4x4(void);
+int		handle_key_caval(int key, t_vars *vars);
+int		destroy_exit(t_vars *vars);
+int		handle_key_isometric(int key, t_vars *vars);
+int		mouse_button(int button, int x, int y, void *p);
+int		mouse_motion(int x, int y, void *p);
 
 #endif
