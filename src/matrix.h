@@ -6,14 +6,14 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:27:01 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 17:28:42 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:34:20 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MATRIX_H
 # define MATRIX_H
-# define MAX_COL (4)
-# define MAX_ROW (4)
+# define MAX_COL 4
+# define MAX_ROW 4
 
 typedef struct s_matrix
 {

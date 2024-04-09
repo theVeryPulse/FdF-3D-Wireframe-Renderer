@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 01:07:18 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 01:31:17 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:37:28 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include "../transformation_matrix/transformation_matrix.h"
 #include "../image.h"
 
-/* [ ] Comment */
 void	transform(t_vars *vars, int key)
 {
 	t_mx	transform4x4;

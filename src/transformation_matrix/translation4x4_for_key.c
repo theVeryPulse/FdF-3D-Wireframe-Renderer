@@ -6,12 +6,12 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 23:46:41 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/08 23:48:09 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:35:41 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "../matrix.h"
-# include <X11/keysym.h>
+#include "../matrix.h"
+#include <X11/keysym.h>
 
 /**
  * @brief Builds a 4x4 translation matrix based on the pressed key.

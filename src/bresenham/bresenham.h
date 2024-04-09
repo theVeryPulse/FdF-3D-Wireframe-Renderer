@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/08 17:34:55 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:14:58 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:37:03 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,6 @@ typedef struct s_transition
 }	t_transition;
 
 void	bresenham_draw_colored_line(
-		t_img_vars *img_vars, t_px_coord a, t_px_coord b);
+			t_img_vars *img_vars, t_px_coord a, t_px_coord b);
 
 #endif

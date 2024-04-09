@@ -6,7 +6,7 @@
 /*   By: Philip <juli@student.42london.com>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/09 00:29:50 by Philip            #+#    #+#             */
-/*   Updated: 2024/04/09 00:33:33 by Philip           ###   ########.fr       */
+/*   Updated: 2024/04/09 01:36:11 by Philip           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include "../screen_size.h"
 
 static t_px_coord	mx_to_pxcoord(t_mx mx);
-static int	round_double(double n);
+static int			round_double(double n);
 
 /**
  * @brief Converts screen coordinates to raster coordinates.
