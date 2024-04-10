@@ -55,14 +55,6 @@ EVENTS_HANDLERS_FILES := \
 	transform.c
 EVENTS_HANDLERS_FILES := $(addprefix $(EVENTS_HANDLERS_DIR)/, $(EVENTS_HANDLERS_FILES))
 
-SUBFOLDERS := \
-	$(TRANSFORMATION_MATRIX_DIR) \
-	$(BRESENHAM_DIR) \
-	$(MAP_DIR) \
-	$(COORD_CONVERSION_DIR) \
-	$(HEX_ATOI_DIR) \
-	$(EVENTS_HANDLERS_DIR)
-
 
 COMMON_FILES := \
 	argb.c \
@@ -81,7 +73,7 @@ COMMON_FILES := \
 
 SRC_DIR := src
 OBJ_DIR := build
-SUBFOLDERS := $(addprefix $(OBJ_DIR)/, $(SUBFOLDERS))
+
 
 FILES := main_isometric.c $(COMMON_FILES)
 SRC := $(addprefix $(SRC_DIR)/, $(FILES))
