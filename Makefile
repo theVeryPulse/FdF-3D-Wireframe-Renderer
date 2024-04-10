@@ -101,7 +101,7 @@ CFLAGS := -Wall -Wextra -Werror
 
 # -O3 highest optimization
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	@mkdir -p $(OBJ_DIR) $(SUBFOLDERS)
+	mkdir -p $(@D)
 	$(CC) -I /usr/include -I$(MLX_INC) -I$(FT_INC) -O3 -c $< -o $@
 
 # .SILENT:
