@@ -1,5 +1,5 @@
 NAME := fdf
-
+CC := gcc
 TRANSFORMATION_MATRIX_DIR := transformation_matrix
 TRANSFORMATION_MATRIX_FILES := \
 	isometric4x4.c \
